@@ -21,8 +21,8 @@ initialState = {
     <h2>Input</h2>
     
     <HtmlEditor 
-      schema={schema}
       plugins={plugins}
+      schema={schema}
       value={state.value} 
       onChange={value => setState({ value })}
     />
