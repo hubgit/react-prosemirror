@@ -1,10 +1,10 @@
 ## Installation
 
-`npm install @eaton/react-prosemirror --save`
+`npm install @aeaton/react-prosemirror --save`
 
 or
 
-`yarn add @eaton/react-prosemirror`
+`yarn add @aeaton/react-prosemirror`
 
 ## Usage
 
