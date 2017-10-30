@@ -18,9 +18,11 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.7",
     "prosemirror-example-setup": "^1.0.0",
     "prosemirror-menu": "^1.0.1",
@@ -43,5 +45,8 @@
     "build": "babel src --out-dir dist --source-maps",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }

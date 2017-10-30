@@ -11,7 +11,7 @@ require('../styles.css')
 const plugins = exampleSetup({ schema, floatingMenu: false })
 
 initialState = {
-  value: {}
+  doc: {}
 };
 
 <div>
@@ -20,11 +20,11 @@ initialState = {
     <Editor 
       plugins={plugins}
       schema={schema} 
-      onChange={value => setState({ value })}
+      onChange={doc => setState({ doc })}
     />
     
     <h2>Output</h2>
     
-    <pre><code>{JSON.stringify(state.value, null, 2)}</code></pre>
+    <pre><code>{JSON.stringify(state.doc, null, 2)}</code></pre>
 </div>
 ```
