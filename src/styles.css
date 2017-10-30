@@ -1,0 +1,11 @@
+h2 {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.ProseMirror {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
