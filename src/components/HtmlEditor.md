@@ -12,12 +12,6 @@ require('../styles.css')
 
 const plugins = exampleSetup({ schema, floatingMenu: false })
 
-const styles = {
-  output: {
-    whiteSpace: 'pre-wrap'
-  }
-}
-
 initialState = {
   value: `<h1>This is a title</h1><p>This is a paragraph.</p>`
 };
@@ -35,6 +29,6 @@ initialState = {
     
     <h2>Output</h2>
     
-    <pre style={styles.output}><code>{state.value}</code></pre>
+    <pre style={{whiteSpace: 'pre-wrap'}}><code>{state.value}</code></pre>
 </div>
 ```
