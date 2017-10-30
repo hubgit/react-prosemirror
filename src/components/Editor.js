@@ -17,8 +17,13 @@ class Editor extends React.Component {
     })
   }
 
+  // TODO: what should happen here?
   componentWillReceiveProps (props) {
-    // TODO: what should happen here?
+  }
+
+  // never re-render
+  shouldComponentUpdate () {
+    return false
   }
 
   render () {
