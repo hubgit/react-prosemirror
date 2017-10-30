@@ -8,6 +8,29 @@ or
 
 ## Usage
 
-See example usage for the [Editor](src/components/Editor.md) and [HtmlEditor](src/components/HtmlEditor.md) components.
+Use `npm run styleguide` to see live examples in [the styleguide](http://git.macropus.org/react-prosemirror/).
 
-Use `npm run styleguide` to see live examples in the styleguide.
+Example usage, using `prosemirror-example-setup` to provide a menu bar, keymaps, etc:
+
+```js
+import React from 'react'
+import { HtmlEditor } from '@aeaton/react-prosemirror'
+import { schema } from 'prosemirror-schema-basic'
+import { exampleSetup } from 'prosemirror-example-setup'
+
+import 'prosemirror-menu/style/menu.css'
+import 'prosemirror-example-setup/style/style.css'
+
+const plugins = exampleSetup({ schema, floatingMenu: false })
+
+const Editor = ({ value, onChange }) => (
+  <HtmlEditor
+    schema={schema}
+    plugins={plugins}
+    value={value}
+    onChange={onChange}
+  />
+)
+
+export default Editor
+```
