@@ -1,4 +1,4 @@
-An editor for content stored as HTML, with a menu bar.
+An editor for content stored as HTML.
 
 Calls to the `onChange` handler are debounced to avoid unnecessary conversion to HTML, so the output will only update after a typing pause (or a maximum of 5 seconds).
 
