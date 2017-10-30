@@ -1,4 +1,5 @@
 module.exports = {
+  title: 'react-prosemirror',
   webpackConfig: {
     module: {
       rules: [
