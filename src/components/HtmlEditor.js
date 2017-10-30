@@ -1,5 +1,5 @@
 import React from 'react'
-import debounce from 'lodash.debounce'
+import debounce from 'lodash/debounce'
 import { DOMParser, DOMSerializer } from 'prosemirror-model'
 
 import Editor from './Editor'

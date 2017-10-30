@@ -10,7 +10,7 @@
   "author": "Alf Eaton <eaton.alf@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash.debounce": "^4.0.8",
+    "lodash": "^4.17.4",
     "prosemirror-model": "^1.0.0",
     "prosemirror-state": "^1.0.0",
     "prosemirror-view": "^1.0.0"
