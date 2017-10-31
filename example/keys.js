@@ -2,6 +2,7 @@ import { keymap } from 'prosemirror-keymap'
 import { undoInputRule } from 'prosemirror-inputrules'
 import { undo, redo } from 'prosemirror-history'
 import { wrapInList, splitListItem, liftListItem, sinkListItem } from 'prosemirror-schema-list'
+import { goToNextCell } from 'prosemirror-tables'
 import { baseKeymap, toggleMark, wrapIn, setBlockType, chainCommands, exitCode, joinUp, joinDown, lift, selectParentNode } from 'prosemirror-commands'
 
 import schema from './schema'
@@ -35,7 +36,7 @@ export default keymap({
   'Mod-Enter': insertBreak,
   'Shift-Enter': insertBreak,
   'Ctrl-Enter': insertBreak, // mac-only?
-  'Enter': splitListItem(schema.nodes.list_item),
+  // 'Enter': splitListItem(schema.nodes.list_item),
   'Mod-[': liftListItem(schema.nodes.list_item),
   'Mod-]': sinkListItem(schema.nodes.list_item),
   'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
@@ -46,5 +47,7 @@ export default keymap({
   'Shift-Ctrl-4': setBlockType(schema.nodes.heading, { level: 4 }),
   'Shift-Ctrl-5': setBlockType(schema.nodes.heading, { level: 5 }),
   'Shift-Ctrl-6': setBlockType(schema.nodes.heading, { level: 6 }),
-  'Mod-_': insertRule
+  'Mod-_': insertRule,
+  'Tab': goToNextCell(1),
+  'Shift-Tab': goToNextCell(-1)
 })

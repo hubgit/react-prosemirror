@@ -1,7 +1,7 @@
 const prefix = 'ProseMirror-prompt'
 
 const getValues = (fields, domFields) => {
-  return fields.keys().reduce((output, key, index, fields) => {
+  return Object.keys(fields).reduce((output, key, index) => {
     const field = fields[key]
     const dom = domFields[index]
 
