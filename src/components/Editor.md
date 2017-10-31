@@ -1,11 +1,11 @@
 An editor for content stored as ProseMirror JSON.
 
 ```js
-const options = require('../config')
+const options = require('../../example')
 
 require('prosemirror-menu/style/menu.css')
-require('../config/style.css')
-require('../styles.css')
+require('../../example/style.css')
+require('../../styleguide/style.css')
 
 initialState = {
   doc: {}
