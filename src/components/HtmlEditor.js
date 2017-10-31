@@ -4,40 +4,57 @@ import { DOMParser, DOMSerializer } from 'prosemirror-model'
 
 import Editor from './Editor'
 
-class HtmlEditor extends React.Component {
-  parse (content) {
+const parser = schema => {
+  const parser = DOMParser.fromSchema(schema)
+
+  return content => {
     const container = document.createElement('article')
     container.innerHTML = content
-    return this.parser.parse(container)
+    return parser.parse(container)
   }
+}
 
-  serialize (content) {
+const serializer = schema => {
+  const serializer = DOMSerializer.fromSchema(schema)
+
+  return content => {
     const container = document.createElement('article')
-    container.appendChild(this.serializer.serializeFragment(content))
+    container.appendChild(serializer.serializeFragment(content))
     return container.innerHTML
   }
+}
 
+class HtmlEditor extends React.Component {
   componentWillMount () {
-    const { schema, value, onChange, ...options } = this.props
+    const { value, onChange, options } = this.props
+    const { schema } = options
 
-    this.parser = DOMParser.fromSchema(schema)
-    this.serializer = DOMSerializer.fromSchema(schema)
+    const parse = parser(schema)
+    const serialize = serializer(schema)
 
-    this.setState({
-      ...options,
-      doc: this.parse(value),
-      onChange: debounce(value => {
-        onChange(this.serialize(value))
-      }, 1000, { maxWait: 5000 })
-    })
+    options.doc = parse(value)
+
+    this.onChange = debounce(value => {
+      onChange(serialize(value))
+    }, 1000, { maxWait: 5000 })
   }
 
   componentWillReceiveProps (props) {
     // TODO: what should happen here?
   }
 
+  shouldComponentUpdate () {
+    // never re-render
+    return false
+  }
+
   render () {
-    return <Editor {...this.state} />
+    return (
+      <Editor
+        options={this.props.options}
+        onChange={this.onChange}
+      />
+    )
   }
 }
 
