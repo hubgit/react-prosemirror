@@ -3,11 +3,11 @@ An editor for content stored as HTML.
 Calls to the `onChange` handler are debounced to avoid unnecessary conversion to HTML, so the output will only update after a typing pause (or a maximum of 5 seconds).
 
 ```js
-const options = require('../config')
+const options = require('../../example')
 
 require('prosemirror-menu/style/menu.css')
-require('../config/style.css')
-require('../styles.css')
+require('../../example/style.css')
+require('../../styleguide/style.css')
 
 initialState = {
   value: `<h1>This is a title</h1><p>This is a paragraph.</p>`

@@ -12,15 +12,15 @@ or
 
 ## Usage
 
-The [`src/config`](src/config) folder contains an example of ProseMirror configuration, adapted from `prosemirror-schema-basic`.
+The [`example`](example) folder contains ProseMirror configuration adapted from `prosemirror-schema-basic`.
 
 ```js
 import React from 'react'
 import { HtmlEditor } from '@aeaton/react-prosemirror'
-import options from '../config'
+import * as options from './example'
 
 import 'prosemirror-menu/style/menu.css'
-import '../config/style.css'
+import './example/style.css'
 
 const Editor = ({ value, onChange }) => (
   <HtmlEditor
