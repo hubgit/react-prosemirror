@@ -5,7 +5,7 @@ import 'prosemirror-view/style/prosemirror.css'
 
 class Editor extends React.Component {
   componentDidMount () {
-    const { onChange, ...options } = this.props
+    const { onChange, options } = this.props
 
     const view = new EditorView(this.editorNode, {
       state: EditorState.create(options),
@@ -17,12 +17,12 @@ class Editor extends React.Component {
     })
   }
 
-  // TODO: what should happen here?
   componentWillReceiveProps (props) {
+    // TODO: what should happen here?
   }
 
-  // never re-render
   shouldComponentUpdate () {
+    // never re-render
     return false
   }
 
