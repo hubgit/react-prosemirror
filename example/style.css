@@ -91,3 +91,9 @@
   margin-top: 5px;
   display: none;
 }
+
+.ProseMirror th,
+.ProseMirror td {
+  border: 1px solid #eee;
+  padding: 2px 5px;
+}

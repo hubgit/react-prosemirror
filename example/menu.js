@@ -7,14 +7,29 @@ import {
   menuBar,
   MenuItem,
   redoItem,
-  selectParentNodeItem,
+  // selectParentNodeItem,
   undoItem,
   wrapItem
 } from 'prosemirror-menu'
 
+import {
+  addColumnAfter,
+  addColumnBefore,
+  deleteColumn,
+  addRowAfter,
+  addRowBefore,
+  deleteRow,
+  mergeCells,
+  splitCell,
+  toggleHeaderRow,
+  toggleHeaderColumn,
+  toggleHeaderCell,
+  deleteTable
+} from 'prosemirror-tables'
+
 import { wrapInList } from 'prosemirror-schema-list'
 import { toggleMark } from 'prosemirror-commands'
-import { NodeSelection } from 'prosemirror-state'
+import { NodeSelection, Selection } from 'prosemirror-state'
 
 import schema from './schema'
 import icons from './icons'
@@ -206,6 +221,57 @@ const insertHorizontalRule = new MenuItem({
   }
 })
 
+const positiveInteger = value => {
+  if (!/^[1-9]\d*$/.test(value)) {
+    return 'Should be a positive integer'
+  }
+}
+
+const insertTable = new MenuItem({
+  title: 'Insert table',
+  label: 'Table',
+  enable (state) {
+    return canInsert(state, schema.nodes.table)
+  },
+  run (state, _, view) {
+    const { from } = state.selection
+
+    prompt({
+      title: 'Insert table',
+      fields: {
+        rows: new TextField({
+          label: 'Rows',
+          required: true,
+          validate: positiveInteger
+        }),
+        cols: new TextField({
+          label: 'Columns',
+          required: true,
+          validate: positiveInteger
+        })
+      },
+      callback (attrs) {
+        const cells = []
+        while (attrs.cols--) {
+          cells.push(schema.nodes.table_cell.createAndFill())
+        }
+
+        const rows = []
+        while (attrs.rows--) {
+          rows.push(schema.nodes.table_row.createAndFill(null, cells))
+        }
+
+        const table = schema.nodes.table.createAndFill(null, rows)
+
+        const tr = view.state.tr.replaceSelectionWith(table)
+        tr.setSelection(Selection.near(tr.doc.resolve(from)))
+        view.dispatch(tr.scrollIntoView())
+        view.focus()
+      }
+    })
+  }
+})
+
 const makeHeading = new DropdownSubmenu([1, 2, 3, 4, 5, 6].map(i => {
   return blockTypeItem(schema.nodes.heading, {
     title: 'Change to heading ' + i,
@@ -216,6 +282,45 @@ const makeHeading = new DropdownSubmenu([1, 2, 3, 4, 5, 6].map(i => {
   })
 }), {
   label: 'Heading'
+})
+
+const insertMenu = new Dropdown([
+  insertImage,
+  insertHorizontalRule,
+  insertTable
+], {
+  label: 'Insert'
+})
+
+const typeMenu = new Dropdown([
+  makeParagraph,
+  makeCodeBlock,
+  makeHeading
+], {
+  label: 'Type...'
+})
+
+const tableMenuItem = (label, cmd) => new MenuItem({
+  label,
+  select: cmd,
+  run: cmd
+})
+
+const tableMenu = new Dropdown([
+  tableMenuItem('Insert column before', addColumnBefore),
+  tableMenuItem('Insert column after', addColumnAfter),
+  tableMenuItem('Delete column', deleteColumn),
+  tableMenuItem('Insert row before', addRowBefore),
+  tableMenuItem('Insert row after', addRowAfter),
+  tableMenuItem('Delete row', deleteRow),
+  tableMenuItem('Delete table', deleteTable),
+  tableMenuItem('Merge cells', mergeCells),
+  tableMenuItem('Split cell', splitCell),
+  tableMenuItem('Toggle header column', toggleHeaderColumn),
+  tableMenuItem('Toggle header row', toggleHeaderRow),
+  tableMenuItem('Toggle header cells', toggleHeaderCell)
+], {
+  label: 'Table'
 })
 
 export default menuBar({
@@ -230,19 +335,9 @@ export default menuBar({
       toggleLink
     ],
     [
-      new Dropdown([
-        insertImage,
-        insertHorizontalRule
-      ], {
-        label: 'Insert'
-      }),
-      new Dropdown([
-        makeParagraph,
-        makeCodeBlock,
-        makeHeading
-      ], {
-        label: 'Type...'
-      })
+      insertMenu,
+      typeMenu,
+      tableMenu
     ],
     [
       undoItem,
@@ -253,8 +348,8 @@ export default menuBar({
       wrapOrderedList,
       wrapBlockQuote,
       joinUpItem,
-      liftItem,
-      selectParentNodeItem
+      liftItem
+      // selectParentNodeItem
     ]
   ]
 })

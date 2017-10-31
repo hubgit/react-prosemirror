@@ -4,6 +4,7 @@ An editor for content stored as ProseMirror JSON.
 const options = require('../../example')
 
 require('prosemirror-menu/style/menu.css')
+require('prosemirror-tables/style/tables.css')
 require('../../example/style.css')
 require('../../styleguide/style.css')
 
