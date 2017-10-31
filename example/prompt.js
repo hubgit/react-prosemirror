@@ -50,7 +50,7 @@ export default options => {
     if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper)
   }
 
-  const domFields = options.fields.map(field => field.render())
+  const domFields = Object.values(options.fields).map(field => field.render())
 
   let submitButton = document.createElement('button')
   submitButton.type = 'submit'
