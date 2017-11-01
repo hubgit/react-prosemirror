@@ -7,18 +7,17 @@ import { baseKeymap, toggleMark, wrapIn, setBlockType, chainCommands, exitCode, 
 
 import schema from './schema'
 
-const insertBreak = chainCommands(exitCode, (state, dispatch) => {
+const insertBreak = (state, dispatch) => {
   dispatch(state.tr.replaceSelectionWith(schema.nodes.hard_break.create()).scrollIntoView())
   return true
-})
+}
 
 const insertRule = (state, dispatch) => {
   dispatch(state.tr.replaceSelectionWith(schema.nodes.horizontal_rule.create()).scrollIntoView())
   return true
 }
 
-export default keymap({
-  ...baseKeymap,
+const keys = {
   'Mod-z': undo,
   'Shift-Mod-z': redo,
   'Backspace': undoInputRule,
@@ -33,13 +32,10 @@ export default keymap({
   'Shift-Ctrl-8': wrapInList(schema.nodes.bullet_list),
   'Shift-Ctrl-9': wrapInList(schema.nodes.ordered_list),
   'Ctrl->': wrapIn(schema.nodes.blockquote),
-  'Mod-Enter': insertBreak,
-  'Shift-Enter': insertBreak,
-  'Ctrl-Enter': insertBreak, // mac-only?
-  'Enter': chainCommands(
-    splitListItem(schema.nodes.list_item),
-    baseKeymap['Enter']
-  ),
+  'Mod-Enter': chainCommands(exitCode, insertBreak),
+  'Shift-Enter': chainCommands(exitCode, insertBreak),
+  'Ctrl-Enter': chainCommands(exitCode, insertBreak), // mac-only?
+  'Enter': splitListItem(schema.nodes.list_item),
   'Mod-[': liftListItem(schema.nodes.list_item),
   'Mod-]': sinkListItem(schema.nodes.list_item),
   'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
@@ -53,4 +49,14 @@ export default keymap({
   'Mod-_': insertRule,
   'Tab': goToNextCell(1),
   'Shift-Tab': goToNextCell(-1)
+}
+
+Object.keys(baseKeymap).forEach(key => {
+  if (keys[key]) {
+    keys[key] = chainCommands(keys[key], baseKeymap[key])
+  } else {
+    keys[key] = baseKeymap[key]
+  }
 })
+
+export default keymap(keys)
