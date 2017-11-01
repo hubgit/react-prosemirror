@@ -19,9 +19,6 @@ import React from 'react'
 import { HtmlEditor } from '@aeaton/react-prosemirror'
 import * as options from './example'
 
-import 'prosemirror-menu/style/menu.css'
-import './example/style.css'
-
 const Editor = ({ value, onChange }) => (
   <HtmlEditor
     options={options}

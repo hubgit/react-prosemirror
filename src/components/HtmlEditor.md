@@ -5,15 +5,12 @@ Calls to the `onChange` handler are debounced to avoid unnecessary conversion to
 ```js
 const options = require('../../example')
 
-require('prosemirror-menu/style/menu.css')
 require('prosemirror-tables/style/tables.css')
-require('../../example/style.css')
 require('../../styleguide/style.css')
 
 initialState = {
   value: `<h1>This is a title</h1><p>This is a paragraph.</p>`
 };
-
 
 <div>
     <h2>Input</h2>
