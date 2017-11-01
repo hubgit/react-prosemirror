@@ -24,7 +24,9 @@ module.exports = {
       getExportNamed: false,
       getExport: id => cssExportMap[id]
     }),
-    babel()
+    babel({
+      plugins: ['external-helpers']
+    })
   ],
   external: id => !/^[./]/.test(id)
 }
