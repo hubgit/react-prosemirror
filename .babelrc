@@ -1,7 +1,10 @@
 {
   "presets": [
-    "env",
+    ["env", { "modules": false }],
     "react",
     "stage-2"
+  ],
+  "plugins": [
+    "external-helpers"
   ]
 }
