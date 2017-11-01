@@ -13,7 +13,7 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "prosemirror-model": "^1.0.0",
-    "prosemirror-state": "^1.0.0",
+    "prosemirror-state": "^1.0.1",
     "prosemirror-view": "^1.0.0"
   },
   "devDependencies": {
