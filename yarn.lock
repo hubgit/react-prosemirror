@@ -4850,9 +4850,9 @@ prosemirror-schema-list@^1.0.0:
     prosemirror-model "^1.0.0"
     prosemirror-transform "^1.0.0"
 
-prosemirror-state@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/prosemirror-state/-/prosemirror-state-1.0.0.tgz#9d886069f9d896e0779efd372705190423ee89b8"
+prosemirror-state@^1.0.0, prosemirror-state@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/prosemirror-state/-/prosemirror-state-1.0.1.tgz#339eed25a9ee81df2891a4fe382cd27e6794b9e0"
   dependencies:
     prosemirror-model "^1.0.0"
     prosemirror-transform "^1.0.0"
