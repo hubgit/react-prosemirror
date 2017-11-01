@@ -1,0 +1,30 @@
+.bar {
+  box-shadow: 0 1px 2px #ccc;
+  padding: 2px;
+}
+
+.button {
+  background: white;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.button.active {
+  background: #000;
+  color: #fff;
+}
+
+.separator {
+  vertical-align: top;
+  width: 1px;
+  display: inline-block;
+  background: #ddd;
+  margin: 0 4px;
+  height: 21px;
+}

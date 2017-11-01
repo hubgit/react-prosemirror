@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@fortawesome/fontawesome-free-solid@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-0.0.17.tgz#fe9ae40dc79193a3dc0735fca0023f4882e57535"
+
+"@fortawesome/fontawesome@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-0.0.21.tgz#282cea251c730aedace61e5a74021b90c584622e"
+
+"@fortawesome/react-fontawesome@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.0.12.tgz#26ee9227b36b8eb814ac7c1783e5c3a25c3946b0"
+  dependencies:
+    humps "^2.0.1"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -1680,10 +1694,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-crel@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/crel/-/crel-3.1.0.tgz#c0d5ed3df6b8017ff5ecc9f0743c60572e268c64"
-
 cross-spawn@5.1.0, cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -3079,6 +3089,10 @@ http-signature@~1.1.0:
 https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
+
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
 
 iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   version "0.4.19"
@@ -4822,15 +4836,6 @@ prosemirror-keymap@^1.0.0:
     prosemirror-state "^1.0.0"
     w3c-keyname "^1.1.0"
 
-prosemirror-menu@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/prosemirror-menu/-/prosemirror-menu-1.0.1.tgz#63b5e5b85300c7eb9127dcc66f7be0a3d22903fb"
-  dependencies:
-    crel "^3.0.0"
-    prosemirror-commands "^1.0.0"
-    prosemirror-history "^1.0.0"
-    prosemirror-state "^1.0.0"
-
 prosemirror-model@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prosemirror-model/-/prosemirror-model-1.0.0.tgz#a12168c1eb9e89ed2809e70b74fc87f74eeef14d"
@@ -6463,14 +6468,10 @@ webpack-dev-server@^2.8.2:
     yargs "^6.6.0"
 
 webpack-merge@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.0.tgz#6ad72223b3e0b837e531e4597c199f909361511e"
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.1.tgz#f1197a0a973e69c6fbeeb6d658219aa8c0c13555"
   dependencies:
     lodash "^4.17.4"
-
-webpack-node-externals@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-1.6.0.tgz#232c62ec6092b100635a3d29d83c1747128df9bd"
 
 webpack-sources@^1.0.1:
   version "1.0.1"

@@ -43,11 +43,6 @@ class HtmlEditor extends React.Component {
     // TODO: what should happen here?
   }
 
-  shouldComponentUpdate () {
-    // never re-render
-    return false
-  }
-
   render () {
     return (
       <Editor

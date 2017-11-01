@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "A React component for ProseMirror",
   "main": "dist",
   "files": [
@@ -11,12 +11,16 @@
   "license": "MIT",
   "repository": "hubgit/react-prosemirror",
   "dependencies": {
+    "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prosemirror-model": "^1.0.0",
     "prosemirror-state": "^1.0.1",
     "prosemirror-view": "^1.0.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome": "^0.0.21",
+    "@fortawesome/fontawesome-free-solid": "^0.0.17",
+    "@fortawesome/react-fontawesome": "^0.0.12",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
@@ -31,7 +35,6 @@
     "prosemirror-history": "^1.0.0",
     "prosemirror-inputrules": "^1.0.0",
     "prosemirror-keymap": "^1.0.0",
-    "prosemirror-menu": "^1.0.1",
     "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",
     "prosemirror-tables": "^0.4.1",
@@ -41,8 +44,7 @@
     "rimraf": "^2.6.2",
     "standard": "^10.0.3",
     "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "webpack": "^3.8.1"
   },
   "peerDependencies": {
     "react": "^16.0.0",
