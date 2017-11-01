@@ -4,7 +4,6 @@ import {
   DropdownSubmenu,
   joinUpItem,
   liftItem,
-  menuBar,
   MenuItem,
   redoItem,
   // selectParentNodeItem,
@@ -323,33 +322,30 @@ const tableMenu = new Dropdown([
   label: 'Table'
 })
 
-export default menuBar({
-  floating: false,
-  content: [
-    [
-      toggleStrong,
-      toggleEm,
-      toggleCode,
-      toggleSubscript,
-      toggleSuperscript,
-      toggleLink
-    ],
-    [
-      insertMenu,
-      typeMenu,
-      tableMenu
-    ],
-    [
-      undoItem,
-      redoItem
-    ],
-    [
-      wrapBulletList,
-      wrapOrderedList,
-      wrapBlockQuote,
-      joinUpItem,
-      liftItem
-      // selectParentNodeItem
-    ]
+export default [
+  [
+    toggleStrong,
+    toggleEm,
+    toggleCode,
+    toggleSubscript,
+    toggleSuperscript,
+    toggleLink
+  ],
+  [
+    insertMenu,
+    typeMenu,
+    tableMenu
+  ],
+  [
+    undoItem,
+    redoItem
+  ],
+  [
+    wrapBulletList,
+    wrapOrderedList,
+    wrapBlockQuote,
+    joinUpItem,
+    liftItem
+    // selectParentNodeItem
   ]
-})
+]
