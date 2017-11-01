@@ -53,7 +53,7 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "rimraf dist",
-    "build": "babel src --out-dir dist --source-maps",
+    "build": "babel src --out-dir dist --source-maps --copy-files",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
