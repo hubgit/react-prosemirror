@@ -49,6 +49,7 @@
     "react-dom": "^16.0.0"
   },
   "scripts": {
+    "prepublishOnly": "npm run build",
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist --source-maps",
     "styleguide": "styleguidist server",
