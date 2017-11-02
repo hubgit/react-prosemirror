@@ -1,6 +1,5 @@
 import React from 'react'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-
 import {
   faBold,
   faItalic,
@@ -23,6 +22,8 @@ import {
 
 export default {
   em: <FontAwesomeIcon icon={faItalic} />,
+  italic: <FontAwesomeIcon icon={faItalic} />,
+  strong: <FontAwesomeIcon icon={faBold} />,
   bold: <FontAwesomeIcon icon={faBold} />,
   code: <FontAwesomeIcon icon={faCode} />,
   subscript: <FontAwesomeIcon icon={faSubscript} />,

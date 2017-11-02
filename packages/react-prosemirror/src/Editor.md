@@ -1,10 +1,7 @@
 An editor for content stored as ProseMirror JSON.
 
 ```js
-const options = require('@aeaton/react-prosemirror-config-full')
-const { icons } = require('@aeaton/react-prosemirror-icons-fontawesome')
-
-const menu = options.menu(options.schema, icons)
+const options = require('@aeaton/react-prosemirror-config-default')
 
 initialState = {
   doc: {}
@@ -15,7 +12,6 @@ initialState = {
     
     <Editor 
       options={options}
-      menu={menu}
       onChange={doc => setState({ doc })}
     />
     

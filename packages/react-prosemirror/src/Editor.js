@@ -22,7 +22,10 @@ class Editor extends React.Component {
       state,
       dispatchTransaction: this.dispatchTransaction,
       attributes: {
-        class: classnames(baseClasses.ProseMirror, classes.ProseMirror)
+        class: classnames(
+          baseClasses.ProseMirror,
+          classes.ProseMirror
+        )
       }
     })
   }
@@ -35,7 +38,7 @@ class Editor extends React.Component {
   }
 
   render () {
-    const { menu } = this.props
+    const { options: { menu } } = this.props
     const { state } = this.state
 
     return (
@@ -46,9 +49,7 @@ class Editor extends React.Component {
           dispatch={this.dispatchTransaction}
         />
 
-        <div
-          ref={this.createEditorView}
-        />
+        <div ref={this.createEditorView} />
       </div>
     )
   }

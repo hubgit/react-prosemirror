@@ -1,7 +1,7 @@
 {
-  "name": "@aeaton/react-prosemirror-config-full",
+  "name": "@aeaton/react-prosemirror-config-default",
   "version": "0.6.0",
-  "description": "Full configuration for react-prosemirror",
+  "description": "A configuration for react-prosemirror with Font Awesome icons",
   "main": "dist",
   "files": [
     "dist",
@@ -12,8 +12,11 @@
   },
   "author": "Alf Eaton <eaton.alf@gmail.com>",
   "license": "MIT",
-  "repository": "hubgit/react-prosemirror",
+  "repository": "hubgit/react-prosemirror-config-default",
   "dependencies": {
+    "@fortawesome/fontawesome": "^0.0.21",
+    "@fortawesome/fontawesome-free-solid": "^0.0.17",
+    "@fortawesome/react-fontawesome": "^0.0.12",
     "prosemirror-commands": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",

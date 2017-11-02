@@ -8,8 +8,7 @@
   "repository": "hubgit/react-prosemirror",
   "dependencies": {
     "@aeaton/react-prosemirror": "^0.6.0",
-    "@aeaton/react-prosemirror-config-full": "^0.6.0",
-    "@aeaton/react-prosemirror-icons-fontawesome": "^0.6.0"
+    "@aeaton/react-prosemirror-config-default": "^0.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
