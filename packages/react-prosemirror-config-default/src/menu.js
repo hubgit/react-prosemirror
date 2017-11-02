@@ -226,8 +226,8 @@ export default {
       enable: redo,
       run: redo
     }
-  },
-  table: {
+  }
+  // table: {
     // addColumnBefore: {
     //   title: 'Insert column before',
     //   content: icons.after,
@@ -240,5 +240,5 @@ export default {
     //   active: addColumnAfter, // TOOD: active -> select
     //   run: addColumnAfter
     // }
-  }
+  // }
 }

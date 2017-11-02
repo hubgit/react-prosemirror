@@ -34,17 +34,17 @@ const MenuBar = ({ menu, state, dispatch }) => {
     )
   }
 
+  const keys = Object.keys(menu)
+  const limit = keys.length - 1
+
   return (
     <div className={classes.bar}>
-      {map(menu.marks, Button)}
-      <Separator />
-      {map(menu.blocks, Button)}
-      <Separator />
-      {map(menu.insert, Button)}
-      <Separator />
-      {map(menu.history, Button)}
-      <Separator />
-      {map(menu.table, Button)}
+      {keys.map((key, index) => (
+        <span key={key}>
+          {map(menu[key], Button)}
+          {index < limit && <Separator />}
+        </span>
+      ))}
     </div>
   )
 }
