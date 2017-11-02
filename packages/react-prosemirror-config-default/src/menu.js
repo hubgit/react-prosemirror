@@ -3,6 +3,9 @@ import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
 // import { addColumnAfter, addColumnBefore } from 'prosemirror-tables'
 
+import schema from './schema'
+import icons from './icons'
+
 const markActive = type => state => {
   const { from, $from, to, empty } = state.selection
 
@@ -45,7 +48,7 @@ const promptForURL = () => {
   return url
 }
 
-export default (schema, icons) => ({
+export default {
   marks: {
     em: {
       title: 'Toggle emphasis',
@@ -55,7 +58,7 @@ export default (schema, icons) => ({
     },
     strong: {
       title: 'Toggle strong',
-      content: icons.bold,
+      content: icons.strong,
       active: markActive(schema.marks.strong),
       run: toggleMark(schema.marks.strong)
     },
@@ -238,4 +241,4 @@ export default (schema, icons) => ({
     //   run: addColumnAfter
     // }
   }
-})
+}

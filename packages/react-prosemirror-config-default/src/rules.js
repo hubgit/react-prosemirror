@@ -1,6 +1,8 @@
 import { inputRules, wrappingInputRule, textblockTypeInputRule, smartQuotes, emDash, ellipsis } from 'prosemirror-inputrules'
 
-export default schema => inputRules({
+import schema from './schema'
+
+export default inputRules({
   rules: [
     ...smartQuotes,
     ellipsis,

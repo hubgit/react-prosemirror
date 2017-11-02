@@ -1,18 +1,15 @@
 A React menu bar for a ProseMirror editor
 
 ```js
-const options = require('@aeaton/react-prosemirror-config-full')
-const { icons } = require('@aeaton/react-prosemirror-icons-fontawesome')
 const { EditorState } = require('prosemirror-state')
-
-const menu = options.menu(options.schema, icons);
+const options = require('@aeaton/react-prosemirror-config-default')
 
 initialState = {
   state: EditorState.create(options)
 };
 
 <MenuBar 
-  menu={menu}
+  menu={options.menu}
   state={state.state}
   dispatch={transaction => {
     setState({ 

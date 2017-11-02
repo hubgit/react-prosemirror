@@ -5,11 +5,10 @@ import { columnResizing, tableEditing } from 'prosemirror-tables'
 
 import keys from './keys'
 import rules from './rules'
-import schema from './schema'
 
 export default [
-  rules(schema),
-  keys(schema),
+  rules,
+  keys,
   dropCursor(),
   gapCursor(),
   history(),
