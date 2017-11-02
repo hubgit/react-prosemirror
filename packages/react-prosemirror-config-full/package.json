@@ -1,0 +1,33 @@
+{
+  "name": "@aeaton/react-prosemirror-config-full",
+  "version": "0.5.0",
+  "description": "Full configuration for react-prosemirror",
+  "main": "dist",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Alf Eaton <eaton.alf@gmail.com>",
+  "license": "MIT",
+  "repository": "hubgit/react-prosemirror",
+  "dependencies": {
+    "prosemirror-model": "^1.0.0",
+    "prosemirror-commands": "^1.0.0",
+    "prosemirror-dropcursor": "^1.0.0",
+    "prosemirror-gapcursor": "^1.0.0",
+    "prosemirror-history": "^1.0.0",
+    "prosemirror-inputrules": "^1.0.0",
+    "prosemirror-keymap": "^1.0.0",
+    "prosemirror-schema-basic": "^1.0.0",
+    "prosemirror-schema-list": "^1.0.0",
+    "prosemirror-tables": "^0.4.1"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf dist",
+    "build": "rollup -c"
+  }
+}

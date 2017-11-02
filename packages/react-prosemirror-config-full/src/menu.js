@@ -1,12 +1,7 @@
-import React from 'react'
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { joinUp, lift, setBlockType, toggleMark, wrapIn } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
 // import { addColumnAfter, addColumnBefore } from 'prosemirror-tables'
-import { faBold, faItalic, faCode, faSuperscript, faSubscript, faLink, faParagraph, faHeading, faQuoteLeft, faListOl, faListUl, faImage, faTable, faUndo, faRedo, faOutdent, faAngleUp } from '@fortawesome/fontawesome-free-solid'
-
-import schema from './schema'
 
 const markActive = type => state => {
   const { from, $from, to, empty } = state.selection
@@ -50,41 +45,41 @@ const promptForURL = () => {
   return url
 }
 
-export default {
+export default (schema, icons) => ({
   marks: {
     em: {
       title: 'Toggle emphasis',
-      content: <FontAwesomeIcon icon={faItalic} />,
+      content: icons.em,
       active: markActive(schema.marks.em),
       run: toggleMark(schema.marks.em)
     },
     strong: {
       title: 'Toggle strong',
-      content: <FontAwesomeIcon icon={faBold} />,
+      content: icons.bold,
       active: markActive(schema.marks.strong),
       run: toggleMark(schema.marks.strong)
     },
     code: {
       title: 'Toggle code',
-      content: <FontAwesomeIcon icon={faCode} />,
+      content: icons.code,
       active: markActive(schema.marks.code),
       run: toggleMark(schema.marks.code)
     },
     subscript: {
       title: 'Toggle subscript',
-      content: <FontAwesomeIcon icon={faSubscript} />,
+      content: icons.subscript,
       active: markActive(schema.marks.subscript),
       run: toggleMark(schema.marks.subscript)
     },
     superscript: {
       title: 'Toggle superscript',
-      content: <FontAwesomeIcon icon={faSuperscript} />,
+      content: icons.superscript,
       active: markActive(schema.marks.superscript),
       run: toggleMark(schema.marks.superscript)
     },
     link: {
       title: 'Add or remove link',
-      content: <FontAwesomeIcon icon={faLink} />,
+      content: icons.link,
       active: markActive(schema.marks.link),
       enable: state => !state.selection.empty,
       run (state, dispatch) {
@@ -104,21 +99,21 @@ export default {
   blocks: {
     plain: {
       title: 'Change to paragraph',
-      content: <FontAwesomeIcon icon={faParagraph} />,
+      content: icons.paragraph,
       active: blockActive(schema.nodes.paragraph),
       enable: setBlockType(schema.nodes.paragraph),
       run: setBlockType(schema.nodes.paragraph)
     },
     code_block: {
       title: 'Change to code block',
-      content: <FontAwesomeIcon icon={faCode} />,
+      content: icons.code_block,
       active: blockActive(schema.nodes.code_block),
       enable: setBlockType(schema.nodes.code_block),
       run: setBlockType(schema.nodes.code_block)
     },
     h1: {
       title: 'Change to heading level 1',
-      content: <FontAwesomeIcon icon={faHeading} />,
+      content: icons.heading,
       active: blockActive(schema.nodes.heading, { level: 1 }),
       enable: setBlockType(schema.nodes.heading, { level: 1 }),
       run: setBlockType(schema.nodes.heading, { level: 1 })
@@ -132,34 +127,34 @@ export default {
     // },
     blockquote: {
       title: 'Wrap in block quote',
-      content: <FontAwesomeIcon icon={faQuoteLeft} />,
+      content: icons.blockquote,
       active: blockActive(schema.nodes.blockquote),
       enable: wrapIn(schema.nodes.blockquote),
       run: wrapIn(schema.nodes.blockquote)
     },
-    unorderedList: {
+    bullet_list: {
       title: 'Wrap in bullet list',
-      content: <FontAwesomeIcon icon={faListUl} />,
+      content: icons.bullet_list,
       active: blockActive(schema.nodes.bullet_list),
       enable: wrapInList(schema.nodes.bullet_list),
       run: wrapInList(schema.nodes.bullet_list)
     },
-    orderedList: {
+    ordered_list: {
       title: 'Wrap in ordered list',
-      content: <FontAwesomeIcon icon={faListOl} />,
+      content: icons.ordered_list,
       active: blockActive(schema.nodes.ordered_list),
       enable: wrapInList(schema.nodes.ordered_list),
       run: wrapInList(schema.nodes.ordered_list)
     },
     lift: {
       title: 'Lift out of enclosing block',
-      content: <FontAwesomeIcon icon={faOutdent} />,
+      content: icons.lift,
       enable: lift,
       run: lift
     },
-    joinUp: {
+    join_up: {
       title: 'Join with above block',
-      content: <FontAwesomeIcon icon={faAngleUp} />,
+      content: icons.join_up,
       enable: joinUp,
       run: joinUp
     }
@@ -167,7 +162,7 @@ export default {
   insert: {
     image: {
       title: 'Insert image',
-      content: <FontAwesomeIcon icon={faImage} />,
+      content: icons.image,
       enable: canInsert(schema.nodes.image),
       run: (state, dispatch) => {
         const src = promptForURL()
@@ -188,7 +183,7 @@ export default {
     // },
     table: {
       title: 'Insert table',
-      content: <FontAwesomeIcon icon={faTable} />,
+      content: icons.table,
       enable: canInsert(schema.nodes.table),
       run: (state, dispatch) => {
         // const { from } = state.selection
@@ -218,13 +213,13 @@ export default {
   history: {
     undo: {
       title: 'Undo last change',
-      content: <FontAwesomeIcon icon={faUndo} />,
+      content: icons.undo,
       enable: undo,
       run: undo
     },
     redo: {
       title: 'Redo last undone change',
-      content: <FontAwesomeIcon icon={faRedo} />,
+      content: icons.redo,
       enable: redo,
       run: redo
     }
@@ -232,15 +227,15 @@ export default {
   table: {
     // addColumnBefore: {
     //   title: 'Insert column before',
-    //   content: 'After',
+    //   content: icons.after,
     //   active: addColumnBefore, // TOOD: active -> select
     //   run: addColumnBefore
     // },
     // addColumnAfter: {
     //   title: 'Insert column before',
-    //   content: 'Before',
+    //   content: icons.before,
     //   active: addColumnAfter, // TOOD: active -> select
     //   run: addColumnAfter
     // }
   }
-}
+})

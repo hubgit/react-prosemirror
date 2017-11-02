@@ -20,6 +20,10 @@
   color: #000;
 }
 
+.button:disabled {
+  opacity: 0.5;
+}
+
 .separator {
   vertical-align: bottom;
   width: 1px;

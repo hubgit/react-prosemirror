@@ -3,10 +3,10 @@ An editor for content stored as HTML.
 Calls to the `onChange` handler are debounced to avoid unnecessary conversion to HTML, so the output will only update after a typing pause (or a maximum of 5 seconds).
 
 ```js
-const options = require('../../example')
+const options = require('@aeaton/react-prosemirror-config-full')
+const { icons } = require('@aeaton/react-prosemirror-icons-fontawesome')
 
-require('prosemirror-tables/style/tables.css')
-require('../../styleguide/style.css')
+const menu = options.menu(options.schema, icons)
 
 initialState = {
   value: `<h1>This is a title</h1><p>This is a paragraph.</p>`
@@ -17,6 +17,7 @@ initialState = {
     
     <HtmlEditor 
       options={options}
+      menu={menu}
       value={state.value} 
       onChange={value => setState({ value })}
     />
