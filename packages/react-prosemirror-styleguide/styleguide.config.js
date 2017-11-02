@@ -1,7 +1,12 @@
+const path = require('path')
+
 module.exports = {
   title: 'react-prosemirror',
-  styleguideDir: 'docs',
-  skipComponentsWithoutExample: true,
+  styleguideDir: '../../docs',
+  components: '../react-prosemirror/src/[A-Z]*.js',
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, 'Wrapper')
+  },
   webpackConfig: {
     module: {
       rules: [

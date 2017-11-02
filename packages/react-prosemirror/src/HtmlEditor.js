@@ -39,14 +39,13 @@ class HtmlEditor extends React.Component {
     }, 1000, { maxWait: 5000 })
   }
 
-  componentWillReceiveProps (props) {
-    // TODO: what should happen here?
-  }
-
   render () {
+    const { options, menu } = this.props
+
     return (
       <Editor
-        options={this.props.options}
+        options={options}
+        menu={menu}
         onChange={this.onChange}
       />
     )
