@@ -12,7 +12,7 @@
   },
   "author": "Alf Eaton <eaton.alf@gmail.com>",
   "license": "MIT",
-  "repository": "hubgit/react-prosemirror-config-default",
+  "repository": "hubgit/react-prosemirror",
   "dependencies": {
     "@fortawesome/fontawesome": "^0.0.21",
     "@fortawesome/fontawesome-free-solid": "^0.0.17",
