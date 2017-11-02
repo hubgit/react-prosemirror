@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-icons-fontawesome",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Font Awesome icon config for react-prosemirror menu",
   "main": "dist",
   "files": [

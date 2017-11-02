@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-config-full",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Full configuration for react-prosemirror",
   "main": "dist",
   "files": [
@@ -14,13 +14,13 @@
   "license": "MIT",
   "repository": "hubgit/react-prosemirror",
   "dependencies": {
-    "prosemirror-model": "^1.0.0",
     "prosemirror-commands": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
     "prosemirror-history": "^1.0.0",
     "prosemirror-inputrules": "^1.0.0",
     "prosemirror-keymap": "^1.0.0",
+    "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",
     "prosemirror-tables": "^0.4.1"
