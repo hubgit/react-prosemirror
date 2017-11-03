@@ -1,7 +1,13 @@
 // An example setup, adapted from prosemirror-example-setup
 
-export { default as schema } from './schema'
-export { default as plugins } from './plugins'
+import schema from './schema'
+import plugins from './plugins'
+
+export const options = {
+  plugins,
+  schema
+}
+
 export { default as menu } from './menu'
 
 // for tables

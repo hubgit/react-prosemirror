@@ -38,7 +38,7 @@ class Editor extends React.Component {
   }
 
   render () {
-    const { options: { menu } } = this.props
+    const { menu } = this.props
     const { state } = this.state
 
     return (
