@@ -42,7 +42,7 @@ class Editor extends React.Component {
     const { state } = this.state
 
     return (
-      <div>
+      <div className={classes.root}>
         <MenuBar
           menu={menu}
           state={state}

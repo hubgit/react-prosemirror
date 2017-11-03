@@ -1,9 +1,13 @@
 .bar {
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
+}
+
+.group {
+  margin-right: 5px;
 }
 
 .button {
-  background: white;
+  background: #fff;
   border: none;
   font-size: inherit;
   cursor: pointer;
@@ -14,6 +18,7 @@
 
 .button:hover {
   color: #000;
+  background: #f6f6f6;
 }
 
 .button.active {
@@ -21,13 +26,5 @@
 }
 
 .button:disabled {
-  opacity: 0.5;
-}
-
-.separator {
-  vertical-align: bottom;
-  width: 1px;
-  display: inline-block;
-  background: #ddd;
-  height: 28px;
+  color: #ccc;
 }
