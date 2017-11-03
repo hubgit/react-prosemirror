@@ -1,14 +1,14 @@
 {
   "name": "@aeaton/react-prosemirror-styleguide",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "A style guide for react-prosemirror",
   "private": true,
   "author": "Alf Eaton <eaton.alf@gmail.com>",
   "license": "MIT",
   "repository": "hubgit/react-prosemirror",
   "dependencies": {
-    "@aeaton/react-prosemirror": "^0.7.3",
-    "@aeaton/react-prosemirror-config-default": "^0.7.2"
+    "@aeaton/react-prosemirror": "^0.7.4",
+    "@aeaton/react-prosemirror-config-default": "^0.7.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
