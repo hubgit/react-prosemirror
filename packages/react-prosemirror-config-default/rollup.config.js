@@ -9,7 +9,12 @@ module.exports = {
   sourcemap: true,
   plugins: [
     babel({
-      plugins: ['external-helpers']
+      runtimeHelpers: true,
+      externalHelpers: false,
+      plugins: [
+        'external-helpers',
+        'transform-runtime'
+      ]
     })
   ]
 }
