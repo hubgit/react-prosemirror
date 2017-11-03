@@ -3,10 +3,6 @@ import map from 'lodash/map'
 import classnames from 'classnames'
 import classes from './MenuBar.css'
 
-const Separator = () => (
-  <span className={classes.separator} />
-)
-
 const MenuBar = ({ menu, state, dispatch }) => {
   const Button = (item, key) => (
     <button
@@ -24,15 +20,11 @@ const MenuBar = ({ menu, state, dispatch }) => {
     >{item.content}</button>
   )
 
-  const keys = Object.keys(menu)
-  const limit = keys.length - 1
-
   return (
     <div className={classes.bar}>
-      {keys.map((key, index) => (
-        <span key={key}>
+      {Object.keys(menu).map((key, index) => (
+        <span key={key} className={classes.group}>
           {map(menu[key], Button)}
-          {index < limit && <Separator />}
         </span>
       ))}
     </div>

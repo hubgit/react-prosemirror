@@ -1,5 +1,12 @@
+.root {
+  background: #eee;
+  padding: 5px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 .ProseMirror {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+  padding: 10px;
+  background: #fff;
 }
 
 .ProseMirror:focus {
@@ -39,4 +46,14 @@
 .ProseMirror td {
   border: 1px solid #eee;
   padding: 2px 5px;
+}
+
+.ProseMirror h1 {
+  margin-top: 10px;
+  font-size: 1.5em;
+}
+
+.ProseMirror sup,
+.ProseMirror sub {
+  line-height: 0;
 }
