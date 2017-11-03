@@ -28,9 +28,18 @@
     "prosemirror-schema-list": "^1.0.0",
     "prosemirror-tables": "^0.4.1"
   },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "prebuild": "rimraf dist",
+    "prebuild_x": "rimraf dist",
     "build": "rollup -c"
   }
 }

@@ -8,6 +8,8 @@ module.exports = {
   },
   sourcemap: true,
   plugins: [
-    babel()
+    babel({
+      plugins: ['external-helpers']
+    })
   ]
 }
