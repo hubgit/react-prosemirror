@@ -80,6 +80,18 @@ export default {
       active: markActive(schema.marks.superscript),
       run: toggleMark(schema.marks.superscript)
     },
+    underline: {
+      title: 'Toggle underline',
+      content: icons.underline,
+      active: markActive(schema.marks.underline),
+      run: toggleMark(schema.marks.underline)
+    },
+    strikethrough: {
+      title: 'Toggle strikethrough',
+      content: icons.strikethrough,
+      active: markActive(schema.marks.strikethrough),
+      run: toggleMark(schema.marks.strikethrough)
+    },
     link: {
       title: 'Add or remove link',
       content: icons.link,
