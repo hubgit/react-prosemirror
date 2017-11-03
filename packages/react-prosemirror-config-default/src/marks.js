@@ -1,6 +1,7 @@
 import { marks } from 'prosemirror-schema-basic'
 
 const subscript = {
+  excludes: 'superscript',
   parseDOM: [
     { tag: 'sub' },
     { style: 'vertical-align=sub' }
@@ -9,6 +10,7 @@ const subscript = {
 }
 
 const superscript = {
+  excludes: 'subscript',
   parseDOM: [
     { tag: 'sup' },
     { style: 'vertical-align=super' }
