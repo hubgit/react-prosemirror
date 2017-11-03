@@ -41,6 +41,7 @@ const keys = {
   'Escape': selectParentNode,
   'Mod-b': toggleMark(schema.marks.strong),
   'Mod-i': toggleMark(schema.marks.em),
+  'Mod-u': toggleMark(schema.marks.underline),
   'Mod-`': toggleMark(schema.marks.code),
   'Shift-Ctrl-8': wrapInList(schema.nodes.bullet_list),
   'Shift-Ctrl-9': wrapInList(schema.nodes.ordered_list),
