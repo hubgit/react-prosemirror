@@ -8,31 +8,21 @@ const Separator = () => (
 )
 
 const MenuBar = ({ menu, state, dispatch }) => {
-  const handle = cmd => e => {
-    e.preventDefault()
-    cmd(state, dispatch)
-  }
-
-  const Button = (item, key) => {
-    const disabled = item.enable && !item.enable(state)
-    // if (item.active && disabled) return null
-
-    const active = item.active && item.active(state)
-    // if (item.active && !active) return null
-
-    return (
-      <button
-        key={key}
-        className={classnames({
-          [classes.button]: true,
-          [classes.active]: active
-        })}
-        title={item.title}
-        disabled={disabled}
-        onMouseDown={handle(item.run)}
-      >{item.content}</button>
-    )
-  }
+  const Button = (item, key) => (
+    <button
+      key={key}
+      className={classnames({
+        [classes.button]: true,
+        [classes.active]: item.active && item.active(state)
+      })}
+      title={item.title}
+      disabled={item.enable && !item.enable(state)}
+      onMouseDown={e => {
+        e.preventDefault()
+        item.run(state, dispatch)
+      }}
+    >{item.content}</button>
+  )
 
   const keys = Object.keys(menu)
   const limit = keys.length - 1
