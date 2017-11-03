@@ -39,7 +39,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "prebuild_x": "rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "rollup -c"
   }
 }

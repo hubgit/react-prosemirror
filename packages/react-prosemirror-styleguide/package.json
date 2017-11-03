@@ -24,7 +24,7 @@
     "webpack": "^3.8.1"
   },
   "scripts": {
-    "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "start": "styleguidist server",
+    "build": "styleguidist build"
   }
 }
