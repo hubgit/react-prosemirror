@@ -16,18 +16,25 @@ This example imports configuration from [@aeaton/react-prosemirror-config-defaul
 
 ```js
 import React from 'react'
-import { HtmlEditor } from '@aeaton/react-prosemirror'
+import { HtmlEditor, MenuBar } from '@aeaton/react-prosemirror'
 import { options, menu } from '@aeaton/react-prosemirror-config-default'
 
-const Editor = ({ value, onChange }) => (
+const render = ({ editor, state, dispatch }) => (
+  <div>
+    <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+    {editor}
+  </div>
+);
+
+const CustomEditor = ({ value, onChange }) => (
   <HtmlEditor
     options={options}
-    menu={menu}
+    render={render}
     value={value}
     onChange={onChange}
   />
 )
 
-export default Editor
+export default CustomEditor
 ```
 
