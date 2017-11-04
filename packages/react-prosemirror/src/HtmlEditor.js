@@ -40,12 +40,12 @@ class HtmlEditor extends React.Component {
   }
 
   render () {
-    const { options, menu } = this.props
+    const { options, render } = this.props
 
     return (
       <Editor
         options={options}
-        menu={menu}
+        render={render}
         onChange={this.onChange}
       />
     )
