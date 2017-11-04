@@ -8,13 +8,15 @@ initialState = {
   state: EditorState.create(options)
 };
 
+const dispatch = transaction => {
+  setState({ 
+    state: state.state.apply(transaction)
+  })
+};
+
 <MenuBar 
   menu={menu}
   state={state.state}
-  dispatch={transaction => {
-    setState({ 
-      state: state.state.apply(transaction)
-    })
-  }}
+  dispatch={dispatch}
 />
 ```
