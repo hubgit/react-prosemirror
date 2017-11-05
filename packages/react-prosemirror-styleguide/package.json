@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-styleguide",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "A style guide for react-prosemirror",
   "private": true,
   "author": "Alf Eaton <eaton.alf@gmail.com>",
