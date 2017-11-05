@@ -14,8 +14,8 @@ module.exports = {
           oneOf: [
             {
               test: /\.js$/,
-              exclude: /node_modules/,
-              loader: 'babel-loader'
+              loader: 'babel-loader',
+              exclude: /node_modules/
             },
             {
               test: /\.module\.css$/,

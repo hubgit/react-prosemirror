@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror",
-  "version": "0.9.0",
+  "version": "0.8.1",
   "description": "A React component for ProseMirror",
   "main": "dist",
   "files": [
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -39,6 +39,6 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "rimraf dist",
-    "build": "webpack -p --progress"
+    "build": "webpack --progress"
   }
 }
