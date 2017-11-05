@@ -5,10 +5,9 @@ Calls to the `onChange` handler are debounced to avoid unnecessary conversion to
 ```js
 // const { HtmlEditor, MenuBar } = require('@aeaton/react-prosemirror')
 const { options, menu } = require('@aeaton/react-prosemirror-config-default')
-const classes = require('./demo.css')
 
 const render = ({ editor, state, dispatch }) => (
-  <div className={classes.root}>
+  <div style={{background:'#eee',padding:5}}>
     <MenuBar menu={menu} state={state} dispatch={dispatch}/>
     {editor}
   </div>
