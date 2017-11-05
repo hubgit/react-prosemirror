@@ -1,9 +1,8 @@
 import React from 'react'
-import classnames from 'classnames'
 import { EditorState } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
-import baseClasses from 'prosemirror-view/style/prosemirror.css'
-import classes from './Editor.css'
+import 'prosemirror-view/style/prosemirror.css'
+import './Editor.css'
 
 class Editor extends React.Component {
   constructor (props) {
@@ -17,14 +16,7 @@ class Editor extends React.Component {
   createEditorView = node => {
     this.view = new EditorView(node, {
       state: this.state.state,
-      dispatchTransaction: this.dispatchTransaction,
-      attributes: {
-        class: classnames(
-          baseClasses.ProseMirror,
-          classes.ProseMirror,
-          this.props.className
-        )
-      }
+      dispatchTransaction: this.dispatchTransaction
     })
   }
 

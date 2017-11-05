@@ -3,10 +3,9 @@ An editor for content stored as ProseMirror JSON.
 ```js
 // const { Editor, MenuBar } = require('@aeaton/react-prosemirror')
 const { options, menu } = require('@aeaton/react-prosemirror-config-default')
-const classes = require('./demo.css')
 
 const render = ({ editor, state, dispatch }) => (
-  <div className={classes.root}>
+  <div style={{background:'#eee',padding:5}}>
     <MenuBar menu={menu} state={state} dispatch={dispatch}/>
     {editor}
   </div>

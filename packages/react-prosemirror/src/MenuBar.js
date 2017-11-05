@@ -1,7 +1,7 @@
 import React from 'react'
 import map from 'lodash/map'
 import classnames from 'classnames'
-import classes from './MenuBar.css'
+import classes from './MenuBar.module.css'
 
 const Button = (state, dispatch) => (item, key) => (
   <button
