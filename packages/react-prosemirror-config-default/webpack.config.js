@@ -5,10 +5,12 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'index.js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    library: 'ReactProseMirrorConfigDefault',
+    libraryTarget: 'commonjs2'
   },
-  devtool: 'source-map',
   externals: [nodeExternals({
+    modulesFromFile: true,
     whitelist: [/\.(?!js$).{1,5}$/i]
   })],
   module: {

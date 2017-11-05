@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-config-default",
-  "version": "0.8.0",
+  "version": "0.7.0",
   "description": "A configuration for react-prosemirror with Font Awesome icons",
   "main": "dist",
   "files": [
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -47,6 +47,6 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "rimraf dist",
-    "build": "webpack -p --progress"
+    "build": "webpack --progress"
   }
 }
