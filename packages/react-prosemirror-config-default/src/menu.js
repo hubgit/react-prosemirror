@@ -39,7 +39,7 @@ const canInsert = type => state => {
 }
 
 const promptForURL = () => {
-  let url = window.prompt('Enter the URL', 'https://')
+  let url = window && window.prompt('Enter the URL', 'https://')
 
   if (url && !/^https?:\/\//i.test(url)) {
     url = 'http://' + url
@@ -202,8 +202,8 @@ export default {
       enable: canInsert(schema.nodes.table),
       run: (state, dispatch) => {
         // const { from } = state.selection
-        let rowCount = window.prompt('How many rows?', 2)
-        let colCount = window.prompt('How many columns?', 2)
+        let rowCount = window && window.prompt('How many rows?', 2)
+        let colCount = window && window.prompt('How many columns?', 2)
 
         const cells = []
         while (colCount--) {
