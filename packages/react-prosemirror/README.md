@@ -16,20 +16,12 @@ This example imports configuration from [@aeaton/react-prosemirror-config-defaul
 
 ```js
 import React from 'react'
-import { HtmlEditor, MenuBar } from '@aeaton/react-prosemirror'
-import { options, menu } from '@aeaton/react-prosemirror-config-default'
-
-const render = ({ editor, state, dispatch }) => (
-  <div>
-    <MenuBar menu={menu} state={state} dispatch={dispatch}/>
-    {editor}
-  </div>
-);
+import { HtmlEditor } from '@aeaton/react-prosemirror'
+import { options } from '@aeaton/react-prosemirror-config-default'
 
 const CustomEditor = ({ value, onChange }) => (
   <HtmlEditor
     options={options}
-    render={render}
     value={value}
     onChange={onChange}
   />
@@ -38,3 +30,26 @@ const CustomEditor = ({ value, onChange }) => (
 export default CustomEditor
 ```
 
+Use a `render` prop to add the menu bar:
+
+```js
+import React from 'react'
+import { HtmlEditor, MenuBar } from '@aeaton/react-prosemirror'
+import { options, menu } from '@aeaton/react-prosemirror-config-default'
+
+const CustomEditor = ({ value, onChange }) => (
+  <HtmlEditor
+    options={options}
+    value={value}
+    onChange={onChange}
+    render={({ editor, state, dispatch }) => (
+      <div>
+        <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+        {editor}
+      </div>
+    )}
+  />
+)
+
+export default CustomEditor
+```
