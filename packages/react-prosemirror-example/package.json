@@ -1,6 +1,6 @@
 {
   "name": "react-prosemirror-example",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "An app with a React ProseMirror component",
   "repository": "",
@@ -10,11 +10,11 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@aeaton/react-prosemirror": "^0.9.3",
+    "@aeaton/react-prosemirror-config-default": "^0.8.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "^1.0.17",
-    "@aeaton/react-prosemirror": "^0.9.2",
-    "@aeaton/react-prosemirror-config-default": "^0.8.2"
+    "react-scripts": "^1.0.17"
   },
   "engines": {
     "node": "8.x"
