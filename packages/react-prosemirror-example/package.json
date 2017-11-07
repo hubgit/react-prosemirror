@@ -1,6 +1,7 @@
 {
   "name": "react-prosemirror-example",
   "version": "0.0.1",
+  "private": true,
   "description": "An app with a React ProseMirror component",
   "repository": "",
   "license": "MIT",
