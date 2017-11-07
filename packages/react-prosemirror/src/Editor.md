@@ -4,15 +4,13 @@ An editor for content stored as ProseMirror JSON.
 // const { Editor, MenuBar } = require('@aeaton/react-prosemirror')
 const { options, menu } = require('@aeaton/react-prosemirror-config-default')
 
-const render = ({ editor, state, dispatch }) => (
-  <div style={{background:'#eee',padding:5}}>
-    <MenuBar menu={menu} state={state} dispatch={dispatch}/>
-    {editor}
-  </div>
-);
-
 initialState = {
   doc: {}
+};
+
+const editorStyle = {
+  background: '#eee',
+  padding: 5
 };
 
 <div>
@@ -21,7 +19,12 @@ initialState = {
     <Editor 
       options={options}
       onChange={doc => setState({ doc })}
-      render={render}
+      render={({ editor, state, dispatch }) => (
+        <div style={editorStyle}>
+          <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+          {editor}
+        </div>
+      )}
     />
     
     <h2>Output</h2>

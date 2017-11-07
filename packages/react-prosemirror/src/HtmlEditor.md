@@ -6,15 +6,13 @@ Calls to the `onChange` handler are debounced to avoid unnecessary conversion to
 // const { HtmlEditor, MenuBar } = require('@aeaton/react-prosemirror')
 const { options, menu } = require('@aeaton/react-prosemirror-config-default')
 
-const render = ({ editor, state, dispatch }) => (
-  <div style={{background:'#eee',padding:5}}>
-    <MenuBar menu={menu} state={state} dispatch={dispatch}/>
-    {editor}
-  </div>
-);
-
 initialState = {
   value: `<h1>This is a title</h1><p>This is a paragraph.</p>`
+};
+
+const editorStyle = {
+  background: '#eee',
+  padding: 5
 };
 
 const onChange = value => {
@@ -26,9 +24,14 @@ const onChange = value => {
     
     <HtmlEditor 
       options={options}
-      render={render}
       value={state.value} 
       onChange={onChange}
+      render={({ editor, state, dispatch }) => (
+        <div style={editorStyle}>
+          <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+          {editor}
+        </div>
+      )}
     />
     
     <h2>Output</h2>

@@ -1,0 +1,21 @@
+{
+  "name": "react-prosemirror-example",
+  "version": "0.0.1",
+  "description": "An app with a React ProseMirror component",
+  "repository": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "react-scripts build",
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "^1.0.17",
+    "@aeaton/react-prosemirror": "^0.9.2",
+    "@aeaton/react-prosemirror-config-default": "^0.8.2"
+  },
+  "engines": {
+    "node": "8.x"
+  }
+}

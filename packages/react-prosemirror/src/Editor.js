@@ -28,11 +28,13 @@ class Editor extends React.Component {
   }
 
   render () {
-    return this.props.render({
+    const editor = <div ref={this.createEditorView} />
+
+    return this.props.render ? this.props.render({
       state: this.state.state,
       dispatch: this.dispatchTransaction,
-      editor: <div ref={this.createEditorView} />
-    })
+      editor
+    }) : editor
   }
 }
 
