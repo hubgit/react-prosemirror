@@ -14,6 +14,6 @@ A React component for [ProseMirror](http://prosemirror.net/).
 
 ## Authors and license
 
-[Alf Eaton](http://hublog.hubmed.org/) and [contributors](https://github.com/hubgit/react-prosemirror/graphs/contributors).
+[Alf Eaton](https://github.com/hubgit) and [contributors](https://github.com/hubgit/react-prosemirror/graphs/contributors).
 
 MIT License.
