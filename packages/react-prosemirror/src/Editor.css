@@ -8,6 +8,16 @@
   outline: none;
 }
 
+.ProseMirror .placeholder {
+  color: #aaa;
+  pointer-events: none;
+  height: 0;
+}
+
+.ProseMirror:focus .placeholder {
+  display: none;
+}
+
 .ProseMirror hr {
   padding: 2px 10px;
   border: none;

@@ -2,7 +2,7 @@ An editor for content stored as ProseMirror JSON.
 
 ```js
 // const { Editor, MenuBar } = require('@aeaton/react-prosemirror')
-const { options, menu } = require('@aeaton/react-prosemirror-config-default')
+const { options, menu, decorations } = require('@aeaton/react-prosemirror-config-default')
 
 initialState = {
   doc: {}
@@ -18,6 +18,8 @@ const editorStyle = {
     
     <Editor 
       options={options}
+      decorations={decorations}
+      placeholder="Start typing…"
       onChange={doc => setState({ doc })}
       render={({ editor, state, dispatch }) => (
         <div style={editorStyle}>
