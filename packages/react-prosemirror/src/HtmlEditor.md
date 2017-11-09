@@ -26,6 +26,7 @@ const onChange = value => {
       options={options}
       value={state.value} 
       onChange={onChange}
+      placeholder="Enter some text…"
       render={({ editor, state, dispatch }) => (
         <div style={editorStyle}>
           <MenuBar menu={menu} state={state} dispatch={dispatch}/>
