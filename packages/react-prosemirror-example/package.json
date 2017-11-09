@@ -1,5 +1,5 @@
 {
-  "name": "react-prosemirror-example",
+  "name": "@aeaton/react-prosemirror-example",
   "version": "0.0.4",
   "private": true,
   "description": "An app with a React ProseMirror component",

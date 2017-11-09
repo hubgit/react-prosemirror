@@ -8,12 +8,6 @@
   outline: none;
 }
 
-.ProseMirror .placeholder {
-  color: #aaa;
-  pointer-events: none;
-  height: 0;
-}
-
 .ProseMirror hr {
   padding: 2px 10px;
   border: none;
