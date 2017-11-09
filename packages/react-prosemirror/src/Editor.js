@@ -21,6 +21,10 @@ class Editor extends React.Component {
         dispatchTransaction: this.dispatchTransaction,
         decorations: decorations(this.props)
       })
+
+      if (this.props.autoFocus) {
+        this.view.focus()
+      }
     }
   }
 
