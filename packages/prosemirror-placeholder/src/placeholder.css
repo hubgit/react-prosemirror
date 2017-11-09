@@ -1,0 +1,5 @@
+.ProseMirror .placeholder {
+  color: #aaa;
+  pointer-events: none;
+  height: 0;
+}

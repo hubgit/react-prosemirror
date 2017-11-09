@@ -1,7 +1,6 @@
 import React from 'react'
 import { EditorState } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
-import decorations from './decorations'
 import 'prosemirror-view/style/prosemirror.css'
 import './Editor.css'
 
@@ -19,7 +18,9 @@ class Editor extends React.Component {
       this.view = new EditorView(node, {
         state: this.state.state,
         dispatchTransaction: this.dispatchTransaction,
-        decorations: decorations(this.props)
+        attributes: {
+          placeholder: this.props.placeholder
+        }
       })
 
       if (this.props.autoFocus) {
