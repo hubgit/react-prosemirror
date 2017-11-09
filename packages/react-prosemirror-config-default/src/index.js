@@ -8,4 +8,5 @@ export const options = {
   schema
 }
 
+export { default as decorations } from './decorations'
 export { default as menu } from './menu'

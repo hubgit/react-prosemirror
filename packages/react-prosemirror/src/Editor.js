@@ -14,10 +14,13 @@ class Editor extends React.Component {
   }
 
   createEditorView = node => {
+    const { decorations } = this.props
+
     if (!this.view) {
       this.view = new EditorView(node, {
         state: this.state.state,
-        dispatchTransaction: this.dispatchTransaction
+        dispatchTransaction: this.dispatchTransaction,
+        decorations: decorations ? decorations(this.props) : null
       })
     }
   }
