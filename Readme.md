@@ -2,7 +2,7 @@
 
 A React component for [ProseMirror](http://prosemirror.net/).
 
-* [Documentation](https://github.com/hubgit/react-prosemirror/blob/master/packages/react-prosemirror/README.md
+* [Documentation](https://github.com/hubgit/react-prosemirror/blob/master/packages/react-prosemirror/README.md)
 * [Demo](http://git.macropus.org/react-prosemirror/)
 * [Example](https://github.com/hubgit/react-prosemirror/tree/master/packages/react-prosemirror-example)
 
