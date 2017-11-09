@@ -26,8 +26,7 @@
     "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",
-    "prosemirror-tables": "^0.4.1",
-    "prosemirror-view": "^1.0.0"
+    "prosemirror-tables": "^0.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
