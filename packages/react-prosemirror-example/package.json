@@ -12,8 +12,8 @@
   "dependencies": {
     "@aeaton/react-prosemirror": "^0.9.6",
     "@aeaton/react-prosemirror-config-default": "^0.8.3",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
     "react-scripts": "^1.0.17"
   },
   "engines": {

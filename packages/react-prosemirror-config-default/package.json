@@ -22,7 +22,7 @@
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
     "prosemirror-history": "^1.0.0",
-    "prosemirror-inputrules": "^1.0.0",
+    "prosemirror-inputrules": "^1.0.1",
     "prosemirror-keymap": "^1.0.0",
     "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
@@ -42,8 +42,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0"
   },
   "scripts": {
     "prepublishOnly": "npm run build",

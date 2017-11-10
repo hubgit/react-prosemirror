@@ -13,6 +13,6 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "build": "lerna run build"
+    "build": "lerna run build --toposort"
   }
 }
