@@ -17,7 +17,7 @@ export default options => {
 
         const node = document.createElement('div')
         node.textContent = options.content
-        node.classList.add('placeholder')
+        node.className = 'placeholder'
 
         return DecorationSet.create(state.doc, [
           Decoration.widget(1, node)
