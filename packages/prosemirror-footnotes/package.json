@@ -1,0 +1,39 @@
+{
+  "name": "@aeaton/prosemirror-footnotes",
+  "version": "0.0.1",
+  "description": "A footnotes plugin for ProseMirror",
+  "repository": "hubgit/react-prosemirror",
+  "license": "MIT",
+  "main": "dist",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "prosemirror-state": "^1.0.1",
+    "prosemirror-transform": "^1.0.0",
+    "prosemirror-keymap": "^1.0.0",
+    "prosemirror-history": "^1.0.0",
+    "prosemirror-view": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuildn": "rimraf dist",
+    "build": "webpack --progress"
+  }
+}
