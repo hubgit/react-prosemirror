@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/prosemirror-footnotes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A footnotes plugin for ProseMirror",
   "repository": "hubgit/react-prosemirror",
   "license": "MIT",
@@ -13,10 +13,10 @@
     "access": "public"
   },
   "dependencies": {
+    "prosemirror-history": "^1.0.0",
+    "prosemirror-keymap": "^1.0.0",
     "prosemirror-state": "^1.0.1",
     "prosemirror-transform": "^1.0.0",
-    "prosemirror-keymap": "^1.0.0",
-    "prosemirror-history": "^1.0.0",
     "prosemirror-view": "^1.0.0"
   },
   "devDependencies": {

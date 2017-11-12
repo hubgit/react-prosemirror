@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-config-default",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "A configuration for react-prosemirror with Font Awesome icons",
   "main": "dist",
   "files": [
@@ -14,8 +14,8 @@
   "license": "MIT",
   "repository": "hubgit/react-prosemirror",
   "dependencies": {
-    "@aeaton/prosemirror-footnotes": "^0.0.1",
-    "@aeaton/prosemirror-placeholder": "^0.0.2",
+    "@aeaton/prosemirror-footnotes": "^0.0.2",
+    "@aeaton/prosemirror-placeholder": "^0.0.3",
     "@fortawesome/fontawesome": "^0.0.21",
     "@fortawesome/fontawesome-free-solid": "^0.0.17",
     "@fortawesome/react-fontawesome": "^0.0.12",
