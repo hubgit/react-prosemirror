@@ -33,7 +33,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "prebuildn": "rimraf dist",
+    "prebuild": "rimraf dist",
     "build": "webpack --progress"
   }
 }
