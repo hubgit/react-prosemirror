@@ -8,9 +8,11 @@ A React component for [ProseMirror](http://prosemirror.net/).
 
 ## Packages
 
+* [prosemirror-footnotes](https://github.com/hubgit/react-prosemirror/blob/master/packages/prosemirror-footnotes) — footnotes plugin for ProseMirror
 * [prosemirror-placeholder](https://github.com/hubgit/react-prosemirror/blob/master/packages/prosemirror-placeholder) — placeholder plugin for ProseMirror
-* [react-prosemirror-config-default](https://github.com/hubgit/react-prosemirror/blob/master/packages/react-prosemirror-config-default) — ProseMirror configuration adapted from prosemirror-schema-basic and prosemirror-menu
 * [react-prosemirror](https://github.com/hubgit/react-prosemirror/blob/master/packages/react-prosemirror) — main package
+* [react-prosemirror-config-default](https://github.com/hubgit/react-prosemirror/blob/master/packages/react-prosemirror-config-default) — ProseMirror configuration adapted from prosemirror-schema-basic and prosemirror-menu
+* [react-prosemirror-example](https://github.com/hubgit/react-prosemirror/blob/master/packages/react-prosemirror) — an example implementation
 
 ## Authors and license
 
