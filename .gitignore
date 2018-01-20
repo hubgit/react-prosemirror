@@ -1,4 +1,4 @@
-dist/
 node_modules/
 *.log
-packages/react-prosemirror-example/build/
+build/
+dist/
