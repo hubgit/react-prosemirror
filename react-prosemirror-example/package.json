@@ -8,9 +8,10 @@
   "dependencies": {
     "@aeaton/react-prosemirror": "^0.9.8",
     "@aeaton/react-prosemirror-config-default": "^0.8.5",
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0",
-    "react-scripts": "^1.0.17"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.1.0",
+    "styled-components": "^2.4.0"
   },
   "scripts": {
     "build": "react-scripts build",

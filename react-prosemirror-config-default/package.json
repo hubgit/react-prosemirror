@@ -16,9 +16,9 @@
   "dependencies": {
     "@aeaton/prosemirror-footnotes": "^0.0.2",
     "@aeaton/prosemirror-placeholder": "^0.0.3",
-    "@fortawesome/fontawesome": "^0.0.21",
-    "@fortawesome/fontawesome-free-solid": "^0.0.17",
-    "@fortawesome/react-fontawesome": "^0.0.12",
+    "@fortawesome/fontawesome": "^1.1.2",
+    "@fortawesome/fontawesome-free-solid": "^5.0.4",
+    "@fortawesome/react-fontawesome": "^0.0.17",
     "prosemirror-commands": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
@@ -28,7 +28,7 @@
     "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",
-    "prosemirror-tables": "^0.4.1"
+    "prosemirror-tables": "^0.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -43,8 +43,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "scripts": {
     "prepublishOnly": "npm run build",

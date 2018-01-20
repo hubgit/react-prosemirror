@@ -34,8 +34,8 @@
     "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "scripts": {
     "prepublishOnly": "npm run build",
