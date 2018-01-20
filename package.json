@@ -14,6 +14,7 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "build": "lerna run build --toposort --concurrency=1"
+    "build": "lerna run build --toposort --concurrency=1",
+    "publish": "lerna run publish"
   }
 }
