@@ -7,7 +7,8 @@
     "standard": "^10.0.3"
   },
   "workspaces": [
-    "packages/*"
+    "prosemirror-*",
+    "react-*"
   ],
   "standard": {
     "parser": "babel-eslint"

@@ -5,16 +5,16 @@
   "description": "An app with a React ProseMirror component",
   "repository": "",
   "license": "MIT",
-  "scripts": {
-    "build": "react-scripts build",
-    "start": "react-scripts start"
-  },
   "dependencies": {
     "@aeaton/react-prosemirror": "^0.9.8",
     "@aeaton/react-prosemirror-config-default": "^0.8.5",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-scripts": "^1.0.17"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "start": "react-scripts start"
   },
   "engines": {
     "node": "8.x"
