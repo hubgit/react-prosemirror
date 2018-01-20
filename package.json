@@ -15,6 +15,6 @@
   },
   "scripts": {
     "build": "lerna run build --toposort --concurrency=1",
-    "publish": "lerna run publish"
+    "publish": "lerna publish"
   }
 }
