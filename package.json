@@ -2,8 +2,8 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "lerna": "^2.4.0",
+    "babel-eslint": "^8.2.1",
+    "lerna": "^2.8.0",
     "standard": "^10.0.3"
   },
   "workspaces": [
