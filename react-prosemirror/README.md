@@ -8,7 +8,7 @@ or
 
 ## Demo
 
-[View demo](http://git.macropus.org/react-prosemirror/)
+[View demo](https://react-prosemirror-example.now.sh/)
 
 ## Usage
 
