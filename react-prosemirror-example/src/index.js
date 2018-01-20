@@ -32,7 +32,6 @@ ReactDOM.render(
     <Input>
       <Editor
         options={options}
-        style={{height: '100%'}}
         value={`<h1>This is a title</h1><p>This is a paragraph</p>`}
         onChange={value => {
           document.getElementById('output').textContent = JSON.stringify(value, null, 2)
