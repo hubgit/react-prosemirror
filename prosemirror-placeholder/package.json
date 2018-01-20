@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/prosemirror-placeholder",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A placeholder plugin for ProseMirror",
   "repository": "hubgit/react-prosemirror",
   "license": "MIT",
