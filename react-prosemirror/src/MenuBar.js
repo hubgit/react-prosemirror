@@ -6,6 +6,7 @@ import classes from './MenuBar.module.css'
 const Button = (state, dispatch) => (item, key) => (
   <button
     key={key}
+    type="button"
     className={classnames({
       [classes.button]: true,
       [classes.active]: item.active && item.active(state)
