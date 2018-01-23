@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-example",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "An app with a React ProseMirror component",
   "repository": "",
@@ -9,7 +9,7 @@
     "build"
   ],
   "dependencies": {
-    "@aeaton/react-prosemirror": "^0.9.10",
+    "@aeaton/react-prosemirror": "^0.10.0",
     "@aeaton/react-prosemirror-config-default": "^0.8.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
