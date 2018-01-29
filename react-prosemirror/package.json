@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "A React component for ProseMirror",
   "main": "dist",
   "files": [
@@ -21,7 +21,7 @@
     "prosemirror-view": "^1.0.0"
   },
   "devDependencies": {
-    "@aeaton/react-prosemirror-config-default": "^0.8.7",
+    "@aeaton/react-prosemirror-config-default": "^0.8.8",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
