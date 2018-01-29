@@ -49,8 +49,5 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "webpack --progress"
-  },
-  "now": {
-    "alias": "react-prosemirror-example"
   }
 }

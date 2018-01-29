@@ -19,9 +19,13 @@
   "scripts": {
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "start": "react-scripts start",
-    "deploy": "now --public"
+    "deploy": "now build --public --name react-prosemirror-example"
   },
   "engines": {
     "node": "8.x"
+  },
+  "now": {
+    "name": "react-prosemirror-example",
+    "alias": "react-prosemirror-example"
   }
 }
