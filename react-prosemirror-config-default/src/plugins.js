@@ -7,6 +7,8 @@ import { footnotes } from '@aeaton/prosemirror-footnotes'
 
 import 'prosemirror-tables/style/tables.css'
 import 'prosemirror-gapcursor/style/gapcursor.css'
+import '@aeaton/prosemirror-footnotes/style/footnotes.css'
+import '@aeaton/prosemirror-placeholder/style/placeholder.css'
 
 import keys from './keys'
 import rules from './rules'
@@ -14,9 +16,7 @@ import rules from './rules'
 export default [
   rules,
   keys,
-  placeholder({
-    content: 'Start typing…'
-  }),
+  placeholder(),
   footnotes(),
   dropCursor(),
   gapCursor(),
