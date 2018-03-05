@@ -17,7 +17,7 @@
     "prosemirror-keymap": "^1.0.0",
     "prosemirror-state": "^1.1.0",
     "prosemirror-transform": "^1.0.0",
-    "prosemirror-view": "^1.0.0"
+    "prosemirror-view": "^1.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
