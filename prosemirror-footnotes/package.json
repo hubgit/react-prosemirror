@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/prosemirror-footnotes",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A footnotes plugin for ProseMirror",
   "repository": "hubgit/react-prosemirror",
   "license": "MIT",
