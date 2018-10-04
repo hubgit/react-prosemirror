@@ -1,0 +1,31 @@
+{
+  "name": "@aeaton/react-prosemirror-inline-menu-example",
+  "version": "0.2.0",
+  "private": true,
+  "description": "An app with a React ProseMirror component",
+  "repository": "",
+  "license": "MIT",
+  "files": [
+    "build"
+  ],
+  "dependencies": {
+    "@aeaton/react-prosemirror": "^0.11.0",
+    "@aeaton/react-prosemirror-config-default": "^0.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.1.0",
+    "styled-components": "^3.1.0"
+  },
+  "scripts": {
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "start": "react-scripts start",
+    "deploy": "now build --public --name react-prosemirror-inline-menu-example"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "now": {
+    "name": "react-prosemirror-inline-menu-example",
+    "alias": "react-prosemirror-inline-menu-example"
+  }
+}
