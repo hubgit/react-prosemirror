@@ -42,6 +42,7 @@ class Editor extends React.Component {
     return this.props.render ? this.props.render({
       state: this.state.state,
       dispatch: this.dispatchTransaction,
+      view: this.view,
       editor
     }) : editor
   }
