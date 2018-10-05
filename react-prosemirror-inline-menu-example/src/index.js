@@ -27,14 +27,6 @@ const Output = styled('pre')`
   color: lawngreen;
 `
 
-const EditorWrap = styled('pre')`
-  postition: relative;
-`
-
-const MenuWrap = styled('pre')`
-  postition: absolute;
-`
-
 ReactDOM.render(
   <Container>
     <Input>
@@ -44,35 +36,12 @@ ReactDOM.render(
         onChange={value => {
           document.getElementById('output').textContent = JSON.stringify(value, null, 2)
         }}
-        render={({ editor, state, view, dispatch }) => {
-          console.log('Render: ', view);
-
-          let inlineStyles = { top: 0, left: 0, display: "none" };
-
-          if (view) {
-            if (state.selection.$anchor.pos !== state.selection.$head.pos) {
-              const coords = view.coordsAtPos(state.selection.$anchor.pos);
-              inlineStyles = {
-                top: coords.top - 35,
-                left: coords.left - 100,
-                display: "block"
-              };
-            }
-          }
-
-          return (
-            <EditorWrap>
-              <MenuWrap style={inlineStyles}>
-                <MenuBar
-                  menu={menu}
-                  state={state}
-                  dispatch={dispatch}
-                />
-              </MenuWrap>
-              {editor}
-            </EditorWrap>
-          );
-        }}
+        render={({ editor, state, dispatch, view }) => (
+          <React.Fragment>
+            <MenuBar menu={menu} state={state} dispatch={dispatch} view={view} floating={true} />
+            {editor}
+          </React.Fragment>
+        )}
       />
     </Input>
     <Output id={'output'} />
