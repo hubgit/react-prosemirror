@@ -30,3 +30,21 @@
 .button:disabled {
   color: #ccc;
 }
+
+.floating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: #151616;
+  padding: 3px;
+  border-radius: 3px;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+.floating span:last-child {
+  margin-right: 0;
+}
