@@ -16,11 +16,15 @@ class Floater extends React.Component {
   }
 
   componentDidMount () {
-    this.calculateStyle(this.props)
+    this.setState({
+      style: this.calculateStyle(this.props)
+    })
   }
 
   componentWillReceiveProps (nextProps) {
-    this.calculateStyle(nextProps)
+    this.setState({
+      style: this.calculateStyle(nextProps)
+    })
   }
 
   render () {
@@ -32,18 +36,25 @@ class Floater extends React.Component {
   }
 
   calculateStyle (props) {
-    const { view } = this.props
+    const { view } = props
 
-    const coords = view.coordsAtPos(view.state.selection.$anchor.pos)
+    const { selection } = view.state
+
+    if (!selection || selection.empty) {
+      return {
+        left: -1000,
+        top: 0
+      }
+    }
+
+    const coords = view.coordsAtPos(selection.$anchor.pos)
 
     const { offsetWidth } = this.menuRef.current
 
-    this.setState({
-      style: {
-        left: window.innerWidth - offsetWidth < coords.left ? coords.left - offsetWidth + 20 : coords.left,
-        top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 20
-      }
-    })
+    return {
+      left: window.innerWidth - offsetWidth < coords.left ? coords.left - offsetWidth + 20 : coords.left,
+      top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 20
+    }
   }
 }
 
