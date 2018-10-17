@@ -40,13 +40,13 @@ class HtmlEditor extends React.Component {
   }
 
   render () {
-    const { autoFocus, options, placeholder, render } = this.props
+    const { autoFocus, options, attributes, render } = this.props
 
     return (
       <Editor
         autoFocus={autoFocus}
         options={options}
-        placeholder={placeholder}
+        attributes={attributes}
         render={render}
         onChange={this.onChange}
       />

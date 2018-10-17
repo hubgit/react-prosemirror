@@ -20,9 +20,7 @@ class Editor extends React.Component {
         this.setState({ state })
         this.props.onChange(state.doc.content)
       },
-      attributes: {
-        placeholder: this.props.placeholder
-      }
+      attributes: this.props.attributes
     })
 
     this.state = { state }
