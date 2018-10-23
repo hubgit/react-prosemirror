@@ -20,9 +20,9 @@ const editorStyle = {
       options={options}
       autoFocus
       onChange={doc => setState({ doc })}
-      render={({ editor, state, dispatch }) => (
+      render={({ editor, view }) => (
         <div style={editorStyle}>
-          <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+          <MenuBar menu={menu} view={view} />
           {editor}
         </div>
       )}

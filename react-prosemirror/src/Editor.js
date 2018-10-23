@@ -10,20 +10,21 @@ class Editor extends React.Component {
 
     this.editorRef = React.createRef()
 
-    const state = EditorState.create(props.options)
-
     this.view = new EditorView(null, {
-      state,
+      state: EditorState.create(props.options),
       dispatchTransaction: transaction => {
-        const state = this.view.state.apply(transaction)
+        const { state, transactions } = this.view.state.applyTransaction(transaction)
+
         this.view.updateState(state)
-        this.setState({ state })
-        this.props.onChange(state.doc.content)
+
+        if (transactions.some(tr => tr.docChanged)) {
+          this.props.onChange(state.doc)
+        }
+
+        this.forceUpdate()
       },
       attributes: this.props.attributes
     })
-
-    this.state = { state }
   }
 
   componentDidMount () {

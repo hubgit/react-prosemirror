@@ -33,8 +33,8 @@ ReactDOM.render(
       <Editor
         options={options}
         value={`<h1>This is a title</h1><p>This is a paragraph</p>`}
-        onChange={value => {
-          document.getElementById('output').textContent = JSON.stringify(value, null, 2)
+        onChange={doc => {
+          document.getElementById('output').textContent = JSON.stringify(doc, null, 2)
         }}
         render={({ editor, view }) => (
           <React.Fragment>
