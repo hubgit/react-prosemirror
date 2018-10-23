@@ -16,8 +16,7 @@ const listNodes = {
   },
   list_item: {
     ...listItem,
-    content: 'paragraph block*',
-    group: 'block'
+    content: 'paragraph block*'
   }
 }
 
