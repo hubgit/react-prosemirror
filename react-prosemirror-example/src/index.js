@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import { Editor, MenuBar } from '@aeaton/react-prosemirror'
+import { Editor, Floater, MenuBar } from '@aeaton/react-prosemirror'
 import { options, menu } from '@aeaton/react-prosemirror-config-default'
 
 const Container = styled('div')`
@@ -33,12 +33,17 @@ ReactDOM.render(
       <Editor
         options={options}
         value={`<h1>This is a title</h1><p>This is a paragraph</p>`}
-        onChange={value => {
-          document.getElementById('output').textContent = JSON.stringify(value, null, 2)
+        onChange={doc => {
+          document.getElementById('output').textContent = JSON.stringify(doc, null, 2)
         }}
-        render={({ editor, state, dispatch }) => (
+        render={({ editor, view }) => (
           <React.Fragment>
-            <MenuBar menu={menu} state={state} dispatch={dispatch} />
+            <MenuBar menu={menu} view={view} />
+
+            <Floater view={view}>
+              <MenuBar menu={{ marks: menu.marks }} view={view} />
+            </Floater>
+
             {editor}
           </React.Fragment>
         )}

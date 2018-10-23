@@ -42,9 +42,9 @@ const CustomEditor = ({ value, onChange }) => (
     options={options}
     value={value}
     onChange={onChange}
-    render={({ editor, state, dispatch }) => (
+    render={({ editor, view }) => (
       <div>
-        <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+        <MenuBar menu={menu} view={view} />
         {editor}
       </div>
     )}

@@ -8,41 +8,39 @@ class Editor extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      state: EditorState.create(props.options)
-    }
-  }
+    this.editorRef = React.createRef()
 
-  createEditorView = node => {
-    if (!this.view) {
-      this.view = new EditorView(node, {
-        state: this.state.state,
-        dispatchTransaction: this.dispatchTransaction,
-        attributes: {
-          placeholder: this.props.placeholder
+    this.view = new EditorView(null, {
+      state: EditorState.create(props.options),
+      dispatchTransaction: transaction => {
+        const { state, transactions } = this.view.state.applyTransaction(transaction)
+
+        this.view.updateState(state)
+
+        if (transactions.some(tr => tr.docChanged)) {
+          this.props.onChange(state.doc)
         }
-      })
 
-      if (this.props.autoFocus) {
-        this.view.focus()
-      }
-    }
+        this.forceUpdate()
+      },
+      attributes: this.props.attributes
+    })
   }
 
-  dispatchTransaction = transaction => {
-    const state = this.view.state.apply(transaction)
-    this.view.updateState(state)
-    this.setState({ state })
-    this.props.onChange(state.doc.content)
+  componentDidMount () {
+    this.editorRef.current.appendChild(this.view.dom)
+
+    if (this.props.autoFocus) {
+      this.view.focus()
+    }
   }
 
   render () {
-    const editor = <div ref={this.createEditorView} />
+    const editor = <div ref={this.editorRef} />
 
     return this.props.render ? this.props.render({
-      state: this.state.state,
-      dispatch: this.dispatchTransaction,
-      editor
+      editor,
+      view: this.view
     }) : editor
   }
 }

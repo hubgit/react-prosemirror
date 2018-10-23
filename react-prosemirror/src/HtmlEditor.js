@@ -10,6 +10,7 @@ const parser = schema => {
   return content => {
     const container = document.createElement('article')
     container.innerHTML = content
+
     return parser.parse(container)
   }
 }
@@ -17,9 +18,10 @@ const parser = schema => {
 const serializer = schema => {
   const serializer = DOMSerializer.fromSchema(schema)
 
-  return content => {
+  return doc => {
     const container = document.createElement('article')
-    container.appendChild(serializer.serializeFragment(content))
+    container.appendChild(serializer.serializeFragment(doc.content))
+
     return container.innerHTML
   }
 }
@@ -34,19 +36,19 @@ class HtmlEditor extends React.Component {
 
     options.doc = parse(value)
 
-    this.onChange = debounce(value => {
-      onChange(serialize(value))
+    this.onChange = debounce(doc => {
+      onChange(serialize(doc))
     }, 1000, { maxWait: 5000 })
   }
 
   render () {
-    const { autoFocus, options, placeholder, render } = this.props
+    const { autoFocus, options, attributes, render } = this.props
 
     return (
       <Editor
         autoFocus={autoFocus}
         options={options}
-        placeholder={placeholder}
+        attributes={attributes}
         render={render}
         onChange={this.onChange}
       />

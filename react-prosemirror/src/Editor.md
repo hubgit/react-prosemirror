@@ -18,12 +18,11 @@ const editorStyle = {
     
     <Editor 
       options={options}
-      placeholder="Enter some text…"
       autoFocus
       onChange={doc => setState({ doc })}
-      render={({ editor, state, dispatch }) => (
+      render={({ editor, view }) => (
         <div style={editorStyle}>
-          <MenuBar menu={menu} state={state} dispatch={dispatch}/>
+          <MenuBar menu={menu} view={view} />
           {editor}
         </div>
       )}
