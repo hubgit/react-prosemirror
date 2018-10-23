@@ -32,7 +32,6 @@ ReactDOM.render(
     <Input>
       <Editor
         options={options}
-        value={`<h1>This is a title</h1><p>This is a paragraph</p>`}
         onChange={doc => {
           document.getElementById('output').textContent = JSON.stringify(doc, null, 2)
         }}
