@@ -21,8 +21,8 @@ const superscript = {
 const strikethrough = {
   parseDOM: [
     { tag: 'strike' },
-    { style: 'text-decoration:line-through' },
-    { style: 'text-decoration-line:line-through' }
+    { style: 'text-decoration=line-through' },
+    { style: 'text-decoration-line=line-through' }
   ],
   toDOM: () => ['span', {
     style: 'text-decoration-line:line-through'
@@ -32,7 +32,7 @@ const strikethrough = {
 const underline = {
   parseDOM: [
     { tag: 'u' },
-    { style: 'text-decoration:underline' }
+    { style: 'text-decoration=underline' }
   ],
   toDOM: () => ['span', {
     style: 'text-decoration:underline'
