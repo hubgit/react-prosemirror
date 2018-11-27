@@ -23,7 +23,8 @@ class Editor extends React.Component {
 
         this.forceUpdate()
       },
-      attributes: this.props.attributes
+      attributes: this.props.attributes,
+      nodeViews: this.props.nodeViews
     })
   }
 
