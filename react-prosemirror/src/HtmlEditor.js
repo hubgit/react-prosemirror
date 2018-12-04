@@ -42,7 +42,7 @@ class HtmlEditor extends React.Component {
   }
 
   render () {
-    const { autoFocus, options, attributes, render } = this.props
+    const { autoFocus, options, attributes, render, nodeViews } = this.props
 
     return (
       <Editor
@@ -51,6 +51,7 @@ class HtmlEditor extends React.Component {
         attributes={attributes}
         render={render}
         onChange={this.onChange}
+        nodeViews={nodeViews}
       />
     )
   }
