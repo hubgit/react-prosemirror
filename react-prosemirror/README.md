@@ -53,3 +53,9 @@ const CustomEditor = ({ value, onChange }) => (
 
 export default CustomEditor
 ```
+
+## Development
+
+1. Run `lerna build`
+2. Run `lerna publish`
+3. Run `lerna run deploy`
