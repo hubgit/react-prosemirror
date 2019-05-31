@@ -22,7 +22,7 @@
     "deploy": "now build --public --name react-prosemirror-example"
   },
   "engines": {
-    "node": "8.x"
+    "node": "11.x"
   },
   "now": {
     "name": "react-prosemirror-example",
