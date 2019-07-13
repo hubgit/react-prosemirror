@@ -21,7 +21,7 @@ import {
   faRedo,
   faOutdent,
   faAngleUp
-} from '@fortawesome/fontawesome-free-solid'
+} from '@fortawesome/free-solid-svg-icons'
 
 export default {
   em: <FontAwesomeIcon icon={faItalic} />,

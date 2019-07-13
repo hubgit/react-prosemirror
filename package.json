@@ -2,9 +2,10 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "lerna": "^2.8.0",
-    "standard": "^11.0.0"
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.0.1",
+    "lerna": "^3.15.0",
+    "standard": "^13.0.2"
   },
   "workspaces": [
     "prosemirror-*",
@@ -14,7 +15,7 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "build": "lerna run build --toposort --concurrency=1",
+    "build": "lerna run build --concurrency=1",
     "publish": "lerna publish"
   }
 }
