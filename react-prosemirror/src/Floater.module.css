@@ -1,5 +1,5 @@
 .floater {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     border: 3px solid #151616;
     border-radius: 3px;

@@ -16,14 +16,19 @@ class Floater extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({
-      style: this.calculateStyle(this.props)
+    this.setStyle(this.props)
+    ['resize', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, this.updateStyle)
     })
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({
-      style: this.calculateStyle(nextProps)
+    this.setStyle(nextProps)
+  }
+
+  componentWillUnmount () {
+    ['resize', 'scroll'].forEach(evt => {
+      window.removeEventListener(evt, this.updateStyle)
     })
   }
 
@@ -55,6 +60,16 @@ class Floater extends React.Component {
       left: window.innerWidth - offsetWidth < coords.left ? coords.left - offsetWidth + 20 : coords.left,
       top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 20
     }
+  }
+
+  setStyle = (props) => {
+    this.setState({
+      style: this.calculateStyle(props)
+    })
+  }
+
+  updateStyle = () => {
+    this.setStyle(this.props)
   }
 }
 
