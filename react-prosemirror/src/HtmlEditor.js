@@ -55,11 +55,11 @@ class HtmlEditor extends React.Component {
     }, 1000, { maxWait: 5000 })
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const { value, options } = this.props
     const { schema } = options
 
-    if (nextProps.value !== value) {
+    if (value !== prevProps.value) {
       const parse = this.initializeParse(schema)
       this.view.state.doc = parse(value)
       this.view.updateState(this.view.state);
