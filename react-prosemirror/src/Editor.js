@@ -5,6 +5,7 @@ import 'prosemirror-view/style/prosemirror.css'
 import './Editor.css'
 
 class Editor extends React.Component {
+
   constructor (props) {
     super(props)
 
@@ -26,6 +27,14 @@ class Editor extends React.Component {
       attributes: this.props.attributes,
       nodeViews: this.props.nodeViews
     })
+  }
+
+  get view() {
+    return this._view;
+  }
+
+  set view(value) {
+    this._view = value;
   }
 
   componentDidMount () {
