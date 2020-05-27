@@ -1,6 +1,7 @@
 import React from 'react'
 import debounce from 'lodash/debounce'
 import { DOMParser, DOMSerializer } from 'prosemirror-model'
+import { TextSelection } from 'prosemirror-state';
 
 import Editor from './Editor'
 
@@ -52,18 +53,27 @@ class HtmlEditor extends React.Component {
 
     this.onChange = debounce(doc => {
       onChange(serialize(doc))
-    }, 1000, { maxWait: 5000 })
+    }, 100, { maxWait: 250 })
+  }
+
+  resetState() {
+    const { value, options } = this.props
+    const { schema } = options
+    const parse = this.initializeParse(schema)
+    this.view.state.doc = parse(value)
+    const resetPosition = this.view.state.tr.before.resolve(1);
+    this.view.dispatch(this.view.state.tr.setSelection(new TextSelection(resetPosition, resetPosition)))
+    this.view.updateState(this.view.state);
   }
 
   componentDidUpdate(prevProps) {
-    const { value, options } = this.props
-    const { schema } = options
-
-    if (value !== prevProps.value) {
-      const parse = this.initializeParse(schema)
-      this.view.state.doc = parse(value)
-      this.view.updateState(this.view.state);
+    if (this.props.value !== prevProps.value) {
+      this.resetState();
     }
+  }
+
+  focus() {
+    this.view.dom.focus();
   }
 
   render () {
