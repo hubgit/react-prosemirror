@@ -5,7 +5,7 @@
 
 .ProseMirror {
   font-family: sans-serif;
-  padding: 0 8px;
+  padding: 0 16px;
   position: relative;
   border: 1px solid #ccc;
   border-radius: 4px;

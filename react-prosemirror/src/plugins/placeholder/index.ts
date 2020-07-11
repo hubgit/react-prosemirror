@@ -6,33 +6,23 @@ interface Props {
   text: string
 }
 
-export const placeholder = <S extends Schema>({ text }: Props): Plugin<S> =>
+export const placeholder = <S extends Schema>(): Plugin<S> =>
   new Plugin<S>({
     props: {
       decorations: (state: EditorState<S>) => {
-        const { childCount, firstChild } = state.doc
+        const decorations: Decoration[] = []
 
-        if (
-          childCount === 1 &&
-          firstChild &&
-          firstChild.type.name === 'paragraph' &&
-          firstChild.childCount === 0
-        ) {
-          const decorations: Decoration[] = []
+        state.doc.descendants((node, pos) => {
+          if (node.type.isBlock && node.childCount === 0) {
+            decorations.push(
+              Decoration.node(pos, pos + node.nodeSize, {
+                class: 'empty-node',
+              })
+            )
+          }
+        })
 
-          decorations.push(
-            Decoration.widget(0, () => {
-              const placeholder = document.createElement('div')
-              placeholder.className = 'ProseMirror-placeholder'
-              placeholder.textContent = text
-              return placeholder
-            })
-          )
-
-          return DecorationSet.create<S>(state.doc, decorations)
-        }
-
-        return null
+        return DecorationSet.create<S>(state.doc, decorations)
       },
     },
   })

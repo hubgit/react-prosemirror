@@ -1,3 +1,7 @@
 body {
     margin: 0;
 }
+
+.ProseMirror p.empty-node:first-child::before {
+    content: 'Start typing…';
+}
