@@ -9,8 +9,9 @@
   margin: 8px 0;
   position: relative;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 2px;
   min-height: 10em;
+  font-size: 24px;
 }
 
 .ProseMirror:focus-within {
