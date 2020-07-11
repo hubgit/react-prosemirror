@@ -17,7 +17,7 @@ export const createHtmlTransformer = <S extends Schema>(
       const template = document.createElement('template')
       template.innerHTML = input
 
-      return parser.parse(template)
+      return parser.parse(template.content)
     },
     export: (output): string => {
       const template = document.createElement('template')
