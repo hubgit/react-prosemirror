@@ -15,8 +15,12 @@
 .ProseMirror-toolbar-item {
   padding: 6px 16px;
   cursor: pointer;
-  border: none;
+  border: 1px solid #000;
   background: white;
+}
+
+.ProseMirror-toolbar-item:not(:last-child) {
+  border-right: none;
 }
 
 .ProseMirror-toolbar-item:first-child {
@@ -29,16 +33,16 @@
   border-bottom-right-radius: 4px;
 }
 
-.ProseMirror-toolbar-item:hover {
-  background: #f6f6f6;
-}
-
 .ProseMirror-toolbar-item[data-active=true] {
-  background: #ddd;
+  background: #b4d5f8;
 }
 
 .ProseMirror-toolbar-item:active {
-  background: #bbb;
+  background: #80bdfc;
+}
+
+.ProseMirror-toolbar-item:disabled[data-active=true] {
+  color: #000;
 }
 
 .ProseMirror-toolbar-item > div:not(.ProseMirror-icon) {
