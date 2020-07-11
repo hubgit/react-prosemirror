@@ -6,6 +6,7 @@
 .ProseMirror {
   font-family: sans-serif;
   padding: 0 16px;
+  margin: 8px 0;
   position: relative;
   border: 1px solid #ccc;
   border-radius: 4px;

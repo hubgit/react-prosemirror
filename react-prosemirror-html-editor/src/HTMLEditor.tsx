@@ -86,15 +86,15 @@ const plugins: Plugin<EditorSchema>[] = [
     'Shift-Mod-z': redo,
     Backspace: joinBackward, // TODO: select all + delete
   }),
-  placeholder<EditorSchema>({ text: 'Start typing…' }),
+  placeholder<EditorSchema>(),
   inputRules({
     rules: [textblockTypeInputRule(/^```$/, schema.nodes.code_block)],
   }),
 ]
 
-// 3. Define your toolbar
+// 3. Define your toolbar(s)
 
-const toolbar: ToolbarSpec<EditorSchema> = {
+const floatingToolbar: ToolbarSpec<EditorSchema> = {
   format: {
     strong: {
       title: 'Toggle strong',
@@ -146,6 +146,9 @@ const toolbar: ToolbarSpec<EditorSchema> = {
       run: toggleMark(schema.marks.strikethrough),
     },
   },
+}
+
+const toolbar: ToolbarSpec<EditorSchema> = {
   blockType: {
     plain: {
       title: 'Change to paragraph',
@@ -252,6 +255,7 @@ export const HTMLEditor: React.FC<{
       plugins={plugins}
       schema={schema}
       toolbar={toolbar}
+      floatingToolbar={floatingToolbar}
       transformer={transformer}
       value={value}
     />

@@ -2,10 +2,13 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  padding: 8px 0;
   display: flex;
   align-items: center;
   background: white;
+}
+
+.ProseMirror-toolbar-group {
+  white-space: nowrap;
 }
 
 .ProseMirror-toolbar-group:not(:last-child) {
@@ -15,7 +18,7 @@
 .ProseMirror-toolbar-item {
   padding: 6px 16px;
   cursor: pointer;
-  border: 1px solid #000;
+  border: 1px solid #a9a9a9;
   background: white;
 }
 
@@ -34,7 +37,7 @@
 }
 
 .ProseMirror-toolbar-item[data-active=true] {
-  background: #b4d5f8;
+  background: #e2e2e2;
 }
 
 .ProseMirror-toolbar-item:active {

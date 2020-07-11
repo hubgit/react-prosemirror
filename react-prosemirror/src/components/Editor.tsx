@@ -10,11 +10,13 @@ import React, {
 } from 'react'
 
 import { Toolbar, ToolbarSpec, Transformer } from '..'
+import { Floater } from '../toolbar/Floater'
 
 export const Editor = <S extends Schema, T = string>({
   autoFocus,
   debounce = 500,
   editorProps,
+  floatingToolbar,
   handleChange,
   plugins,
   schema,
@@ -25,10 +27,11 @@ export const Editor = <S extends Schema, T = string>({
   autoFocus?: boolean
   debounce?: number
   editorProps?: EditorProps<unknown, S>
+  floatingToolbar?: ToolbarSpec<S>
   handleChange: (value: T) => void
   plugins: Plugin<S>[]
   schema: S
-  toolbar: ToolbarSpec<S>
+  toolbar?: ToolbarSpec<S>
   transformer: Transformer<S, T>
   value: T
 }): ReactElement | null => {
@@ -109,7 +112,19 @@ export const Editor = <S extends Schema, T = string>({
 
   return (
     <div ref={editorRef} className={'ProseMirror-container'}>
-      <Toolbar<S> toolbar={toolbar} view={view} state={editorState} />
+      {toolbar && (
+        <Toolbar<S> toolbar={toolbar} view={view} state={editorState} />
+      )}
+
+      {floatingToolbar && (
+        <Floater view={view} state={editorState}>
+          <Toolbar<S>
+            toolbar={floatingToolbar}
+            view={view}
+            state={editorState}
+          />
+        </Floater>
+      )}
     </div>
   )
 }
