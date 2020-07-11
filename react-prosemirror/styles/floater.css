@@ -9,11 +9,11 @@
     background-color: #333;
     color: white;
     opacity: 0.8;
-    border-color: #333;
+    border: none;
 }
 
 .ProseMirror-floater .ProseMirror-toolbar-item[data-active=true] {
-    background-color: #111;
+    background-color: #000;
 }
 
 .ProseMirror-floater .ProseMirror-toolbar-item:active {
