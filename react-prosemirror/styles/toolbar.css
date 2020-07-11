@@ -1,0 +1,50 @@
+.ProseMirror-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  background: white;
+}
+
+.ProseMirror-toolbar-group:not(:last-child) {
+  margin-right: 16px;
+}
+
+.ProseMirror-toolbar-item {
+  padding: 6px 16px;
+  cursor: pointer;
+  border: none;
+  background: white;
+}
+
+.ProseMirror-toolbar-item:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.ProseMirror-toolbar-item:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.ProseMirror-toolbar-item:hover {
+  background: #f6f6f6;
+}
+
+.ProseMirror-toolbar-item[data-active=true] {
+  background: #ddd;
+}
+
+.ProseMirror-toolbar-item:active {
+  background: #bbb;
+}
+
+.ProseMirror-toolbar-item > div:not(.ProseMirror-icon) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 8px;
+}

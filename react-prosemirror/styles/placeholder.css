@@ -1,0 +1,12 @@
+.ProseMirror p {
+  margin: 1ch 0;
+  position: relative;
+}
+
+.ProseMirror-placeholder {
+  color: #aaa;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  pointer-events: none;
+}
