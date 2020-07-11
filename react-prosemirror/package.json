@@ -7,8 +7,8 @@
     "styles"
   ],
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "tsc --build",
+    "dev": "tsc --build --watch"
   },
   "license": "MIT",
   "peerDependencies": {

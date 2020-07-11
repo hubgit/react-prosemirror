@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "parcel build index.html",
-    "dev": "parcel index.html"
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html"
   },
   "dependencies": {
     "react": "^16.13.1",
