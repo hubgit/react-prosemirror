@@ -4,3 +4,18 @@
     display: flex;
     flex-wrap: nowrap;
 }
+
+.ProseMirror-floater .ProseMirror-toolbar-item {
+    background-color: #333;
+    color: white;
+    opacity: 0.8;
+    border-color: #333;
+}
+
+.ProseMirror-floater .ProseMirror-toolbar-item[data-active=true] {
+    background-color: #111;
+}
+
+.ProseMirror-floater .ProseMirror-toolbar-item:active {
+    background-color: #000;
+}
