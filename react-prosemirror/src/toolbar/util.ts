@@ -4,10 +4,9 @@ import {
   NodeSelection,
   Selection,
   TextSelection,
-  Transaction,
 } from 'prosemirror-state'
 
-type Dispatch<S extends Schema> = (transaction: Transaction<S>) => void
+import { DispatchTransaction } from '../types'
 
 export const markActive = <S extends Schema>(markType: MarkType<S>) => (
   state: EditorState<S>
@@ -60,7 +59,7 @@ export const blockActive = <S extends Schema>(
 export const insertBlockAfter = <S extends Schema>(
   node: Node<S>,
   state: EditorState<S>,
-  dispatch: Dispatch<S>
+  dispatch: DispatchTransaction
 ): void => {
   const tr = state.tr
   const pos = tr.selection.$anchor.after()
@@ -77,7 +76,7 @@ export const insertBlockAfter = <S extends Schema>(
 export const insertBlock = <S extends Schema>(
   nodeType: NodeType<S>,
   attrs?: Record<string, unknown>
-) => (state: EditorState<S>, dispatch: Dispatch<S>): void => {
+) => (state: EditorState<S>, dispatch: DispatchTransaction): void => {
   const node = nodeType.createAndFill(attrs) as Node
 
   insertBlockAfter(node, state, dispatch)

@@ -1,15 +1,10 @@
-import { EditorState } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
-import React, { PropsWithChildren, ReactElement, useMemo, useRef } from 'react'
+import React, { useContext, useMemo, useRef } from 'react'
 
-export const Floater = ({
-  view,
-  state,
-  children,
-}: PropsWithChildren<{
-  view: EditorView
-  state: EditorState
-}>): ReactElement => {
+import { EditorContext } from '../components'
+
+export const Floater: React.FC = ({ children }) => {
+  const { view, state } = useContext(EditorContext)
+
   const floaterRef = useRef<HTMLDivElement>(null)
 
   const style = useMemo(() => {
@@ -32,7 +27,8 @@ export const Floater = ({
         window.innerWidth - offsetWidth < coords.left
           ? coords.left - offsetWidth + 20
           : coords.left,
-      top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 20,
+      top: coords.top + 30,
+      // top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 30,
     }
   }, [state, view, floaterRef])
 

@@ -1,7 +1,6 @@
 import 'prosemirror-view/style/prosemirror.css'
 import 'react-prosemirror/styles/editor.css'
 import 'react-prosemirror/styles/floater.css'
-import 'react-prosemirror/styles/placeholder.css'
 import 'react-prosemirror/styles/toolbar.css'
 import '../styles/demo.css'
 
@@ -18,6 +17,7 @@ ReactDOM.render(
       console.log(output)
     }}
     value={`<p>Hello World!</p>`}
+    // value={''}
   />,
   document.querySelector('#root')
 )

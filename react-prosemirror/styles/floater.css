@@ -3,19 +3,14 @@
     z-index: 10;
     display: flex;
     flex-wrap: nowrap;
+    background: white;
+    opacity: 0.8;
+}
+
+.ProseMirror-floater .ProseMirror-toolbar {
+    padding: 0;
 }
 
 .ProseMirror-floater .ProseMirror-toolbar-item {
-    background-color: #333;
-    color: white;
-    opacity: 0.8;
-    border: none;
-}
-
-.ProseMirror-floater .ProseMirror-toolbar-item[data-active=true] {
-    background-color: #000;
-}
-
-.ProseMirror-floater .ProseMirror-toolbar-item:active {
-    background-color: #000;
+    padding: 4px 8px;
 }

@@ -1,19 +1,18 @@
 .ProseMirror-container {
   position: relative;
-  margin: 8px 16px;
 }
 
 .ProseMirror {
-  font-family: sans-serif;
-  padding: 0 16px;
-  margin: 8px 0;
+  font-family: Helvetica, sans-serif;
+  padding: 1em;
   position: relative;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  min-height: 10em;
-  font-size: 24px;
+  overflow-y: auto;
+  min-height: 5em;
+  max-height: 10em;
+  max-width: 40em;
 }
 
 .ProseMirror:focus-within {
   outline: none;
 }
+

@@ -1,1 +1,2 @@
-export * from './Editor'
+export * from './EditorProvider'
+export * from './EditorContent'

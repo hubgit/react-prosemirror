@@ -1,8 +1,0 @@
-.ProseMirror .empty-node::before {
-  float: left;
-  color: #aaa;
-  pointer-events: none;
-  height: 0;
-  padding-left: 4px;
-}
-

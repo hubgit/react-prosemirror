@@ -1,10 +1,6 @@
-import { DOMParser, DOMSerializer, Node, Schema } from 'prosemirror-model'
+import { DOMParser, DOMSerializer, Schema } from 'prosemirror-model'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface Transformer<S extends Schema, T = any> {
-  import: (input: T) => Node<S>
-  export: (output: Node<S>) => T
-}
+import { Transformer } from '../types'
 
 export const createHtmlTransformer = <S extends Schema>(
   schema: S

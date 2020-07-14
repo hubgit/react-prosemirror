@@ -1,10 +1,5 @@
 .ProseMirror-toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1;
   display: flex;
-  align-items: center;
-  background: white;
 }
 
 .ProseMirror-toolbar-group {
@@ -19,40 +14,17 @@
   padding: 6px 12px;
   font-size: 12px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background: white;
-}
-
-.ProseMirror-toolbar-item:not(:last-child) {
-  border-right: none;
-}
-
-.ProseMirror-toolbar-item:first-child {
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-}
-
-.ProseMirror-toolbar-item:last-child {
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: background-color 0.1s, color 0.1s;
 }
 
 .ProseMirror-toolbar-item[data-active=true] {
-  background: #e6e6e6;
+  background-color: #5754f8;
+  color: #fff;
 }
 
 .ProseMirror-toolbar-item:active {
-  background: #aaa;
-}
-
-.ProseMirror-toolbar-item:disabled[data-active=true] {
-  color: #000;
-}
-
-.ProseMirror-toolbar-item > div:not(.ProseMirror-icon) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0 8px;
+  background-color: #5754f8;
+  color: #fff;
 }
