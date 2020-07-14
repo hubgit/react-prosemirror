@@ -12,9 +12,11 @@ import { toggleMark } from 'prosemirror-commands'
 import React from 'react'
 import { Floater, markActive, Toolbar, ToolbarItem } from 'react-prosemirror'
 
-import { schema } from './schema'
+import { EditorSchema } from '../schema'
 
-export const FloatingToolbar: React.FC = () => {
+export const FloatingToolbar: React.FC<{ schema: EditorSchema }> = ({
+  schema,
+}) => {
   return (
     <Floater>
       <Toolbar>

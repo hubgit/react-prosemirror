@@ -1,3 +1,6 @@
+import { baseKeymap } from 'prosemirror-commands'
+import { history } from 'prosemirror-history'
+import { keymap } from 'prosemirror-keymap'
 import { EditorProps } from 'prosemirror-view'
 import React, { useMemo } from 'react'
 import {
@@ -6,11 +9,19 @@ import {
   EditorProvider,
 } from 'react-prosemirror'
 
-import { FloatingToolbar } from './FloatingToolbar'
-import { MainToolbar } from './MainToolbar'
-import * as nodeViews from './nodeViews'
-import { plugins } from './plugins'
-import { EditorSchema, schema } from './schema'
+import { FloatingToolbar, MainToolbar } from './components'
+import { keys, rules } from './plugins'
+import { createSchema, EditorSchema } from './schema'
+import { paragraphView } from './views'
+
+const schema = createSchema()
+
+const plugins = [
+  history(), // undo/redo
+  keys(schema), // custom keymap
+  keymap(baseKeymap), // base keymap
+  rules(schema), // input rules
+]
 
 const transformer = createHtmlTransformer<EditorSchema>(schema)
 
@@ -40,7 +51,9 @@ export const HTMLEditor = React.memo<{
             return false
           },
         },
-        nodeViews,
+        nodeViews: {
+          paragraph: paragraphView,
+        },
         scrollMargin: 16,
         scrollThreshold: 16,
       }),
@@ -56,9 +69,9 @@ export const HTMLEditor = React.memo<{
         transformer={transformer}
         value={value}
       >
-        <MainToolbar />
+        <MainToolbar schema={schema} />
         <EditorContent autoFocus={autoFocus} />
-        <FloatingToolbar />
+        <FloatingToolbar schema={schema} />
       </EditorProvider>
     )
   }

@@ -1,1 +1,1 @@
-export * from './HTMLEditor'
+export { HTMLEditor } from './HTMLEditor'

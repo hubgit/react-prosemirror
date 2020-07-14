@@ -21,9 +21,9 @@ import {
   ToolbarItem,
 } from 'react-prosemirror'
 
-import { schema } from './schema'
+import { EditorSchema } from '../schema'
 
-export const MainToolbar: React.FC = () => {
+export const MainToolbar: React.FC<{ schema: EditorSchema }> = ({ schema }) => {
   return (
     <Toolbar>
       <ToolbarGroup>
