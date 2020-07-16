@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.settings.json",
+  "compilerOptions": {
+    "composite": false,
+    "jsx": "react",
+    "noEmit": true
+  },
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../html-editor"
+    }
+  ]
+}

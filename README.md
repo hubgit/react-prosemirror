@@ -2,6 +2,6 @@
 
 ## Packages
 
-* [react-prosemirror](react-prosemirror) - the base component
-* [react-prosemirror-html-editor](react-prosemirror-html-editor) - an example component for editing HTML
-* [demo](demo) - a demo app showing the HTML editor
+* [@pompom/core](packages/core) - the base Editor component
+* [@pompom/html-editor](packages/html-editor) - an example HTML editor component
+* [demo](packages/demo) - a demo app showing the HTML editor

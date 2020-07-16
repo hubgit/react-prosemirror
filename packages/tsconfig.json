@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "demo" },
+    { "path": "core"},
+    { "path": "html-editor"}
+  ]
+}
