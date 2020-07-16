@@ -10,8 +10,9 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --build packages",
-    "build:watch": "tsc --build --watch packages",
-    "lint": "eslint 'packages/**/*.{ts,tsx}'"
+    "clean": "tsc --build --clean packages",
+    "lint": "eslint 'packages/**/*.{ts,tsx}'",
+    "watch": "tsc --build --watch packages"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.6.0",

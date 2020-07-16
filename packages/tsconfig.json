@@ -2,9 +2,9 @@
   "files": [],
   "references": [
     { "path": "commands"},
-    { "path": "model"},
     { "path": "editor"},
     { "path": "html-editor"},
+    { "path": "model"},
     { "path": "transformers"}
   ]
 }
