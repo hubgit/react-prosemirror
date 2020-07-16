@@ -1,8 +1,10 @@
 {
   "files": [],
   "references": [
-    { "path": "demo" },
-    { "path": "core"},
-    { "path": "html-editor"}
+    { "path": "commands"},
+    { "path": "model"},
+    { "path": "editor"},
+    { "path": "html-editor"},
+    { "path": "transformers"}
   ]
 }

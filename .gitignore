@@ -4,3 +4,6 @@ dist/
 .cache/
 *.log
 *.tsbuildinfo
+packages/**/*.js
+packages/**/*.map
+packages/**/*.d.ts

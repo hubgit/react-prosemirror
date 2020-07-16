@@ -1,12 +1,9 @@
 {
   "extends": "../tsconfig.settings.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src"
-  },
   "references": [
-    {
-      "path": "../core"
-    }
+    { "path": "../editor" },
+    { "path": "../commands" },
+    { "path": "../model" },
+    { "path": "../transformers" }
   ]
 }

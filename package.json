@@ -2,14 +2,15 @@
   "name": "pompom",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "demo"
   ],
   "version": "2.0.0",
   "author": "Alf Eaton <eaton.alf@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc --build packages",
-    "dev": "tsc --build --watch packages",
+    "build:watch": "tsc --build --watch packages",
     "lint": "eslint 'packages/**/*.{ts,tsx}'"
   },
   "devDependencies": {

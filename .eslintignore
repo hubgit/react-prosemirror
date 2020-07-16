@@ -1,4 +1,7 @@
 node_modules/
 dist/
-build/
 .cache/
+packages/**/*.js
+packages/**/*.map
+packages/**/*.d.ts
+

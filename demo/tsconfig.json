@@ -3,14 +3,12 @@
     "target": "es2017",
     "module": "esnext",
     "jsx": "react",
-    "declaration": true,
-    "declarationMap": true,
-//    "sourceMap": true,
-    "composite": true,
+    "sourceMap": true,
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true
   }
 }

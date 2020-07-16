@@ -1,0 +1,39 @@
+.ProseMirror {
+    font-family: "San Francisco", serif;
+    font-size: 24px;
+    margin: 8px 0;
+    max-width: 40em;
+}
+
+.ProseMirror-toolbar {
+    --toolbar-color: #5754f8;
+    --toolbar-color-inverse: #fff;
+}
+
+.ProseMirror p:first-child {
+    margin-top: 0;
+}
+
+.ProseMirror > p.empty-node:first-child::before {
+    content: 'Start typing…';
+}
+
+.ProseMirror-toolbar {
+    padding: 0 16px;
+}
+
+.ProseMirror sub, .ProseMirror sup {
+    line-height: 0;
+}
+
+.ProseMirror > *:first-child {
+    margin-top: 0;
+}
+
+.ProseMirror .empty-node::before {
+    float: left;
+    color: #aaa;
+    pointer-events: none;
+    height: 0;
+}
+
