@@ -9,10 +9,10 @@ import { EditorSchema, schema } from '../schema'
 
 export const rules = inputRules({
   rules: [
-    // block quote
+    // wrap in block quote
     wrappingInputRule<EditorSchema>(/^\s*>\s$/, schema.nodes.blockquote),
 
-    // ordered list
+    // wrap in ordered list
     wrappingInputRule<EditorSchema>(
       /^(\d+)\.\s$/,
       schema.nodes.list,
@@ -25,7 +25,7 @@ export const rules = inputRules({
       }
     ),
 
-    // unordered list
+    // wrap in unordered list
     wrappingInputRule<EditorSchema>(
       /^\s*([-+*])\s$/,
       schema.nodes.list,
@@ -34,10 +34,10 @@ export const rules = inputRules({
       })
     ),
 
-    // code block
+    // set as code block
     textblockTypeInputRule<EditorSchema>(/^```$/, schema.nodes.code_block),
 
-    // headings
+    // set as heading
     textblockTypeInputRule<EditorSchema>(
       new RegExp('^(#{1,6})\\s$'),
       schema.nodes.heading,

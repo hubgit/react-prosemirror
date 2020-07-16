@@ -13,7 +13,7 @@ import ReactDOM from 'react-dom'
 ReactDOM.render(
   <HTMLEditor
     autoFocus={true}
-    handleChange={(output: string) => {
+    onChange={(output: string) => {
       console.log(output)
     }}
     value={`<p>Hello World!</p>`}
