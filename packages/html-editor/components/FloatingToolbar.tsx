@@ -2,82 +2,46 @@ import {
   faBold,
   faCode,
   faItalic,
+  faRemoveFormat,
   faStrikethrough,
   faSubscript,
   faSuperscript,
   faUnderline,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { isMarkActive } from '@pompom/commands'
 import { Floater, Toolbar, ToolbarItem } from '@pompom/editor'
-import { toggleMark } from 'prosemirror-commands'
 import React from 'react'
 
 import { EditorSchema } from '../schema'
+import { format } from './MainToolbar'
 
-export const FloatingToolbar: React.FC<{ schema: EditorSchema }> = ({
-  schema,
-}) => {
-  return (
-    <Floater>
-      <Toolbar>
-        <ToolbarItem
-          title={'Toggle strong'}
-          active={isMarkActive(schema.marks.strong)}
-          enable={toggleMark(schema.marks.strong)}
-          run={toggleMark(schema.marks.strong)}
-        >
-          <FontAwesomeIcon icon={faBold} />
-        </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle emphasis'}
-          active={isMarkActive(schema.marks.em)}
-          enable={toggleMark(schema.marks.em)}
-          run={toggleMark(schema.marks.em)}
-        >
-          <FontAwesomeIcon icon={faItalic} />
-        </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle code'}
-          active={isMarkActive(schema.marks.code)}
-          enable={toggleMark(schema.marks.code)}
-          run={toggleMark(schema.marks.code)}
-        >
-          <FontAwesomeIcon icon={faCode} />
-        </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle subscript'}
-          active={isMarkActive(schema.marks.subscript)}
-          enable={toggleMark(schema.marks.subscript)}
-          run={toggleMark(schema.marks.subscript)}
-        >
-          <FontAwesomeIcon icon={faSubscript} />
-        </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle superscript'}
-          active={isMarkActive(schema.marks.superscript)}
-          enable={toggleMark(schema.marks.superscript)}
-          run={toggleMark(schema.marks.superscript)}
-        >
-          <FontAwesomeIcon icon={faSuperscript} />
-        </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle underline'}
-          active={isMarkActive(schema.marks.underline)}
-          enable={toggleMark(schema.marks.underline)}
-          run={toggleMark(schema.marks.underline)}
-        >
-          <FontAwesomeIcon icon={faUnderline} />
-        </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle strikethrough'}
-          active={isMarkActive(schema.marks.strikethrough)}
-          enable={toggleMark(schema.marks.strikethrough)}
-          run={toggleMark(schema.marks.strikethrough)}
-        >
-          <FontAwesomeIcon icon={faStrikethrough} />
-        </ToolbarItem>
-      </Toolbar>
-    </Floater>
-  )
-}
+export const FloatingToolbar: React.FC = () => (
+  <Floater>
+    <Toolbar>
+      <ToolbarItem<EditorSchema> item={format.strong}>
+        <FontAwesomeIcon icon={faBold} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.emphasis}>
+        <FontAwesomeIcon icon={faItalic} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.code}>
+        <FontAwesomeIcon icon={faCode} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.subscript}>
+        <FontAwesomeIcon icon={faSubscript} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.superscript}>
+        <FontAwesomeIcon icon={faSuperscript} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.underline}>
+        <FontAwesomeIcon icon={faUnderline} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.strikethrough}>
+        <FontAwesomeIcon icon={faStrikethrough} />
+      </ToolbarItem>
+      <ToolbarItem<EditorSchema> item={format.removeFormat}>
+        <FontAwesomeIcon icon={faRemoveFormat} />
+      </ToolbarItem>
+    </Toolbar>
+  </Floater>
+)

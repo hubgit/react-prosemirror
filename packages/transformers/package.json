@@ -2,6 +2,7 @@
   "name": "@pompom/transformers",
   "version": "1.0.0",
   "main": "index.js",
+  "source": "index.ts",
   "types": "index.d.ts",
   "files": ["**/*.{js,jsx,d.ts}"],
   "license": "MIT",

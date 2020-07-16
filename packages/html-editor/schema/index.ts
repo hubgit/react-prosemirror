@@ -46,8 +46,7 @@ export interface EditorSchema extends Schema {
   marks: Record<MarkName, MarkType>
 }
 
-export const createSchema = (): EditorSchema =>
-  new Schema({
-    nodes,
-    marks,
-  })
+export const schema: EditorSchema = new Schema({
+  nodes,
+  marks,
+})

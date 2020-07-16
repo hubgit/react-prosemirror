@@ -1,6 +1,7 @@
+import { Schema } from 'prosemirror-model'
 import { EditorState, Transaction } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
-import React, { useContext } from 'react'
+import React, { PropsWithChildren, ReactElement, useContext } from 'react'
 
 import { EditorContext } from './EditorProvider'
 
@@ -12,19 +13,26 @@ export const ToolbarGroup: React.FC = ({ children }) => (
   <div className={'ProseMirror-toolbar-group'}>{children}</div>
 )
 
-// TODO: press button with keyboard
-
-export const ToolbarItem: React.FC<{
+export interface ToolbarItemSpec<S extends Schema> {
   title?: string
-  active?: (state: EditorState) => boolean
-  enable?: (state: EditorState) => boolean
+  active?: (state: EditorState<S>) => boolean
+  enable?: (state: EditorState<S>) => boolean
   run: (
-    state: EditorState,
-    dispatch: (transaction: Transaction) => void,
-    view: EditorView,
+    state: EditorState<S>,
+    dispatch: (transaction: Transaction<S>) => void,
+    view: EditorView<S>,
     event: Event
   ) => boolean
-}> = ({ active, children, enable, title, run }) => {
+}
+
+// TODO: press button with keyboard
+
+export const ToolbarItem = <S extends Schema>({
+  item,
+  children,
+}: PropsWithChildren<{ item: ToolbarItemSpec<Schema> }>): ReactElement => {
+  const { active, enable, title, run } = item
+
   const { view } = useContext(EditorContext)
 
   return (
@@ -43,3 +51,5 @@ export const ToolbarItem: React.FC<{
     </button>
   )
 }
+
+// export const ToolbarItem = React.memo(ToolbarInner) as typeof ToolbarInner

@@ -2,6 +2,7 @@
   "name": "@pompom/commands",
   "version": "1.0.0",
   "main": "index.js",
+  "source": "index.ts",
   "types": "index.d.ts",
   "files": ["**/*.{js,d.ts}"],
   "license": "MIT",

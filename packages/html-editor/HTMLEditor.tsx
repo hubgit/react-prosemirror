@@ -8,16 +8,14 @@ import React, { useMemo } from 'react'
 
 import { MainToolbar } from './components'
 import { keys, rules } from './plugins'
-import { createSchema, EditorSchema } from './schema'
+import { EditorSchema, schema } from './schema'
 import { paragraphView } from './views'
-
-const schema = createSchema()
 
 const plugins = [
   history(), // undo/redo
-  keys(schema), // custom keymap
+  keys, // custom keymap
   keymap(baseKeymap), // base keymap
-  rules(schema), // input rules
+  rules, // input rules
 ]
 
 const transformer = createHtmlTransformer<EditorSchema>(schema)
@@ -66,7 +64,7 @@ export const HTMLEditor = React.memo<{
         transformer={transformer}
         value={value}
       >
-        <MainToolbar schema={schema} />
+        <MainToolbar />
         <EditorContent autoFocus={autoFocus} />
       </EditorProvider>
     )

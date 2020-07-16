@@ -24,140 +24,168 @@ import {
   removeFormatting,
   toggleWrap,
 } from '@pompom/commands'
-import { Toolbar, ToolbarGroup, ToolbarItem } from '@pompom/editor'
+import {
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+  ToolbarItemSpec,
+} from '@pompom/editor'
 import { lift, setBlockType, toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
+import { MarkType, NodeType, Schema } from 'prosemirror-model'
 import { wrapInList } from 'prosemirror-schema-list'
 import React from 'react'
 
-import { EditorSchema } from '../schema'
+import { EditorSchema, schema } from '../schema'
 
-export const MainToolbar: React.FC<{ schema: EditorSchema }> = ({ schema }) => {
+export const toggleMarkItem = <S extends Schema>(
+  markType: MarkType<S>,
+  title: string
+) => ({
+  title,
+  active: isMarkActive(markType),
+  enable: toggleMark(markType),
+  run: toggleMark(markType),
+})
+
+export const format = {
+  strong: toggleMarkItem(schema.marks.strong, 'Toggle strong'),
+  emphasis: toggleMarkItem(schema.marks.em, 'Toggle emphasis'),
+  code: toggleMarkItem(schema.marks.code, 'Toggle code'),
+  subscript: toggleMarkItem(schema.marks.subscript, 'Toggle subscript'),
+  superscript: toggleMarkItem(schema.marks.superscript, 'Toggle superscript'),
+  underline: toggleMarkItem(schema.marks.underline, 'Toggle underline'),
+  strikethrough: toggleMarkItem(
+    schema.marks.strikethrough,
+    'Toggle strike-through'
+  ),
+  removeFormat: {
+    title: 'Remove formatting',
+    run: removeFormatting,
+  },
+}
+
+const block = {
+  paragraph: {
+    title: 'Change to paragraph',
+    active: isBlockActive(schema.nodes.paragraph),
+    enable: setBlockType(schema.nodes.paragraph),
+    run: setBlockType(schema.nodes.paragraph),
+  },
+  code: {
+    title: 'Change to code block',
+    active: isBlockActive(schema.nodes.code_block),
+    enable: setBlockType(schema.nodes.code_block),
+    run: setBlockType(schema.nodes.code_block),
+  },
+  heading: {
+    title: 'Change to heading',
+    active: isBlockActive(schema.nodes.heading, { level: 1 }),
+    enable: setBlockType(schema.nodes.heading, { level: 1 }),
+    run: setBlockType(schema.nodes.heading, { level: 1 }),
+  },
+}
+
+const wrap = {
+  blockquote: {
+    title: 'Wrap in block quote',
+    active: toggleWrap(schema.nodes.blockquote),
+    run: toggleWrap(schema.nodes.blockquote),
+  },
+  ordered_list: {
+    title: 'Wrap in ordered list',
+    active: isBlockActive(schema.nodes.list, { type: 'ordered' }),
+    enable: wrapInList(schema.nodes.list, { type: 'ordered' }),
+    run: wrapInList(schema.nodes.list, { type: 'ordered' }),
+  },
+  unordered_list: {
+    title: 'Wrap in unordered list',
+    active: isBlockActive(schema.nodes.list, { type: 'unordered' }),
+    enable: wrapInList(schema.nodes.list, { type: 'unordered' }),
+    run: wrapInList(schema.nodes.list, { type: 'unordered' }),
+  },
+  lift: {
+    title: 'Lift',
+    enable: lift,
+    run: lift,
+  },
+}
+
+const history = {
+  undo: {
+    title: 'Undo last change',
+    enable: undo,
+    run: undo,
+  },
+  redo: {
+    title: 'Redo last change',
+    enable: redo,
+    run: redo,
+  },
+}
+
+export const MainToolbar: React.FC = () => {
   return (
     <Toolbar>
       <ToolbarGroup>
-        <ToolbarItem
-          title={'Toggle strong'}
-          active={isMarkActive(schema.marks.strong)}
-          enable={toggleMark(schema.marks.strong)}
-          run={toggleMark(schema.marks.strong)}
-        >
+        <ToolbarItem<EditorSchema> item={format.strong}>
           <FontAwesomeIcon icon={faBold} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle emphasis'}
-          active={isMarkActive(schema.marks.em)}
-          enable={toggleMark(schema.marks.em)}
-          run={toggleMark(schema.marks.em)}
-        >
+        <ToolbarItem<EditorSchema> item={format.emphasis}>
           <FontAwesomeIcon icon={faItalic} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle code'}
-          active={isMarkActive(schema.marks.code)}
-          enable={toggleMark(schema.marks.code)}
-          run={toggleMark(schema.marks.code)}
-        >
+        <ToolbarItem<EditorSchema> item={format.code}>
           <FontAwesomeIcon icon={faCode} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle subscript'}
-          active={isMarkActive(schema.marks.subscript)}
-          enable={toggleMark(schema.marks.subscript)}
-          run={toggleMark(schema.marks.subscript)}
-        >
+        <ToolbarItem<EditorSchema> item={format.subscript}>
           <FontAwesomeIcon icon={faSubscript} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle superscript'}
-          active={isMarkActive(schema.marks.superscript)}
-          enable={toggleMark(schema.marks.superscript)}
-          run={toggleMark(schema.marks.superscript)}
-        >
+        <ToolbarItem<EditorSchema> item={format.superscript}>
           <FontAwesomeIcon icon={faSuperscript} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle underline'}
-          active={isMarkActive(schema.marks.underline)}
-          enable={toggleMark(schema.marks.underline)}
-          run={toggleMark(schema.marks.underline)}
-        >
+        <ToolbarItem<EditorSchema> item={format.underline}>
           <FontAwesomeIcon icon={faUnderline} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Toggle strikethrough'}
-          active={isMarkActive(schema.marks.strikethrough)}
-          enable={toggleMark(schema.marks.strikethrough)}
-          run={toggleMark(schema.marks.strikethrough)}
-        >
+        <ToolbarItem<EditorSchema> item={format.strikethrough}>
           <FontAwesomeIcon icon={faStrikethrough} />
         </ToolbarItem>
-        <ToolbarItem title={'Remove formattting'} run={removeFormatting}>
+        <ToolbarItem<EditorSchema> item={format.removeFormat}>
           <FontAwesomeIcon icon={faRemoveFormat} />
         </ToolbarItem>
       </ToolbarGroup>
+
       <ToolbarGroup>
-        <ToolbarItem
-          title={'Change to paragraph'}
-          active={isBlockActive(schema.nodes.paragraph)}
-          enable={setBlockType(schema.nodes.paragraph)}
-          run={setBlockType(schema.nodes.paragraph)}
-        >
+        <ToolbarItem<EditorSchema> item={block.paragraph}>
           <FontAwesomeIcon icon={faParagraph} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Change to code block'}
-          active={isBlockActive(schema.nodes.code_block)}
-          enable={setBlockType(schema.nodes.code_block)}
-          run={setBlockType(schema.nodes.code_block)}
-        >
+        <ToolbarItem<EditorSchema> item={block.code}>
           <FontAwesomeIcon icon={faCode} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Change to heading level 1'}
-          active={isBlockActive(schema.nodes.heading, { level: 1 })}
-          enable={setBlockType(schema.nodes.heading, { level: 1 })}
-          run={setBlockType(schema.nodes.heading, { level: 1 })}
-        >
+        <ToolbarItem<EditorSchema> item={block.heading}>
           <FontAwesomeIcon icon={faHeading} />
         </ToolbarItem>
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarItem
-          title={'Wrap in block quote'}
-          active={toggleWrap(schema.nodes.blockquote)}
-          // enable={toggleWrap(schema.nodes.blockquote)}
-          run={toggleWrap(schema.nodes.blockquote)}
-        >
+        <ToolbarItem<EditorSchema> item={wrap.blockquote}>
           <FontAwesomeIcon icon={faQuoteLeft} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Wrap in ordered list'}
-          active={isBlockActive(schema.nodes.list, { type: 'ordered' })}
-          enable={wrapInList(schema.nodes.list, { type: 'ordered' })}
-          run={wrapInList(schema.nodes.list, { type: 'ordered' })}
-        >
+        <ToolbarItem<EditorSchema> item={wrap.ordered_list}>
           <FontAwesomeIcon icon={faListOl} />
         </ToolbarItem>
-        <ToolbarItem
-          title={'Wrap in unordered list'}
-          active={isBlockActive(schema.nodes.list, { type: 'unordered' })}
-          enable={wrapInList(schema.nodes.list, { type: 'unordered' })}
-          run={wrapInList(schema.nodes.list, { type: 'unordered' })}
-        >
+        <ToolbarItem<EditorSchema> item={wrap.unordered_list}>
           <FontAwesomeIcon icon={faListUl} />
         </ToolbarItem>
-        <ToolbarItem title={'Lift'} enable={lift} run={lift}>
+        <ToolbarItem<EditorSchema> item={wrap.lift}>
           <FontAwesomeIcon icon={faOutdent} />
         </ToolbarItem>
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarItem title={'Undo last change'} enable={undo} run={undo}>
+        <ToolbarItem item={history.undo}>
           <FontAwesomeIcon icon={faUndo} />
         </ToolbarItem>
-        <ToolbarItem title={'Redo last change'} enable={redo} run={redo}>
+        <ToolbarItem item={history.redo}>
           <FontAwesomeIcon icon={faRedo} />
         </ToolbarItem>
       </ToolbarGroup>

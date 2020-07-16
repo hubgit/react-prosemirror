@@ -6,16 +6,20 @@ export const paragraphView: NodeViewCreator = (
   getPos,
   decorations
 ) => {
-  const contentDOM = document.createElement('p')
+  const dom = document.createElement('p')
 
   return {
-    contentDOM,
+    dom,
+    contentDOM: dom,
     update: (newNode, newDecorations) => {
-      if (!node.sameMarkup(newNode)) {
+      if (!newNode.sameMarkup(node)) {
         return false
       }
 
-      contentDOM.classList.toggle('empty-node', !node.childCount)
+      dom.classList.toggle('empty-node', !newNode.content.size)
+
+      node = newNode
+
       return true
     },
   }

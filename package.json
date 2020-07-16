@@ -11,6 +11,7 @@
   "scripts": {
     "build": "tsc --build packages",
     "clean": "tsc --build --clean packages",
+    "demo": "yarn workspace demo serve",
     "lint": "eslint 'packages/**/*.{ts,tsx}'",
     "watch": "tsc --build --watch packages"
   },
