@@ -19,11 +19,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  canWrap,
   isBlockActive,
   isMarkActive,
   isWrapped,
   removeFormatting,
+  setListTypeOrWrapInList,
   toggleWrap,
 } from '@pompom/commands'
 import {
@@ -99,14 +99,14 @@ const wrap = {
   ordered_list: {
     title: 'Wrap in ordered list',
     active: isBlockActive(schema.nodes.list, { type: 'ordered' }),
-    enable: wrapInList(schema.nodes.list, { type: 'ordered' }),
-    run: wrapInList(schema.nodes.list, { type: 'ordered' }),
+    enable: setListTypeOrWrapInList(schema.nodes.list, { type: 'ordered' }),
+    run: setListTypeOrWrapInList(schema.nodes.list, { type: 'ordered' }),
   },
   unordered_list: {
     title: 'Wrap in unordered list',
     active: isBlockActive(schema.nodes.list, { type: 'unordered' }),
-    enable: wrapInList(schema.nodes.list, { type: 'unordered' }),
-    run: wrapInList(schema.nodes.list, { type: 'unordered' }),
+    enable: setListTypeOrWrapInList(schema.nodes.list, { type: 'unordered' }),
+    run: setListTypeOrWrapInList(schema.nodes.list, { type: 'unordered' }),
   },
   lift: {
     title: 'Lift',

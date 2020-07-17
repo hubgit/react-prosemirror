@@ -70,15 +70,15 @@ export const insertNodeAfter = <S extends Schema>(
   state: EditorState<S>,
   dispatch?: DispatchTransaction
 ): boolean => {
-  const tr = state.tr
-
   const { $anchor } = state.selection
 
   const pos = $anchor.after()
 
-  tr.insert(pos, node).setSelection(TextSelection.near(tr.doc.resolve(pos)))
-
   if (dispatch) {
+    const tr = state.tr
+
+    tr.insert(pos, node).setSelection(TextSelection.near(tr.doc.resolve(pos)))
+
     dispatch(tr)
   }
 
@@ -98,9 +98,9 @@ export const removeFormatting = <S extends Schema>(
   state: EditorState<S>,
   dispatch?: DispatchTransaction
 ): boolean => {
-  const tr = state.tr
-
   const { from, to } = state.selection
+
+  const tr = state.tr
 
   tr.removeMark(from, to, undefined).setStoredMarks()
 
@@ -127,6 +127,19 @@ const parentBlockPos = <S extends Schema>(
   }
 }
 
+const parentWithNodeType = <S extends Schema>(
+  $pos: ResolvedPos<S>,
+  nodeType: NodeType<S>
+): Node<S> | undefined => {
+  for (let depth = $pos.depth; depth >= 0; depth--) {
+    const parent = $pos.node(depth)
+
+    if (parent.type === nodeType) {
+      return parent
+    }
+  }
+}
+
 const parentWithNodeTypePos = <S extends Schema>(
   $pos: ResolvedPos,
   nodeType: NodeType<S>
@@ -145,8 +158,6 @@ export const changeBlockType = <S extends Schema>(
   attrs?: Record<string, unknown>,
   marks?: Array<Mark<S>>
 ) => (state: EditorState<S>, dispatch?: DispatchTransaction): boolean => {
-  const tr = state.tr
-
   const { $from } = state.selection
 
   const parentPos = parentBlockPos($from)
@@ -155,10 +166,8 @@ export const changeBlockType = <S extends Schema>(
     return false
   }
 
-  tr.setNodeMarkup(parentPos, nodeType, attrs, marks)
-
   if (dispatch) {
-    dispatch(tr)
+    dispatch(state.tr.setNodeMarkup(parentPos, nodeType, attrs, marks))
   }
 
   return true
@@ -176,16 +185,11 @@ export const canWrap = <S extends Schema>(
     return false
   }
 
-  const parentPos = parentWithNodeTypePos(range.$from, nodeType)
-
-  if (typeof parentPos === 'number') {
+  if (parentWithNodeType(range.$from, nodeType)) {
     return false // already wrapped
   }
 
-  // wrap
-  const wrapping = findWrapping(range, nodeType, attrs)
-
-  return Boolean(wrapping)
+  return findWrapping(range, nodeType, attrs) !== null
 }
 
 export const isWrapped = <S extends Schema>(nodeType: NodeType<S>) => (
@@ -199,17 +203,13 @@ export const isWrapped = <S extends Schema>(nodeType: NodeType<S>) => (
     return false
   }
 
-  const parentPos = parentWithNodeTypePos(range.$from, nodeType)
-
-  return typeof parentPos === 'number'
+  return parentWithNodeType(range.$from, nodeType) !== undefined
 }
 
 export const toggleWrap = <S extends Schema>(
   nodeType: NodeType<S>,
   attrs?: Record<string, unknown>
 ) => (state: EditorState<S>, dispatch?: DispatchTransaction): boolean => {
-  const tr = state.tr
-
   const { $from, $to } = state.selection
 
   const range = $from.blockRange($to)
@@ -229,7 +229,7 @@ export const toggleWrap = <S extends Schema>(
     }
 
     if (dispatch) {
-      dispatch(tr.lift(range, target).scrollIntoView())
+      dispatch(state.tr.lift(range, target).scrollIntoView())
     }
 
     return true
@@ -242,7 +242,52 @@ export const toggleWrap = <S extends Schema>(
     }
 
     if (dispatch) {
-      dispatch(tr.wrap(range, wrapping).scrollIntoView())
+      dispatch(state.tr.wrap(range, wrapping).scrollIntoView())
+    }
+
+    return true
+  }
+}
+
+export const setListTypeOrWrapInList = <S extends Schema>(
+  listType: NodeType<S>,
+  attrs: Record<string, unknown>
+) => (state: EditorState, dispatch?: DispatchTransaction) => {
+  const { $from, $to } = state.selection
+
+  const range = $from.blockRange($to)
+
+  if (!range) {
+    return false
+  }
+
+  const parentPos = parentWithNodeTypePos(range.$from, listType)
+
+  if (typeof parentPos === 'number') {
+    // already in list
+    const $pos = state.doc.resolve(parentPos)
+
+    const node = $pos.nodeAfter
+
+    if (node && node.attrs.type === attrs.type) {
+      // return false if the node type already matches
+      return false
+    }
+
+    if (dispatch) {
+      dispatch(state.tr.setNodeMarkup(parentPos, undefined, attrs))
+    }
+
+    return true
+  } else {
+    const wrapping = findWrapping(range, listType, attrs)
+
+    if (!wrapping) {
+      return false
+    }
+
+    if (dispatch) {
+      dispatch(state.tr.wrap(range, wrapping).scrollIntoView())
     }
 
     return true
