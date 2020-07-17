@@ -10,7 +10,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "@pompom/editor": "^1.0.0",
-    "@pompom/html-editor": "^1.0.0",
+    "@pompom/rich-text": "^1.0.0",
     "prosemirror-view": "^1.15.2"
   },
   "devDependencies": {

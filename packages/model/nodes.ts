@@ -1,7 +1,7 @@
 import { NodeSpec } from 'prosemirror-model'
 
 export const doc: NodeSpec = {
-  content: 'block+',
+  content: '(block | heading)+',
   toDOM: () => ['article', 0],
 }
 
@@ -38,7 +38,7 @@ export const heading: NodeSpec = {
   attrs: { level: { default: 1 } },
   content: 'inline*',
   marks: 'em superscript subscript',
-  group: 'block',
+  group: 'heading',
   defining: true,
   parseDOM: [
     { tag: 'h1', attrs: { level: 1 } },

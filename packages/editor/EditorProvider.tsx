@@ -89,7 +89,7 @@ export const EditorProvider = <S extends Schema, T>({
   }, [transformer, value, view])
 
   return (
-    <div className={'ProseMirror-container'}>
+    <div className={'pompom-container'}>
       <EditorContext.Provider value={{ view, state }}>
         {children}
       </EditorContext.Provider>

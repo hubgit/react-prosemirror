@@ -7,20 +7,21 @@ import { EditorProps } from 'prosemirror-view'
 import React, { useMemo } from 'react'
 
 import { MainToolbar } from './components'
-import { keys, rules } from './plugins'
+import { keys, placeholder, rules } from './plugins'
 import { EditorSchema, schema } from './schema'
-import { paragraphView } from './views'
+// import { paragraphView } from './views'
 
 const plugins = [
   history(), // undo/redo
   keys, // custom keymap
   keymap(baseKeymap), // base keymap
+  placeholder,
   rules, // input rules
 ]
 
 const transformer = createHtmlTransformer<EditorSchema>(schema)
 
-export const HTMLEditor = React.memo<{
+export const RichText = React.memo<{
   autoFocus?: boolean
   onBlur?: (event: Event) => void
   onChange: (value: string) => void
@@ -39,9 +40,9 @@ export const HTMLEditor = React.memo<{
           return false
         },
       },
-      nodeViews: {
-        paragraph: paragraphView,
-      },
+      // nodeViews: {
+      //   paragraph: paragraphView,
+      // },
       scrollMargin: 16,
       scrollThreshold: 16,
     }),

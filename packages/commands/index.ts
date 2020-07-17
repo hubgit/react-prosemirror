@@ -10,7 +10,8 @@ import {
   EditorState,
   NodeSelection,
   Selection,
-  TextSelection, Transaction,
+  TextSelection,
+  Transaction,
 } from 'prosemirror-state'
 import { findWrapping, liftTarget } from 'prosemirror-transform'
 
@@ -103,6 +104,10 @@ export const removeFormatting = <S extends Schema>(
 
   tr.removeMark(from, to, undefined).setStoredMarks()
 
+  if (!tr.docChanged) {
+    return false
+  }
+
   if (dispatch) {
     dispatch(tr)
   }
@@ -159,6 +164,46 @@ export const changeBlockType = <S extends Schema>(
   return true
 }
 
+export const canWrap = <S extends Schema>(
+  nodeType: NodeType<S>,
+  attrs?: Record<string, unknown>
+) => (state: EditorState<S>): boolean => {
+  const { $from, $to } = state.selection
+
+  const range = $from.blockRange($to)
+
+  if (!range) {
+    return false
+  }
+
+  const parentPos = parentWithNodeTypePos(range.$from, nodeType)
+
+  if (typeof parentPos === 'number') {
+    return false // already wrapped
+  }
+
+  // wrap
+  const wrapping = findWrapping(range, nodeType, attrs)
+
+  return Boolean(wrapping)
+}
+
+export const isWrapped = <S extends Schema>(nodeType: NodeType<S>) => (
+  state: EditorState<S>
+): boolean => {
+  const { $from, $to } = state.selection
+
+  const range = $from.blockRange($to)
+
+  if (!range) {
+    return false
+  }
+
+  const parentPos = parentWithNodeTypePos(range.$from, nodeType)
+
+  return typeof parentPos === 'number'
+}
+
 export const toggleWrap = <S extends Schema>(
   nodeType: NodeType<S>,
   attrs?: Record<string, unknown>
@@ -176,6 +221,7 @@ export const toggleWrap = <S extends Schema>(
   const parentPos = parentWithNodeTypePos(range.$from, nodeType)
 
   if (typeof parentPos === 'number') {
+    // unwrap
     const target = liftTarget(range)
 
     if (typeof target !== 'number') {
@@ -188,6 +234,7 @@ export const toggleWrap = <S extends Schema>(
 
     return true
   } else {
+    // wrap
     const wrapping = findWrapping(range, nodeType, attrs)
 
     if (!wrapping) {
@@ -198,8 +245,6 @@ export const toggleWrap = <S extends Schema>(
       dispatch(tr.wrap(range, wrapping).scrollIntoView())
     }
 
-    // return true
+    return true
   }
-
-  return false
 }

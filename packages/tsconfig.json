@@ -3,8 +3,8 @@
   "references": [
     { "path": "commands"},
     { "path": "editor"},
-    { "path": "html-editor"},
     { "path": "model"},
+    { "path": "rich-text"},
     { "path": "transformers"}
   ]
 }

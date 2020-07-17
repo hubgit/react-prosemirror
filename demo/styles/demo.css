@@ -1,13 +1,20 @@
-.ProseMirror {
-    font-family: "San Francisco", serif;
-    font-size: 24px;
-    margin: 8px 0;
-    max-width: 40em;
+.pompom-container {
+    padding: 8px;
 }
 
-.ProseMirror-toolbar {
+.pompom-toolbar {
     --toolbar-color: #5754f8;
     --toolbar-color-inverse: #fff;
+}
+
+.ProseMirror {
+    font-family: "San Francisco", serif;
+    font-size: 20px;
+    padding: 16px 4px;
+    max-width: 40em;
+    overflow-y: auto;
+    min-height: 5em;
+    max-height: 10em;
 }
 
 .ProseMirror p:first-child {
@@ -16,10 +23,6 @@
 
 .ProseMirror > p.empty-node:first-child::before {
     content: 'Start typing…';
-}
-
-.ProseMirror-toolbar {
-    padding: 0 16px;
 }
 
 .ProseMirror sub, .ProseMirror sup {

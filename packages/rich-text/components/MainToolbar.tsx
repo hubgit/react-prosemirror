@@ -19,8 +19,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  canWrap,
   isBlockActive,
   isMarkActive,
+  isWrapped,
   removeFormatting,
   toggleWrap,
 } from '@pompom/commands'
@@ -32,7 +34,7 @@ import {
 } from '@pompom/editor'
 import { lift, setBlockType, toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
-import { MarkType, NodeType, Schema } from 'prosemirror-model'
+import { MarkType, Schema } from 'prosemirror-model'
 import { wrapInList } from 'prosemirror-schema-list'
 import React from 'react'
 
@@ -41,7 +43,7 @@ import { EditorSchema, schema } from '../schema'
 export const toggleMarkItem = <S extends Schema>(
   markType: MarkType<S>,
   title: string
-) => ({
+): ToolbarItemSpec<S> => ({
   title,
   active: isMarkActive(markType),
   enable: toggleMark(markType),
@@ -62,6 +64,7 @@ export const format = {
   removeFormat: {
     title: 'Remove formatting',
     run: removeFormatting,
+    enable: removeFormatting,
   },
 }
 
@@ -89,7 +92,8 @@ const block = {
 const wrap = {
   blockquote: {
     title: 'Wrap in block quote',
-    active: toggleWrap(schema.nodes.blockquote),
+    active: isWrapped(schema.nodes.blockquote),
+    enable: toggleWrap(schema.nodes.blockquote),
     run: toggleWrap(schema.nodes.blockquote),
   },
   ordered_list: {
@@ -170,12 +174,18 @@ export const MainToolbar: React.FC = () => {
         <ToolbarItem<EditorSchema> item={wrap.blockquote}>
           <FontAwesomeIcon icon={faQuoteLeft} />
         </ToolbarItem>
+      </ToolbarGroup>
+
+      <ToolbarGroup>
         <ToolbarItem<EditorSchema> item={wrap.ordered_list}>
           <FontAwesomeIcon icon={faListOl} />
         </ToolbarItem>
         <ToolbarItem<EditorSchema> item={wrap.unordered_list}>
           <FontAwesomeIcon icon={faListUl} />
         </ToolbarItem>
+      </ToolbarGroup>
+
+      <ToolbarGroup>
         <ToolbarItem<EditorSchema> item={wrap.lift}>
           <FontAwesomeIcon icon={faOutdent} />
         </ToolbarItem>

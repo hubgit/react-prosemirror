@@ -1,20 +1,20 @@
-.ProseMirror-toolbar {
+.pompom-toolbar {
   --toolbar-color: #000;
   --toolbar-color-inverse: #fff;
   display: flex;
   color: var(--toolbar-color);
 }
 
-.ProseMirror-toolbar-group {
+.pompom-toolbar-group {
   white-space: nowrap;
   border: 1px solid var(--toolbar-color);
 }
 
-.ProseMirror-toolbar-group:not(:last-child) {
+.pompom-toolbar-group:not(:last-child) {
   margin-right: 16px;
 }
 
-.ProseMirror-toolbar-item {
+.pompom-toolbar-item {
   padding: 6px 12px;
   font-size: 12px;
   cursor: pointer;
@@ -23,12 +23,16 @@
   color: inherit;
 }
 
-.ProseMirror-toolbar-item[data-active=true] {
+.pompom-toolbar-item[disabled]:not([data-active=true]) {
+  opacity: 0.2;
+}
+
+.pompom-toolbar-item[data-active=true] {
   background-color: var(--toolbar-color);
   color: var(--toolbar-color-inverse);
 }
 
-.ProseMirror-toolbar-item:active {
+.pompom-toolbar-item:active {
   background-color: var(--toolbar-color);
   color: var(--toolbar-color-inverse);
 }

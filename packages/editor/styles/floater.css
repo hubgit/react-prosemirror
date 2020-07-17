@@ -1,4 +1,8 @@
-.ProseMirror-floater {
+.pompom-container {
+    position: relative;
+}
+
+.pompom-floater {
     position: absolute;
     z-index: 10;
     display: flex;
@@ -7,10 +11,10 @@
     opacity: 0.8;
 }
 
-.ProseMirror-floater .ProseMirror-toolbar {
+.pompom-floater .pompom-toolbar {
     padding: 0;
 }
 
-.ProseMirror-floater .ProseMirror-toolbar-item {
+.pompom-floater .pompom-toolbar-item {
     padding: 4px 8px;
 }

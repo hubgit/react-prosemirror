@@ -1,5 +1,5 @@
 {
-  "name": "@pompom/html-editor",
+  "name": "@pompom/rich-text",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",

@@ -2,8 +2,11 @@ import { NodeViewCreator } from './types'
 
 export const paragraphView: NodeViewCreator = (
   node,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   view,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getPos,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   decorations
 ) => {
   const dom = document.createElement('p')
@@ -11,7 +14,7 @@ export const paragraphView: NodeViewCreator = (
   return {
     dom,
     contentDOM: dom,
-    update: (newNode, newDecorations) => {
+    update: (newNode) => {
       if (!newNode.sameMarkup(node)) {
         return false
       }

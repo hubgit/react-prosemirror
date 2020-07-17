@@ -33,7 +33,7 @@ export const Floater: React.FC = ({ children }) => {
   }, [state, view, floaterRef])
 
   return (
-    <div ref={floaterRef} className={'ProseMirror-floater'} style={style}>
+    <div ref={floaterRef} className={'pompom-floater'} style={style}>
       {children}
     </div>
   )

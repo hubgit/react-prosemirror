@@ -20,5 +20,5 @@ export const EditorContent: React.FC<{ autoFocus?: boolean }> = ({
     [view, autoFocus]
   )
 
-  return <div className={'ProseMirror-content'} ref={editorRef} />
+  return <div className={'pompom-content'} ref={editorRef} />
 }

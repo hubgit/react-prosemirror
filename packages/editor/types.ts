@@ -5,4 +5,3 @@ export interface Transformer<S extends Schema, T = any> {
   import: (input: T) => Node<S>
   export: (output: Node<S>) => T
 }
-
