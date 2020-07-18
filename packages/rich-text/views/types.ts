@@ -1,9 +1,9 @@
-import { Node } from 'prosemirror-model'
+import { Node, Schema } from 'prosemirror-model'
 import { Decoration, EditorView, NodeView } from 'prosemirror-view'
 
-export type NodeViewCreator = (
-  node: Node,
-  view: EditorView,
+export type NodeViewCreator = <S extends Schema>(
+  node: Node<S>,
+  view: EditorView<S>,
   getPos: boolean | (() => number),
   decorations: Decoration[]
-) => NodeView
+) => NodeView<S>

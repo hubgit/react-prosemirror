@@ -1,3 +1,5 @@
+import { Node, Schema } from 'prosemirror-model'
+
 import { NodeViewCreator } from './types'
 
 export const paragraphView: NodeViewCreator = (
@@ -11,6 +13,12 @@ export const paragraphView: NodeViewCreator = (
 ) => {
   const dom = document.createElement('p')
 
+  const handleUpdate = (newNode: Node) => {
+    dom.classList.toggle('empty-node', !newNode.content.size)
+  }
+
+  handleUpdate(node)
+
   return {
     dom,
     contentDOM: dom,
@@ -19,7 +27,7 @@ export const paragraphView: NodeViewCreator = (
         return false
       }
 
-      dom.classList.toggle('empty-node', !newNode.content.size)
+      handleUpdate(newNode)
 
       node = newNode
 

@@ -9,6 +9,7 @@ import React, { useMemo } from 'react'
 import { MainToolbar } from './components'
 import { keys, placeholder, rules } from './plugins'
 import { EditorSchema, schema } from './schema'
+import { codeBlockView } from './views/code_block'
 // import { paragraphView } from './views'
 
 const plugins = [
@@ -40,9 +41,10 @@ export const RichText = React.memo<{
           return false
         },
       },
-      // nodeViews: {
-      //   paragraph: paragraphView,
-      // },
+      nodeViews: {
+        // paragraph: paragraphView,
+        code_block: codeBlockView,
+      },
       scrollMargin: 16,
       scrollThreshold: 16,
     }),

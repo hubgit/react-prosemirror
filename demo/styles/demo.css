@@ -40,3 +40,7 @@
     height: 0;
 }
 
+.ProseMirror code {
+    font-family: "Fira Code Retina", "Fira Code", monospace;
+}
+

@@ -3,6 +3,7 @@ import {
   faBold,
   faCode,
   faHeading,
+  faIndent,
   faItalic,
   faListOl,
   faListUl,
@@ -35,7 +36,7 @@ import {
 import { lift, setBlockType, toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { MarkType, Schema } from 'prosemirror-model'
-import { wrapInList } from 'prosemirror-schema-list'
+import { liftListItem, sinkListItem, wrapInList } from 'prosemirror-schema-list'
 import React from 'react'
 
 import { EditorSchema, schema } from '../schema'
@@ -109,9 +110,14 @@ const wrap = {
     run: setListTypeOrWrapInList(schema.nodes.list, { type: 'unordered' }),
   },
   lift: {
-    title: 'Lift',
-    enable: lift,
-    run: lift,
+    title: 'Outdent',
+    enable: liftListItem(schema.nodes.list),
+    run: liftListItem(schema.nodes.list),
+  },
+  sink: {
+    title: 'Indent',
+    enable: sinkListItem(schema.nodes.list),
+    run: sinkListItem(schema.nodes.list),
   },
 }
 
@@ -183,11 +189,11 @@ export const MainToolbar: React.FC = () => {
         <ToolbarItem<EditorSchema> item={wrap.unordered_list}>
           <FontAwesomeIcon icon={faListUl} />
         </ToolbarItem>
-      </ToolbarGroup>
-
-      <ToolbarGroup>
         <ToolbarItem<EditorSchema> item={wrap.lift}>
           <FontAwesomeIcon icon={faOutdent} />
+        </ToolbarItem>
+        <ToolbarItem<EditorSchema> item={wrap.sink}>
+          <FontAwesomeIcon icon={faIndent} />
         </ToolbarItem>
       </ToolbarGroup>
 
