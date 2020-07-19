@@ -32,7 +32,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
   ToolbarItemSpec,
-} from '@pompom/editor'
+} from '@pompom/react'
 import { lift, setBlockType, toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { MarkType, Schema } from 'prosemirror-model'
@@ -41,7 +41,7 @@ import React from 'react'
 
 import { EditorSchema, schema } from '../schema'
 
-export const toggleMarkItem = <S extends Schema>(
+const toggleMarkItem = <S extends Schema>(
   markType: MarkType<S>,
   title: string
 ): ToolbarItemSpec<S> => ({

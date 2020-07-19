@@ -40,7 +40,26 @@
     height: 0;
 }
 
+.hljs {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+.pompom-code {
+    position: relative;
+    font-size: 16px;
+}
+
+.pompom-code-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
 .ProseMirror code {
     font-family: "Fira Code Retina", "Fira Code", monospace;
 }
-

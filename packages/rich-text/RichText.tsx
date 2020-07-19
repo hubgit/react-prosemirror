@@ -1,4 +1,4 @@
-import { EditorContent, EditorProvider } from '@pompom/editor'
+import { EditorContent, EditorProvider } from '@pompom/react'
 import { createHtmlTransformer } from '@pompom/transformers'
 import { baseKeymap } from 'prosemirror-commands'
 import { history } from 'prosemirror-history'

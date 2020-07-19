@@ -2,7 +2,7 @@
   "extends": "../tsconfig.settings.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "references": [
-    { "path": "../editor" },
+    { "path": "../react"},
     { "path": "../commands" },
     { "path": "../model" },
     { "path": "../transformers" }

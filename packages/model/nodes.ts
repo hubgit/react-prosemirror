@@ -22,8 +22,30 @@ export const code_block: NodeSpec = {
   group: 'block',
   code: true,
   defining: true,
-  parseDOM: [{ tag: 'pre', preserveWhitespace: 'full' }],
-  toDOM: () => ['pre', ['code', 0]],
+  attrs: {
+    language: {
+      default: 'javascript',
+    },
+  },
+  parseDOM: [
+    {
+      tag: 'pre',
+      preserveWhitespace: 'full',
+      // @ts-ignore
+      getAttrs: (node: HTMLPreElement) => {
+        return {
+          language: node.getAttribute('data-language'),
+        }
+      },
+    },
+  ],
+  toDOM: (node) => [
+    'pre',
+    {
+      'data-language': node.attrs.language,
+    },
+    ['code', 0],
+  ],
 }
 
 export const blockquote: NodeSpec = {

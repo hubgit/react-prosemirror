@@ -9,7 +9,7 @@ import {
   faUnderline,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Floater, Toolbar, ToolbarItem } from '@pompom/editor'
+import { Floater, Toolbar, ToolbarItem } from '@pompom/react'
 import React from 'react'
 
 import { EditorSchema } from '../schema'

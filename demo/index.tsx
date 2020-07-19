@@ -1,7 +1,7 @@
 import 'prosemirror-view/style/prosemirror.css'
-import '@pompom/editor/styles/editor.css'
-import '@pompom/editor/styles/floater.css'
-import '@pompom/editor/styles/toolbar.css'
+import '@pompom/react/styles/editor.css'
+import '@pompom/react/styles/floater.css'
+import '@pompom/react/styles/toolbar.css'
 import './styles/demo.css'
 
 import { RichText } from '@pompom/rich-text'

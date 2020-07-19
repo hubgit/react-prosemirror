@@ -1,42 +1,95 @@
 import 'highlight.js/styles/default.css'
 
 import hljs from 'highlight.js'
-import javascript from 'highlight.js/lib/languages/javascript'
+import { Node, Schema } from 'prosemirror-model'
+import { EditorView } from 'prosemirror-view'
 
 import { NodeViewCreator } from './types'
 
-hljs.registerLanguage('javascript', javascript)
+const languages = ['javascript', 'css', 'html']
 
-export const codeBlockView: NodeViewCreator = (
-  node,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  view,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getPos,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  decorations
+import css from 'highlight.js/lib/languages/css'
+import javascript from 'highlight.js/lib/languages/javascript'
+import xml from 'highlight.js/lib/languages/xml'
+
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('xml', xml)
+hljs.registerLanguage('html', xml)
+hljs.registerLanguage('css', css)
+
+export const codeBlockView: NodeViewCreator = <S extends Schema>(
+  node: Node<S>,
+  view: EditorView<S>,
+  getPos: (() => number) | boolean
 ) => {
   const dom = document.createElement('pre')
+  dom.className = 'pompom-code'
 
-  const contentDOM = document.createElement('code')
-  contentDOM.className = 'language-js'
-  dom.appendChild(contentDOM)
+  const renderOptions = (value: string) => {
+    const select = document.createElement('select')
 
-  const handleUpdate = () => {
-    hljs.highlightBlock(contentDOM)
+    for (const language of languages) {
+      const option = document.createElement('option')
+      option.setAttribute('value', language)
+      option.textContent = language
+      option.selected = language === value
+      select.appendChild(option)
+    }
+
+    if (typeof getPos === 'function') {
+      select.addEventListener('change', (event) => {
+        if (event.target) {
+          const language = (event.target as HTMLSelectElement).value as string
+
+          view.dispatch(
+            view.state.tr.setNodeMarkup(getPos(), undefined, {
+              ...node.attrs,
+              language,
+            })
+          )
+        }
+      })
+    }
+
+    const selectContainer = document.createElement('div')
+    selectContainer.appendChild(select)
+
+    dom.appendChild(selectContainer)
   }
 
-  handleUpdate()
+  const contentDOM = document.createElement('code')
+  dom.appendChild(contentDOM)
+
+  const highlightDOM = document.createElement('code')
+  dom.appendChild(highlightDOM)
+
+  const highlightContent = () => {
+    highlightDOM.textContent = contentDOM.textContent
+    hljs.highlightBlock(highlightDOM)
+  }
+
+  const { language } = node.attrs
+
+  highlightDOM.className = `pompom-code-highlight language-${language}`
+
+  /*  if (!hljs.getLanguage(language)) {
+    const highlighter = await import(`highlight.js/lib/languages/${language}`)
+    hljs.registerLanguage(language, highlighter)
+  }*/
+
+  renderOptions(language)
+
+  highlightContent()
 
   return {
     dom,
     contentDOM,
-    update: (newNode) => {
+    update: (newNode: Node<S>) => {
       if (!newNode.sameMarkup(node)) {
         return false
       }
 
-      handleUpdate()
+      highlightContent()
 
       node = newNode
 

@@ -1,5 +1,5 @@
 {
-  "name": "@pompom/editor",
+  "name": "@pompom/react",
   "version": "1.0.0",
   "main": "index.js",
   "source": "index.ts",
