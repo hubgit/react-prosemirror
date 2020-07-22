@@ -111,13 +111,13 @@ const wrap = {
   },
   lift: {
     title: 'Outdent',
-    enable: liftListItem(schema.nodes.list),
-    run: liftListItem(schema.nodes.list),
+    enable: liftListItem(schema.nodes.list_item),
+    run: liftListItem(schema.nodes.list_item),
   },
   sink: {
     title: 'Indent',
-    enable: sinkListItem(schema.nodes.list),
-    run: sinkListItem(schema.nodes.list),
+    enable: sinkListItem(schema.nodes.list_item),
+    run: sinkListItem(schema.nodes.list_item),
   },
 }
 
