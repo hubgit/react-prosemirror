@@ -7,6 +7,7 @@ export const createHtmlTransformer = <S extends Schema>(
 ): Transformer<S> => {
   const parser = DOMParser.fromSchema<S>(schema)
   const serializer = DOMSerializer.fromSchema<S>(schema)
+  // const xmlSerializer = new XMLSerializer()
 
   return {
     import: (input: string) => {
@@ -16,10 +17,14 @@ export const createHtmlTransformer = <S extends Schema>(
       return parser.parse(template.content)
     },
     export: (output): string => {
-      const template = document.createElement('template')
-      template.appendChild(serializer.serializeFragment(output.content))
+      const fragment = serializer.serializeFragment(output.content)
 
-      return template.firstElementChild?.outerHTML || ''
+      // return xmlSerializer.serializeToString(fragment)
+
+      const container = document.createElement('div')
+      container.appendChild(fragment)
+
+      return container.innerHTML
     },
   }
 }
