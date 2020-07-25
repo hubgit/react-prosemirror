@@ -1,8 +1,7 @@
-import * as history from '@pompom/history'
-import * as list from '@pompom/list'
 import { EditorContent, EditorProvider } from '@pompom/react'
-import { createHtmlTransformer } from '@pompom/transformers'
+import { HTMLTransformer } from '@pompom/transformers'
 import { baseKeymap } from 'prosemirror-commands'
+import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
 import { Plugin } from 'prosemirror-state'
 import { EditorProps } from 'prosemirror-view'
@@ -15,15 +14,14 @@ import { codeBlockView } from './views/code_block'
 // import { paragraphView } from './views'
 
 const plugins: Plugin<EditorSchema>[] = [
-  ...history.plugins,
-  ...list.plugins(schema.nodes.list_item),
+  history(), // history
   keys, // custom keymap
   keymap(baseKeymap), // base keymap
   placeholder,
   rules, // input rules
 ]
 
-const transformer = createHtmlTransformer<EditorSchema>(schema)
+const transformer = new HTMLTransformer<EditorSchema>(schema)
 
 export const RichText = React.memo<{
   autoFocus?: boolean

@@ -293,3 +293,29 @@ export const setListTypeOrWrapInList = <S extends Schema>(
     return true
   }
 }
+
+export const backspaceInList = <S extends Schema>(
+  listItemType: NodeType<S>
+) => (state: EditorState<S>, dispatch?: (tr: Transaction<S>) => void) => {
+  const { $from, $to } = state.selection
+
+  const range = $from.blockRange($to, (node) => {
+    if (!node.firstChild) {
+      return false
+    }
+
+    return node.firstChild!.type === listItemType
+  })
+
+  if (!range) {
+    return false
+  }
+
+  if (!dispatch) {
+    return true
+  }
+
+  // TODO: join text with preceding node if appropriate
+
+  return true // TODO
+}

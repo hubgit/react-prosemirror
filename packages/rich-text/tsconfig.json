@@ -4,8 +4,6 @@
   "references": [
     { "path": "../react"},
     { "path": "../commands" },
-    { "path": "../history" },
-    { "path": "../list" },
     { "path": "../model" },
     { "path": "../transformers" }
   ]

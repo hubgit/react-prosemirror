@@ -72,3 +72,61 @@ export const heading: NodeSpec = {
   ],
   toDOM: (node) => ['h' + node.attrs.level, 0],
 }
+
+interface ListAttrs {
+  start?: number
+  type: string
+}
+
+export const list: NodeSpec = {
+  attrs: {
+    start: { default: 1 },
+    type: { default: 'unordered' },
+  },
+  content: 'list_item+',
+  group: 'block',
+  parseDOM: [
+    {
+      tag: 'ol',
+      getAttrs: (dom: Node | string): ListAttrs => {
+        const element = dom as HTMLOListElement
+
+        const start = element.getAttribute('start')
+
+        return {
+          type: 'ordered',
+          start: start === undefined ? 1 : Number(start),
+        }
+      },
+    },
+    {
+      tag: 'ul',
+      getAttrs: (): ListAttrs => {
+        return {
+          type: 'unordered',
+        }
+      },
+    },
+  ],
+  toDOM: (node) => {
+    switch (node.attrs.type) {
+      case 'ordered': {
+        return node.attrs.order == 1
+          ? ['ol', 0]
+          : ['ol', { start: node.attrs.order }, 0]
+      }
+
+      case 'unordered':
+      default: {
+        return ['ul', 0]
+      }
+    }
+  },
+}
+
+export const list_item: NodeSpec = {
+  content: 'paragraph (paragraph | list)*',
+  defining: true,
+  parseDOM: [{ tag: 'li' }],
+  toDOM: () => ['li', 0],
+}

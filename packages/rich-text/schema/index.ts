@@ -1,4 +1,3 @@
-import * as list from '@pompom/list'
 import {
   blockquote,
   code,
@@ -6,6 +5,8 @@ import {
   doc,
   em,
   heading,
+  list,
+  list_item,
   paragraph,
   strikethrough,
   strong,
@@ -14,7 +15,7 @@ import {
   text,
   underline,
 } from '@pompom/model'
-import { MarkType, NodeType, Schema } from 'prosemirror-model'
+import { MarkSpec, MarkType, NodeType, Schema } from 'prosemirror-model'
 
 const nodes = {
   doc,
@@ -23,7 +24,8 @@ const nodes = {
   code_block,
   blockquote,
   heading,
-  ...list.nodes,
+  list,
+  list_item,
 }
 
 const marks = {

@@ -1,2 +1,2 @@
-export * from './types'
-export * from './html'
+export * from './Transformer'
+export * from './HTMLTransformer'

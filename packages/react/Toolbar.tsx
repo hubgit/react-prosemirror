@@ -1,6 +1,5 @@
+import { Action } from '@pompom/rich-text/actions'
 import { Schema } from 'prosemirror-model'
-import { EditorState, Transaction } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
 import React, { PropsWithChildren, ReactElement, useContext } from 'react'
 
 import { EditorContext } from './EditorProvider'
@@ -13,25 +12,13 @@ export const ToolbarGroup: React.FC = ({ children }) => (
   <div className={'pompom-toolbar-group'}>{children}</div>
 )
 
-export interface ToolbarItemSpec<S extends Schema> {
-  title?: string
-  active?: (state: EditorState<S>) => boolean
-  enable?: (state: EditorState<S>) => boolean
-  run: (
-    state: EditorState<S>,
-    dispatch: (transaction: Transaction<S>) => void,
-    view: EditorView<S>,
-    event: Event
-  ) => boolean
-}
-
 // TODO: press button with keyboard
 
 export const ToolbarItem = <S extends Schema>({
-  item,
+  action,
   children,
-}: PropsWithChildren<{ item: ToolbarItemSpec<Schema> }>): ReactElement => {
-  const { active, enable, title, run } = item
+}: PropsWithChildren<{ action: Action<S> }>): ReactElement => {
+  const { active, enable, title, run } = action
 
   const { view } = useContext(EditorContext)
 
