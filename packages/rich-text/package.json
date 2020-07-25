@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@pompom/commands": "^1.0.0",
+    "@pompom/history": "^1.0.0",
     "@pompom/react": "^1.0.0",
     "@pompom/model": "^1.0.0",
     "@pompom/transformers": "^1.0.0",

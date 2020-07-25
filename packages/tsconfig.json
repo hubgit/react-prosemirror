@@ -2,6 +2,7 @@
   "files": [],
   "references": [
     { "path": "commands"},
+    { "path": "history"},
     { "path": "model"},
     { "path": "react"},
     { "path": "rich-text"},

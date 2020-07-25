@@ -1,3 +1,4 @@
+import * as list from '@pompom/list'
 import {
   blockquote,
   code,
@@ -5,8 +6,6 @@ import {
   doc,
   em,
   heading,
-  list,
-  list_item,
   paragraph,
   strikethrough,
   strong,
@@ -24,8 +23,7 @@ const nodes = {
   code_block,
   blockquote,
   heading,
-  list,
-  list_item,
+  ...list.nodes,
 }
 
 const marks = {

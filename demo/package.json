@@ -4,20 +4,24 @@
   "license": "MIT",
   "scripts": {
     "build": "parcel build index.html",
+    "prebuild": "rimraf dist",
     "serve": "parcel index.html"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "@pompom/react": "^1.0.0",
     "@pompom/rich-text": "^1.0.0",
-    "prosemirror-view": "^1.15.2"
+    "prosemirror-view": "^1.15.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@types/prosemirror-view": "^1.15.0",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
-    "parcel-bundler": "^1.12.4"
+    "parcel": "^2.0.0-beta.1",
+    "rimraf": "^3.0.2"
   },
-  "browserslist": ["last 2 years"]
+  "browserslist": [
+    "last 2 years"
+  ]
 }

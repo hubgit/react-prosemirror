@@ -1,7 +1,7 @@
 node_modules/
 build/
 dist/
-.cache/
+.parcel-cache/
 *.log
 *.tsbuildinfo
 packages/**/*.js

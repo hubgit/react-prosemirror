@@ -16,6 +16,10 @@
     "watch": "tsc --build --watch packages"
   },
   "devDependencies": {
+    "@types/prosemirror-history": "^1.0.1",
+    "@types/prosemirror-keymap": "^1.0.3",
+    "@types/prosemirror-schema-list": "^1.0.1",
+    "@types/prosemirror-state": "^1.2.5",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
     "eslint": "^7.4.0",

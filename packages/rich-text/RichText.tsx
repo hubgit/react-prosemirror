@@ -1,8 +1,10 @@
+import * as history from '@pompom/history'
+import * as list from '@pompom/list'
 import { EditorContent, EditorProvider } from '@pompom/react'
 import { createHtmlTransformer } from '@pompom/transformers'
 import { baseKeymap } from 'prosemirror-commands'
-import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
+import { Plugin } from 'prosemirror-state'
 import { EditorProps } from 'prosemirror-view'
 import React, { useMemo } from 'react'
 
@@ -12,8 +14,9 @@ import { EditorSchema, schema } from './schema'
 import { codeBlockView } from './views/code_block'
 // import { paragraphView } from './views'
 
-const plugins = [
-  history(), // undo/redo
+const plugins: Plugin<EditorSchema>[] = [
+  ...history.plugins,
+  ...list.plugins(schema.nodes.list_item),
   keys, // custom keymap
   keymap(baseKeymap), // base keymap
   placeholder,
