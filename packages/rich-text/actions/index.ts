@@ -6,12 +6,11 @@ import {
   setListTypeOrWrapInList,
   toggleWrap,
 } from '@pompom/commands'
-import { setBlockType, toggleMark } from 'prosemirror-commands'
+import { Command, setBlockType, toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { Schema } from 'prosemirror-model'
 import { liftListItem, sinkListItem } from 'prosemirror-schema-list'
-import { EditorState, Transaction } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
+import { EditorState } from 'prosemirror-state'
 
 import { EditorSchema, schema } from '../schema'
 
@@ -21,12 +20,7 @@ export interface Action<S extends Schema> {
   title: string
   active?: (state: EditorState<S>) => boolean
   enable?: (state: EditorState<S>) => boolean
-  run: (
-    state: EditorState<S>,
-    dispatch: (transaction: Transaction<S>) => void,
-    view: EditorView<S>,
-    event: Event
-  ) => boolean
+  run: Command<S>
 }
 
 // TODO: define icons and keyboard shortcuts here?
@@ -90,9 +84,9 @@ export const toggleStrikethrough: Action<EditorSchema> = {
   id: 'toggle-strikethrough',
   label: 'Strikethrough',
   title: 'Toggle strikethrough',
-  active: isMarkActive(schema.marks.strikethrough),
-  enable: toggleMark(schema.marks.strikethrough),
-  run: toggleMark(schema.marks.strikethrough),
+  active: isMarkActive<EditorSchema>(schema.marks.strikethrough),
+  enable: toggleMark<EditorSchema>(schema.marks.strikethrough),
+  run: toggleMark<EditorSchema>(schema.marks.strikethrough),
 }
 
 export const removeFormat: Action<EditorSchema> = {
@@ -107,18 +101,18 @@ export const setNodeTypeParagraph: Action<EditorSchema> = {
   id: 'set-paragraph',
   label: 'Paragraph',
   title: 'Change to paragraph',
-  active: isBlockActive(schema.nodes.paragraph),
-  enable: setBlockType(schema.nodes.paragraph),
-  run: setBlockType(schema.nodes.paragraph),
+  active: isBlockActive<EditorSchema>(schema.nodes.paragraph),
+  enable: setBlockType<EditorSchema>(schema.nodes.paragraph),
+  run: setBlockType<EditorSchema>(schema.nodes.paragraph),
 }
 
 export const setNodeTypeCodeBlock: Action<EditorSchema> = {
   id: 'set-code-block',
   label: 'Code block',
   title: 'Change to code block',
-  active: isBlockActive(schema.nodes.code_block),
-  enable: setBlockType(schema.nodes.code_block),
-  run: setBlockType(schema.nodes.code_block),
+  active: isBlockActive<EditorSchema>(schema.nodes.code_block),
+  enable: setBlockType<EditorSchema>(schema.nodes.code_block),
+  run: setBlockType<EditorSchema>(schema.nodes.code_block),
 }
 
 export const setNodeTypeHeading: Action<EditorSchema> = {
