@@ -16,38 +16,6 @@ export const paragraph: NodeSpec = {
   toDOM: () => ['p', 0],
 }
 
-export const code_block: NodeSpec = {
-  content: 'text*',
-  marks: '',
-  group: 'block',
-  code: true,
-  defining: true,
-  attrs: {
-    language: {
-      default: 'javascript',
-    },
-  },
-  parseDOM: [
-    {
-      tag: 'pre',
-      preserveWhitespace: 'full',
-      // @ts-ignore
-      getAttrs: (node: HTMLPreElement) => {
-        return {
-          language: node.getAttribute('data-language'),
-        }
-      },
-    },
-  ],
-  toDOM: (node) => [
-    'pre',
-    {
-      'data-language': node.attrs.language,
-    },
-    ['code', 0],
-  ],
-}
-
 export const blockquote: NodeSpec = {
   content: 'block+',
   group: 'block',
@@ -83,7 +51,7 @@ export const list: NodeSpec = {
     start: { default: 1 },
     type: { default: 'unordered' },
   },
-  content: 'list_item+',
+  content: 'listItem+',
   group: 'block',
   parseDOM: [
     {
@@ -124,7 +92,7 @@ export const list: NodeSpec = {
   },
 }
 
-export const list_item: NodeSpec = {
+export const listItem: NodeSpec = {
   content: 'paragraph (paragraph | list)*',
   defining: true,
   parseDOM: [{ tag: 'li' }],

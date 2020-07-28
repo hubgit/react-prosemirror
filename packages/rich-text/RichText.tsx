@@ -1,3 +1,4 @@
+// import { codeBlockView } from '@pompom/code-block'
 import { EditorContent, EditorProvider } from '@pompom/react'
 import { HTMLTransformer } from '@pompom/transformers'
 import { EditorProps } from 'prosemirror-view'
@@ -6,7 +7,6 @@ import React, { useMemo } from 'react'
 import { MainToolbar } from './components'
 import { plugins } from './plugins'
 import { EditorSchema, schema } from './schema'
-import { codeBlockView } from './views'
 
 const transformer = new HTMLTransformer<EditorSchema>(schema)
 
@@ -30,8 +30,7 @@ export const RichText = React.memo<{
         },
       },
       nodeViews: {
-        // paragraph: paragraphView,
-        code_block: codeBlockView,
+        // codeBlock: codeBlockView,
       },
       scrollMargin: 16,
       scrollThreshold: 16,

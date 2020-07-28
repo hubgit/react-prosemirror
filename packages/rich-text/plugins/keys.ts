@@ -18,8 +18,8 @@ export const keys: Plugin<EditorSchema> = keymap({
   'Mod-i': toggleEmphasis.run,
 
   // lists
-  Enter: splitListItem<EditorSchema>(schema.nodes.list_item),
-  Backspace: backspaceInList<EditorSchema>(schema.nodes.list_item),
+  Enter: splitListItem<EditorSchema>(schema.nodes.listItem),
+  Backspace: backspaceInList<EditorSchema>(schema.nodes.listItem),
   'Shift-Tab': outdentListItem.run,
   Tab: indentListItem.run,
 

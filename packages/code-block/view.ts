@@ -1,21 +1,27 @@
 import 'highlight.js/styles/default.css'
 
-import hljs from 'highlight.js'
+import { NodeViewCreator } from '@pompom/core'
+import * as hljs from 'highlight.js'
 import { Node, Schema } from 'prosemirror-model'
 import { EditorView } from 'prosemirror-view'
 
-import { NodeViewCreator } from './types'
+const languages = new Map<string, string>([
+  ['javascript', 'javascript'],
+  ['css', 'css'],
+  ['html', 'xml'],
+  ['xml', 'xml'],
+])
 
-const languages = ['javascript', 'css', 'html']
+const importRequirements = async (language: string) => {
+  const requirement = languages.get(language) as string
 
-import css from 'highlight.js/lib/languages/css'
-import javascript from 'highlight.js/lib/languages/javascript'
-import xml from 'highlight.js/lib/languages/xml'
-
-hljs.registerLanguage('javascript', javascript)
-hljs.registerLanguage('xml', xml)
-hljs.registerLanguage('html', xml)
-hljs.registerLanguage('css', css)
+  if (!hljs.getLanguage(requirement)) {
+    const highlighter = await import(
+      `highlight.js/lib/languages/${requirement}`
+    )
+    hljs.registerLanguage(requirement, highlighter)
+  }
+}
 
 export const codeBlockView: NodeViewCreator = <S extends Schema>(
   node: Node<S>,
@@ -28,7 +34,7 @@ export const codeBlockView: NodeViewCreator = <S extends Schema>(
   const renderOptions = (value: string) => {
     const select = document.createElement('select')
 
-    for (const language of languages) {
+    for (const language of languages.keys()) {
       const option = document.createElement('option')
       option.setAttribute('value', language)
       option.textContent = language
@@ -72,14 +78,14 @@ export const codeBlockView: NodeViewCreator = <S extends Schema>(
 
   highlightDOM.className = `pompom-code-highlight language-${language}`
 
-  /*  if (!hljs.getLanguage(language)) {
-    const highlighter = await import(`highlight.js/lib/languages/${language}`)
-    hljs.registerLanguage(language, highlighter)
-  }*/
-
-  renderOptions(language)
-
-  highlightContent()
+  importRequirements(language)
+    .then(() => {
+      renderOptions(language)
+      highlightContent()
+    })
+    .catch(() => {
+      console.error(`Couldn't import ${language} requirements`)
+    })
 
   return {
     dom,

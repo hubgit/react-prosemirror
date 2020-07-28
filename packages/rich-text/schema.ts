@@ -1,12 +1,12 @@
+// import { codeBlock } from '@pompom/code-block'
 import {
   blockquote,
   code,
-  code_block,
   doc,
   em,
   heading,
   list,
-  list_item,
+  listItem,
   paragraph,
   strikethrough,
   strong,
@@ -15,17 +15,17 @@ import {
   text,
   underline,
 } from '@pompom/model'
-import { MarkSpec, MarkType, NodeType, Schema } from 'prosemirror-model'
+import { MarkType, NodeType, Schema } from 'prosemirror-model'
 
 const nodes = {
   doc,
   paragraph,
   text,
-  code_block,
+  // codeBlock,
   blockquote,
   heading,
   list,
-  list_item,
+  listItem,
 }
 
 const marks = {

@@ -27,7 +27,7 @@ import {
   outdentListItem,
   redoAction,
   removeFormat,
-  setNodeTypeCodeBlock,
+  // setNodeTypeCodeBlock,
   setNodeTypeHeading,
   setNodeTypeParagraph,
   toggleBlockquote,
@@ -77,9 +77,9 @@ export const MainToolbar: React.FC = () => (
       <ToolbarItem action={setNodeTypeParagraph}>
         <FontAwesomeIcon icon={faParagraph} />
       </ToolbarItem>
-      <ToolbarItem action={setNodeTypeCodeBlock}>
+      {/*<ToolbarItem action={setNodeTypeCodeBlock}>
         <FontAwesomeIcon icon={faCode} />
-      </ToolbarItem>
+      </ToolbarItem>*/}
       <ToolbarItem action={setNodeTypeHeading}>
         <FontAwesomeIcon icon={faHeading} />
       </ToolbarItem>

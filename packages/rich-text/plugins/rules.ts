@@ -35,7 +35,7 @@ export const rules = inputRules({
     ),
 
     // set as code block
-    textblockTypeInputRule<EditorSchema>(/^```$/, schema.nodes.code_block),
+    // textblockTypeInputRule<EditorSchema>(/^```$/, schema.nodes.codeBlock),
 
     // set as heading
     textblockTypeInputRule<EditorSchema>(

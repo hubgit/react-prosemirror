@@ -1,6 +1,7 @@
 {
   "files": [],
   "references": [
+    { "path": "code-block"},
     { "path": "commands"},
     { "path": "model"},
     { "path": "react"},

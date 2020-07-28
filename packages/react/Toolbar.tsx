@@ -1,4 +1,4 @@
-import { Action } from '@pompom/rich-text/actions'
+import { Action } from '@pompom/commands'
 import { Schema } from 'prosemirror-model'
 import React, { PropsWithChildren, ReactElement, useContext } from 'react'
 
@@ -31,7 +31,8 @@ export const ToolbarItem = <S extends Schema>({
       title={title}
       onMouseDown={(event) => {
         event.preventDefault()
-        run(view.state, view.dispatch, view, event.nativeEvent)
+        run(view.state, view.dispatch, view)
+        // run(view.state, view.dispatch, view, event.nativeEvent)
       }}
     >
       {children}
