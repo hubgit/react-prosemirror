@@ -3,6 +3,7 @@
   "references": [
     { "path": "code-block"},
     { "path": "commands"},
+    { "path": "core"},
     { "path": "model"},
     { "path": "react"},
     { "path": "rich-text"},
