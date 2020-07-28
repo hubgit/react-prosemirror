@@ -3,10 +3,10 @@ import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
 import { Plugin } from 'prosemirror-state'
 
-import { EditorSchema } from '../schema'
+import { placeholder } from '../plugins/placeholder'
 import { keys } from './keys'
-import { placeholder } from './placeholder'
 import { rules } from './rules'
+import { EditorSchema } from './schema'
 
 export const plugins: Plugin<EditorSchema>[] = [
   history(), // history

@@ -1,7 +1,7 @@
 import { Plugin } from 'prosemirror-state'
 import { Decoration, DecorationSet } from 'prosemirror-view'
 
-import { EditorSchema } from '../schema'
+import { EditorSchema } from '../config/schema'
 
 export const placeholder: Plugin<EditorSchema> = new Plugin<EditorSchema>({
   props: {

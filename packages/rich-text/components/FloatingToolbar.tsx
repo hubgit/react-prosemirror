@@ -21,34 +21,33 @@ import {
   toggleSubscript,
   toggleSuperscript,
   toggleUnderline,
-} from '../actions'
-import { EditorSchema } from '../schema'
+} from '../config'
 
 export const FloatingToolbar: React.FC = () => (
   <Floater>
     <Toolbar>
-      <ToolbarItem<EditorSchema> action={toggleStrong}>
+      <ToolbarItem action={toggleStrong}>
         <FontAwesomeIcon icon={faBold} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={toggleEmphasis}>
+      <ToolbarItem action={toggleEmphasis}>
         <FontAwesomeIcon icon={faItalic} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={toggleCode}>
+      <ToolbarItem action={toggleCode}>
         <FontAwesomeIcon icon={faCode} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={toggleSubscript}>
+      <ToolbarItem action={toggleSubscript}>
         <FontAwesomeIcon icon={faSubscript} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={toggleSuperscript}>
+      <ToolbarItem action={toggleSuperscript}>
         <FontAwesomeIcon icon={faSuperscript} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={toggleUnderline}>
+      <ToolbarItem action={toggleUnderline}>
         <FontAwesomeIcon icon={faUnderline} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={toggleStrikethrough}>
+      <ToolbarItem action={toggleStrikethrough}>
         <FontAwesomeIcon icon={faStrikethrough} />
       </ToolbarItem>
-      <ToolbarItem<EditorSchema> action={removeFormat}>
+      <ToolbarItem action={removeFormat}>
         <FontAwesomeIcon icon={faRemoveFormat} />
       </ToolbarItem>
     </Toolbar>

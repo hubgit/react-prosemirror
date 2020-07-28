@@ -9,6 +9,9 @@
     "styles"
   ],
   "license": "MIT",
+  "dependencies": {
+    "@pompom/commands": "^1.0.0"
+  },
   "peerDependencies": {
     "prosemirror-commands": "^1.1.4",
     "prosemirror-history": "^1.1.3",

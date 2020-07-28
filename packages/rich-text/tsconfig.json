@@ -2,9 +2,11 @@
   "extends": "../tsconfig.settings.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "references": [
-    { "path": "../react"},
-    { "path": "../commands" },
+    { "path": "../code-block"},
+    { "path": "../commands"},
+    { "path": "../core" },
     { "path": "../model" },
+    { "path": "../react"},
     { "path": "../transformers" }
   ]
 }

@@ -15,27 +15,19 @@ import { EditorSchema, schema } from './schema'
 
 // TODO: define icons and keyboard shortcuts here?
 
-export const toggleStrong = toggleMarkAction<EditorSchema>(schema.marks.strong)
+export const toggleStrong = toggleMarkAction(schema.marks.strong)
 
-export const toggleEmphasis = toggleMarkAction<EditorSchema>(schema.marks.em)
+export const toggleEmphasis = toggleMarkAction(schema.marks.em)
 
-export const toggleCode = toggleMarkAction<EditorSchema>(schema.marks.code)
+export const toggleCode = toggleMarkAction(schema.marks.code)
 
-export const toggleSubscript = toggleMarkAction<EditorSchema>(
-  schema.marks.subscript
-)
+export const toggleSubscript = toggleMarkAction(schema.marks.subscript)
 
-export const toggleSuperscript = toggleMarkAction<EditorSchema>(
-  schema.marks.superscript
-)
+export const toggleSuperscript = toggleMarkAction(schema.marks.superscript)
 
-export const toggleUnderline = toggleMarkAction<EditorSchema>(
-  schema.marks.underline
-)
+export const toggleUnderline = toggleMarkAction(schema.marks.underline)
 
-export const toggleStrikethrough = toggleMarkAction<EditorSchema>(
-  schema.marks.strikethrough
-)
+export const toggleStrikethrough = toggleMarkAction(schema.marks.strikethrough)
 
 export const removeFormat: Action<EditorSchema> = {
   id: 'remove-format',
@@ -45,17 +37,13 @@ export const removeFormat: Action<EditorSchema> = {
   run: removeFormatting,
 }
 
-export const setNodeTypeParagraph = setBlockTypeAction<EditorSchema>(
-  schema.nodes.paragraph
-)
+export const setNodeTypeParagraph = setBlockTypeAction(schema.nodes.paragraph)
 
-// export const setNodeTypeCodeBlock = setBlockTypeAction<EditorSchema>(
+// export const setNodeTypeCodeBlock = setBlockTypeAction(
 //   schema.nodes.codeBlock
 // )
 
-export const setNodeTypeHeading = setBlockTypeAction<EditorSchema>(
-  schema.nodes.heading
-)
+export const setNodeTypeHeading = setBlockTypeAction(schema.nodes.heading)
 
 export const toggleBlockquote: Action<EditorSchema> = {
   id: 'blockquote',

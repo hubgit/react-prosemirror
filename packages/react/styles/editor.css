@@ -1,6 +1,5 @@
 .ProseMirror {
   font-family: sans-serif;
-  position: relative;
 }
 
 .ProseMirror:focus-within {

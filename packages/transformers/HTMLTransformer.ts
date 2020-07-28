@@ -13,9 +13,12 @@ export class HTMLTransformer<S extends Schema>
     // this.serializer = new XMLSerializer()
   }
 
-  public import(input: string): Node<S> {
+  public import(input?: string): Node<S> {
     const template = document.createElement('template')
-    template.innerHTML = input
+
+    if (input !== undefined) {
+      template.innerHTML = input
+    }
 
     return this.parser.parse(template.content)
   }

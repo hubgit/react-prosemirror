@@ -5,7 +5,7 @@ import {
   wrappingInputRule,
 } from 'prosemirror-inputrules'
 
-import { EditorSchema, schema } from '../schema'
+import { EditorSchema, schema } from './schema'
 
 export const rules = inputRules({
   rules: [

@@ -9,8 +9,8 @@ import {
   outdentListItem,
   toggleEmphasis,
   toggleStrong,
-} from '../actions'
-import { EditorSchema, schema } from '../schema'
+} from './actions'
+import { EditorSchema, schema } from './schema'
 
 export const keys: Plugin<EditorSchema> = keymap({
   // marks
