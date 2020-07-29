@@ -1,6 +1,5 @@
+import { Transformer } from '@pompom/core'
 import { DOMParser, DOMSerializer, Node, Schema } from 'prosemirror-model'
-
-import { Transformer } from './Transformer'
 
 export class HTMLTransformer<S extends Schema>
   implements Transformer<S, string> {
