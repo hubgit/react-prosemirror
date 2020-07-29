@@ -2,6 +2,7 @@
   "extends": "../tsconfig.settings.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "references": [
-    { "path": "../commands" }
+    { "path": "../commands" },
+    { "path": "../core" }
   ]
 }

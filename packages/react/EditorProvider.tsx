@@ -27,19 +27,18 @@ export const EditorContext = createContext<EditorContextProps>(undefined)
 export const EditorProvider = <S extends Schema, T>({
   children,
   debounce = 500,
-  editorProps,
   handleChange,
-  plugins,
-  schema,
-  transformer,
+  config,
   value,
 }: PropsWithChildren<{
+  config: {
+    editorProps: EditorProps<unknown, S>
+    plugins: Plugin<S>[]
+    schema: S
+    transformer: Transformer<S>
+  }
   debounce?: number
-  editorProps: EditorProps<unknown, S>
   handleChange: (value: T) => void
-  plugins: Plugin<S>[]
-  schema: S
-  transformer: Transformer<S>
   value?: T
 }>): ReactElement => {
   // debounce the output transformation if required
@@ -52,12 +51,14 @@ export const EditorProvider = <S extends Schema, T>({
       }
 
       timer = window.setTimeout(() => {
-        handleChange(transformer.export(outputNode))
+        handleChange(config.transformer.export(outputNode))
       }, debounce)
     }
-  }, [debounce, handleChange, transformer])
+  }, [debounce, handleChange, config])
 
   const view = useMemo(() => {
+    const { editorProps, plugins, schema } = config
+
     return new EditorView<S>(undefined, {
       state: EditorState.create<S>({ plugins, schema }),
       dispatchTransaction: (tr: Transaction<S>) => {
@@ -73,20 +74,20 @@ export const EditorProvider = <S extends Schema, T>({
       },
       ...editorProps,
     })
-  }, [debouncedHandleChange, editorProps, plugins, schema])
+  }, [debouncedHandleChange, config])
 
   const [state, setState] = useState<EditorState<S>>(view.state)
 
   useEffect(() => {
     view.updateState(
       EditorState.create<S>({
-        doc: transformer.import(value),
+        doc: config.transformer.import(value),
         plugins: view.state.plugins,
         schema: view.state.schema,
         // selection: view.state.selection, // TODO: map selection?
       })
     )
-  }, [transformer, value, view])
+  }, [config, value, view])
 
   return (
     <div className={'pompom-container'}>

@@ -41,7 +41,7 @@ import {
   undoAction,
   wrapInOrderedList,
   wrapInUnorderedList,
-} from '../config'
+} from '../config/actions'
 
 export const MainToolbar: React.FC = () => (
   <Toolbar>

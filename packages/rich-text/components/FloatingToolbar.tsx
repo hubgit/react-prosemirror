@@ -21,7 +21,7 @@ import {
   toggleSubscript,
   toggleSuperscript,
   toggleUnderline,
-} from '../config'
+} from '../config/actions'
 
 export const FloatingToolbar: React.FC = () => (
   <Floater>

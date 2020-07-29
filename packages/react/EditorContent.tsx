@@ -2,7 +2,11 @@ import React, { useCallback, useContext } from 'react'
 
 import { EditorContext } from './EditorProvider'
 
-export const EditorContent: React.FC<{ autoFocus?: boolean }> = ({
+export interface EditorContentProps {
+  autoFocus?: boolean
+}
+
+export const EditorContent: React.FC<EditorContentProps> = ({
   autoFocus = false,
 }) => {
   const { view } = useContext(EditorContext)
