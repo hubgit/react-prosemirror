@@ -1,4 +1,4 @@
-import { backspaceInList } from '@pompom/commands'
+// import { backspaceInList } from '@pompom/commands'
 import { redo, undo } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
 import { splitListItem } from 'prosemirror-schema-list'
@@ -19,7 +19,7 @@ export const keys: Plugin<EditorSchema> = keymap({
 
   // lists
   Enter: splitListItem<EditorSchema>(schema.nodes.listItem),
-  Backspace: backspaceInList<EditorSchema>(schema.nodes.listItem),
+  // Backspace: backspaceInList<EditorSchema>(schema.nodes.listItem),
   'Shift-Tab': outdentListItem.run,
   Tab: indentListItem.run,
 

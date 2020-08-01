@@ -1,12 +1,13 @@
 import {
+  Editor,
   EditorContent,
   EditorContentProps,
   EditorFieldProps,
-  PomPom,
 } from '@pompom/react'
 import React, { useMemo } from 'react'
 
 import { createConfig, EditorConfigProps } from '../config'
+import { FloatingToolbar } from './FloatingToolbar'
 import { MainToolbar } from './MainToolbar'
 
 // const config = createConfig()
@@ -20,9 +21,10 @@ export const RichText = React.memo<
   ])
 
   return (
-    <PomPom config={config} {...props}>
+    <Editor config={config} {...props}>
+      <FloatingToolbar />
       <MainToolbar />
       <EditorContent autoFocus={autoFocus} />
-    </PomPom>
+    </Editor>
   )
 })

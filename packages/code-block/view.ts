@@ -1,9 +1,8 @@
 import 'highlight.js/styles/default.css'
 
-import { NodeViewCreator } from '@pompom/core'
 import * as hljs from 'highlight.js'
 import { Node, Schema } from 'prosemirror-model'
-import { EditorView } from 'prosemirror-view'
+import { EditorView, NodeView } from 'prosemirror-view'
 
 const languages = new Map<string, string>([
   ['javascript', 'javascript'],
@@ -23,15 +22,59 @@ const importRequirements = async (language: string) => {
   }
 }
 
-export const codeBlockView: NodeViewCreator = <S extends Schema>(
-  node: Node<S>,
-  view: EditorView<S>,
-  getPos: (() => number) | boolean
-) => {
-  const dom = document.createElement('pre')
-  dom.className = 'pompom-code'
+export class CodeBlockView<S extends Schema> implements NodeView<S> {
+  private readonly highlightDOM: HTMLElement
 
-  const renderOptions = (value: string) => {
+  public contentDOM: HTMLElement
+  public dom: HTMLPreElement
+
+  constructor(
+    protected node: Node<S>,
+    protected view: EditorView<S>,
+    protected getPos: () => number
+  ) {
+    this.dom = document.createElement('pre')
+    this.dom.className = 'pompom-code'
+
+    this.contentDOM = document.createElement('code')
+    this.dom.appendChild(this.contentDOM)
+
+    this.highlightDOM = document.createElement('code')
+    this.dom.appendChild(this.highlightDOM)
+
+    this.setLanguage(this.node.attrs.language).catch(() => {
+      console.error(`Couldn't import language requirements`)
+    })
+  }
+
+  public update = (newNode: Node<S>): boolean => {
+    if (!newNode.sameMarkup(this.node)) {
+      return false
+    }
+
+    this.highlightContent()
+
+    this.node = newNode
+
+    return true
+  }
+
+  private setLanguage = async (language: string) => {
+    await importRequirements(language)
+
+    this.renderOptions(language)
+
+    this.highlightDOM.className = `pompom-code-highlight language-${language}`
+
+    this.highlightContent()
+  }
+
+  private highlightContent = () => {
+    this.highlightDOM.textContent = this.contentDOM.textContent
+    hljs.highlightBlock(this.highlightDOM)
+  }
+
+  private renderOptions = (value: string) => {
     const select = document.createElement('select')
 
     for (const language of languages.keys()) {
@@ -42,64 +85,22 @@ export const codeBlockView: NodeViewCreator = <S extends Schema>(
       select.appendChild(option)
     }
 
-    if (typeof getPos === 'function') {
-      select.addEventListener('change', (event) => {
-        if (event.target) {
-          const language = (event.target as HTMLSelectElement).value as string
+    select.addEventListener('change', (event) => {
+      if (event.target) {
+        const language = (event.target as HTMLSelectElement).value
 
-          view.dispatch(
-            view.state.tr.setNodeMarkup(getPos(), undefined, {
-              ...node.attrs,
-              language,
-            })
-          )
-        }
-      })
-    }
+        this.view.dispatch(
+          this.view.state.tr.setNodeMarkup(this.getPos(), undefined, {
+            ...this.node.attrs,
+            language,
+          })
+        )
+      }
+    })
 
     const selectContainer = document.createElement('div')
     selectContainer.appendChild(select)
 
-    dom.appendChild(selectContainer)
-  }
-
-  const contentDOM = document.createElement('code')
-  dom.appendChild(contentDOM)
-
-  const highlightDOM = document.createElement('code')
-  dom.appendChild(highlightDOM)
-
-  const highlightContent = () => {
-    highlightDOM.textContent = contentDOM.textContent
-    hljs.highlightBlock(highlightDOM)
-  }
-
-  const { language } = node.attrs
-
-  highlightDOM.className = `pompom-code-highlight language-${language}`
-
-  importRequirements(language)
-    .then(() => {
-      renderOptions(language)
-      highlightContent()
-    })
-    .catch(() => {
-      console.error(`Couldn't import ${language} requirements`)
-    })
-
-  return {
-    dom,
-    contentDOM,
-    update: (newNode: Node<S>) => {
-      if (!newNode.sameMarkup(node)) {
-        return false
-      }
-
-      highlightContent()
-
-      node = newNode
-
-      return true
-    },
+    this.dom.appendChild(selectContainer)
   }
 }

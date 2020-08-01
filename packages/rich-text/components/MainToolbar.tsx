@@ -45,7 +45,7 @@ import {
 
 export const MainToolbar: React.FC = () => (
   <Toolbar>
-    <ToolbarGroup>
+    {/*<ToolbarGroup>
       <ToolbarItem action={toggleStrong}>
         <FontAwesomeIcon icon={faBold} />
       </ToolbarItem>
@@ -70,7 +70,7 @@ export const MainToolbar: React.FC = () => (
       <ToolbarItem action={removeFormat}>
         <FontAwesomeIcon icon={faRemoveFormat} />
       </ToolbarItem>
-    </ToolbarGroup>
+    </ToolbarGroup>*/}
 
     <ToolbarGroup>
       <ToolbarItem action={setNodeTypeParagraph}>

@@ -9,7 +9,7 @@ export interface EditorFieldProps<T> {
   value?: T
 }
 
-export const PomPom = <S extends Schema, T>({
+export const Editor = <S extends Schema, T>({
   children,
   config,
   onChange,

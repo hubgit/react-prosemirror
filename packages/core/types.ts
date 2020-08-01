@@ -1,13 +1,6 @@
 import { Node, Schema } from 'prosemirror-model'
 import { Plugin } from 'prosemirror-state'
-import { Decoration, EditorProps, EditorView, NodeView } from 'prosemirror-view'
-
-export type NodeViewCreator = <S extends Schema>(
-  node: Node<S>,
-  view: EditorView<S>,
-  getPos: boolean | (() => number),
-  decorations: Decoration[]
-) => NodeView<S>
+import { EditorProps } from 'prosemirror-view'
 
 export interface EditorConfig<S extends Schema, T> {
   editorProps: EditorProps<unknown, S>

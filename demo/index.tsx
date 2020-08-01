@@ -1,6 +1,6 @@
 import 'prosemirror-view/style/prosemirror.css'
 import '@pompom/react/styles/editor.css'
-// import '@pompom/react/styles/floater.css'
+import '@pompom/react/styles/floater.css'
 import '@pompom/react/styles/toolbar.css'
 import './styles/demo.css'
 

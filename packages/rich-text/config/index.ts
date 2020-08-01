@@ -1,3 +1,4 @@
+import { CodeBlockView } from '@pompom/code-block'
 import { EditorConfigCreator } from '@pompom/core'
 
 import { plugins } from './plugins'
@@ -27,7 +28,9 @@ export const createConfig: EditorConfigCreator<
         },
       },
       nodeViews: {
-        // codeBlock: codeBlockView,
+        codeBlock: (node, view, getPos) =>
+          // @ts-ignore (getPos)
+          new CodeBlockView(node, view, getPos),
       },
       scrollMargin: 16,
       scrollThreshold: 16,
