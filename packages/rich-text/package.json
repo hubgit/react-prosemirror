@@ -15,6 +15,7 @@
     "@pompom/commands": "^1.0.0",
     "@pompom/code-block": "^1.0.0",
     "@pompom/core": "^1.0.0",
+    "@pompom/extensions": "^1.0.0",
     "@pompom/react": "^1.0.0",
     "@pompom/model": "^1.0.0",
     "@pompom/transformers": "^1.0.0",

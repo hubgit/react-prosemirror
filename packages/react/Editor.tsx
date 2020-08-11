@@ -5,7 +5,7 @@ import React, { PropsWithChildren, ReactElement } from 'react'
 import { EditorProvider } from './EditorProvider'
 
 export interface EditorFieldProps<T> {
-  onChange: (value: T) => void
+  onChange: (event: Event, value: T) => void
   value?: T
 }
 

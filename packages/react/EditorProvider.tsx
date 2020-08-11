@@ -38,7 +38,7 @@ export const EditorProvider = <S extends Schema, T>({
     transformer: Transformer<S>
   }
   debounce?: number
-  handleChange: (value: T) => void
+  handleChange: (event: Event, value: T) => void
   value?: T
 }>): ReactElement => {
   // debounce the output transformation if required
@@ -69,6 +69,9 @@ export const EditorProvider = <S extends Schema, T>({
         setState(state)
 
         if (transactions.some((tr) => tr.docChanged)) {
+          const event = new Event('change')
+          event.returnValue
+
           debouncedHandleChange(state.doc)
         }
       },

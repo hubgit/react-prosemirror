@@ -1,4 +1,5 @@
-import { Node, Schema } from 'prosemirror-model'
+import { Action } from '@pompom/commands'
+import { MarkSpec, Node, NodeSpec, Schema } from 'prosemirror-model'
 import { Plugin } from 'prosemirror-state'
 import { EditorProps } from 'prosemirror-view'
 
@@ -17,4 +18,25 @@ export type EditorConfigCreator<P, S extends Schema, T> = (
 export abstract class Transformer<S extends Schema, T extends any> {
   public abstract import: (input?: T) => Node<S>
   public abstract export: (output: Node<S>) => T
+}
+
+export abstract class Extension {
+  public marks(): Record<string, MarkSpec> {
+    return {}
+  }
+
+  public nodes(): Record<string, NodeSpec> {
+    return {}
+  }
+
+  public actions<S extends Schema>(schema: S): Record<string, Action<S>> {
+    return {}
+  }
+
+  public plugins<S extends Schema>(
+    schema: S,
+    actions: Record<string, Action<S>>
+  ): Plugin<S>[] {
+    return []
+  }
 }

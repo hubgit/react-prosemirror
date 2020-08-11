@@ -2718,7 +2718,7 @@
   dependencies:
     "@types/prosemirror-model" "*"
 
-"@types/prosemirror-view@*", "@types/prosemirror-view@^1.15.0":
+"@types/prosemirror-view@*", "@types/prosemirror-view@^1.15.0", "@types/prosemirror-view@^1.7.2":
   version "1.15.0"
   resolved "https://registry.npmjs.org/@types/prosemirror-view/-/prosemirror-view-1.15.0.tgz#47d80431559107854f559ccaa29f919f5224a440"
   integrity sha512-OBIAiVInYS0cr4txLZEVYs1t1aFKaAZvogFDgkZfLwa+uda+LNPSs6m4tNLU/KXoFu9iK9CPOpiYTlDQPEnU6g==

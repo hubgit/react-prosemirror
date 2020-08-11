@@ -14,9 +14,10 @@ export interface Action<S extends Schema> {
 }
 
 export const toggleMarkAction = <S extends Schema>(
-  markType: MarkType<S>
+  markType: MarkType<S>,
+  label?: string
 ): Action<S> => ({
-  label: markType.name,
+  label: label || markType.name,
   id: `toggle-mark-${markType.name}`,
   title: `Toggle ${markType.name}`,
   active: isMarkActive<S>(markType),
