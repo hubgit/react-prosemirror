@@ -1,5 +1,4 @@
 export * from './EditorProvider'
 export * from './EditorContent'
 export * from './Floater'
-export * from './Editor'
 export * from './Toolbar'

@@ -1,42 +1,58 @@
-import { Action } from '@pompom/commands'
-import { MarkSpec, Node, NodeSpec, Schema } from 'prosemirror-model'
-import { Plugin } from 'prosemirror-state'
-import { EditorProps } from 'prosemirror-view'
+import { Command } from 'prosemirror-commands'
+import { InputRule } from 'prosemirror-inputrules'
+import {
+  DOMOutputSpec,
+  MarkSpec,
+  Node,
+  NodeSpec,
+  Schema,
+} from 'prosemirror-model'
+import { EditorState, Plugin } from 'prosemirror-state'
+import { EditorView, NodeView } from 'prosemirror-view'
 
-export interface EditorConfig<S extends Schema, T> {
-  editorProps: EditorProps<unknown, S>
-  plugins: Plugin<S>[]
-  schema: S
-  transformer: Transformer<S, T>
+import { PomPom } from './PomPom'
+
+export abstract class Transformer<
+  T,
+  N extends string = any,
+  M extends string = any
+> {
+  public abstract import: (input?: T) => Node<Schema<N, M>>
+  public abstract export: (output: Node<Schema<N, M>>) => T
 }
 
-export type EditorConfigCreator<P, S extends Schema, T> = (
-  props: P
-) => EditorConfig<S, T>
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export abstract class Transformer<S extends Schema, T extends any> {
-  public abstract import: (input?: T) => Node<S>
-  public abstract export: (output: Node<S>) => T
+export interface Action<S extends Schema> {
+  // id: string
+  label: string
+  title: string
+  active?: (state: EditorState<S>) => boolean
+  enable?: (state: EditorState<S>) => boolean
+  run: Command<S>
+  key?: string
 }
 
-export abstract class Extension {
-  public marks(): Record<string, MarkSpec> {
-    return {}
-  }
+export type NodeViewCreator<S extends Schema> = (
+  node: Node<S>,
+  view: EditorView<S>,
+  getPos: () => number // | boolean
+) => NodeView
 
-  public nodes(): Record<string, NodeSpec> {
-    return {}
-  }
-
-  public actions<S extends Schema>(schema: S): Record<string, Action<S>> {
-    return {}
-  }
-
-  public plugins<S extends Schema>(
-    schema: S,
-    actions: Record<string, Action<S>>
-  ): Plugin<S>[] {
-    return []
-  }
+export interface Extension<N extends string = any, M extends string = any> {
+  actions?: (editor: PomPom<N, M>) => Record<string, Action<Schema<N, M>>>
+  inputRules?: (editor: PomPom<N, M>) => Record<string, InputRule<Schema<N, M>>>
+  marks?: Record<
+    M,
+    MarkSpec & {
+      toXML?: (node: Node) => DOMOutputSpec
+    }
+  >
+  nodes?: Record<
+    N,
+    NodeSpec & {
+      toXML?: (node: Node) => DOMOutputSpec
+    }
+  >
+  nodeViews?: Record<N | M, NodeViewCreator<Schema<N, M>>>
+  plugins?: (editor: PomPom<N, M>) => Record<string, Plugin<any, Schema<N, M>>>
+  styles?: string[]
 }

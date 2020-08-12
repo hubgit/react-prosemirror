@@ -2,116 +2,94 @@
 import {
   faBold,
   faCode,
-  faHeading,
-  faIndent,
   faItalic,
-  faListOl,
-  faListUl,
-  faOutdent,
-  faParagraph,
-  faQuoteLeft,
-  faRedo,
   faRemoveFormat,
   faStrikethrough,
   faSubscript,
   faSuperscript,
   faUnderline,
-  faUndo,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Toolbar, ToolbarGroup, ToolbarItem } from '@pompom/react'
+import { Toolbar, ToolbarGroup, ToolbarItem, usePomPom } from '@pompom/react'
 import React from 'react'
 
-import {
-  indentListItem,
-  outdentListItem,
-  redoAction,
-  removeFormat,
-  // setNodeTypeCodeBlock,
-  setNodeTypeHeading,
-  setNodeTypeParagraph,
-  toggleBlockquote,
-  toggleCode,
-  toggleEmphasis,
-  toggleStrikethrough,
-  toggleStrong,
-  toggleSubscript,
-  toggleSuperscript,
-  toggleUnderline,
-  undoAction,
-  wrapInOrderedList,
-  wrapInUnorderedList,
-} from '../config/actions'
+export const MainToolbar: React.FC = () => {
+  const {
+    pompom: { actions },
+  } = usePomPom()
 
-export const MainToolbar: React.FC = () => (
-  <Toolbar>
-    {/*<ToolbarGroup>
-      <ToolbarItem action={toggleStrong}>
-        <FontAwesomeIcon icon={faBold} />
-      </ToolbarItem>
-      <ToolbarItem action={toggleEmphasis}>
-        <FontAwesomeIcon icon={faItalic} />
-      </ToolbarItem>
-      <ToolbarItem action={toggleCode}>
-        <FontAwesomeIcon icon={faCode} />
-      </ToolbarItem>
-      <ToolbarItem action={toggleSubscript}>
-        <FontAwesomeIcon icon={faSubscript} />
-      </ToolbarItem>
-      <ToolbarItem action={toggleSuperscript}>
-        <FontAwesomeIcon icon={faSuperscript} />
-      </ToolbarItem>
-      <ToolbarItem action={toggleUnderline}>
-        <FontAwesomeIcon icon={faUnderline} />
-      </ToolbarItem>
-      <ToolbarItem action={toggleStrikethrough}>
-        <FontAwesomeIcon icon={faStrikethrough} />
-      </ToolbarItem>
-      <ToolbarItem action={removeFormat}>
-        <FontAwesomeIcon icon={faRemoveFormat} />
-      </ToolbarItem>
-    </ToolbarGroup>*/}
+  // TODO: pompom.toggleMark?
 
-    <ToolbarGroup>
-      <ToolbarItem action={setNodeTypeParagraph}>
+  return (
+    <Toolbar>
+      <ToolbarGroup>
+        <ToolbarItem action={actions.toggleMarkStrong}>
+          <FontAwesomeIcon icon={faBold} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.toggleMarkEmphasis}>
+          <FontAwesomeIcon icon={faItalic} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.toggleMarkCode}>
+          <FontAwesomeIcon icon={faCode} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.toggleMarkSubscript}>
+          <FontAwesomeIcon icon={faSubscript} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.toggleMarkSuperscript}>
+          <FontAwesomeIcon icon={faSuperscript} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.toggleMarkUnderline}>
+          <FontAwesomeIcon icon={faUnderline} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.toggleMarkStrikethrough}>
+          <FontAwesomeIcon icon={faStrikethrough} />
+        </ToolbarItem>
+        <ToolbarItem action={actions.removeFormatting}>
+          <FontAwesomeIcon icon={faRemoveFormat} />
+        </ToolbarItem>
+      </ToolbarGroup>
+
+      {/*<ToolbarGroup>
+      <ToolbarItem action={actions.setNodeTypeParagraph}>
         <FontAwesomeIcon icon={faParagraph} />
       </ToolbarItem>
-      {/*<ToolbarItem action={setNodeTypeCodeBlock}>
+      <ToolbarItem action={setNodeTypeCodeBlock}>
         <FontAwesomeIcon icon={faCode} />
-      </ToolbarItem>*/}
-      <ToolbarItem action={setNodeTypeHeading}>
+      </ToolbarItem>
+      <ToolbarItem action={actions.setNodeTypeHeading}>
         <FontAwesomeIcon icon={faHeading} />
       </ToolbarItem>
     </ToolbarGroup>
 
     <ToolbarGroup>
-      <ToolbarItem action={toggleBlockquote}>
+      <ToolbarItem action={actions.toggleBlockquote}>
         <FontAwesomeIcon icon={faQuoteLeft} />
       </ToolbarItem>
     </ToolbarGroup>
 
     <ToolbarGroup>
-      <ToolbarItem action={wrapInOrderedList}>
+      <ToolbarItem action={actions.wrapInOrderedList}>
         <FontAwesomeIcon icon={faListOl} />
       </ToolbarItem>
-      <ToolbarItem action={wrapInUnorderedList}>
+      <ToolbarItem action={actions.wrapInUnorderedList}>
         <FontAwesomeIcon icon={faListUl} />
       </ToolbarItem>
-      <ToolbarItem action={outdentListItem}>
+      <ToolbarItem action={actions.outdentListItem}>
         <FontAwesomeIcon icon={faOutdent} />
       </ToolbarItem>
-      <ToolbarItem action={indentListItem}>
+      <ToolbarItem action={actions.indentListItem}>
         <FontAwesomeIcon icon={faIndent} />
       </ToolbarItem>
     </ToolbarGroup>
 
     <ToolbarGroup>
-      <ToolbarItem action={undoAction}>
+      <ToolbarItem action={actions.undo}>
         <FontAwesomeIcon icon={faUndo} />
       </ToolbarItem>
-      <ToolbarItem action={redoAction}>
+      <ToolbarItem action={actions.undo}>
         <FontAwesomeIcon icon={faRedo} />
       </ToolbarItem>
-    </ToolbarGroup>
-  </Toolbar>
-)
+    </ToolbarGroup>*/}
+    </Toolbar>
+  )
+}

@@ -1,18 +1,18 @@
 import { Transformer } from '@pompom/core'
 import { DOMParser, DOMSerializer, Node, Schema } from 'prosemirror-model'
 
-export class HTMLTransformer<S extends Schema>
-  implements Transformer<S, string> {
+export class HTMLTransformer<N extends string = any, M extends string = any>
+  implements Transformer<string, N, M> {
   private parser: DOMParser
   private serializer: DOMSerializer
 
-  public constructor(schema: S) {
-    this.parser = DOMParser.fromSchema<S>(schema)
-    this.serializer = DOMSerializer.fromSchema<S>(schema)
+  public constructor(schema: Schema<N, M>) {
+    this.parser = DOMParser.fromSchema(schema)
+    this.serializer = DOMSerializer.fromSchema(schema)
     // this.serializer = new XMLSerializer()
   }
 
-  public import(input?: string): Node<S> {
+  public import(input?: string): Node<Schema<N, M>> {
     const template = document.createElement('template')
 
     if (input !== undefined) {
@@ -22,7 +22,7 @@ export class HTMLTransformer<S extends Schema>
     return this.parser.parse(template.content)
   }
 
-  public export(output: Node<S>): string {
+  public export(output: Node<Schema<N, M>>): string {
     const fragment = this.serializer.serializeFragment(output.content)
 
     // return xmlSerializer.serializeToString(fragment)

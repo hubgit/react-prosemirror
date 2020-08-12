@@ -2,9 +2,8 @@
   "files": [],
   "references": [
     { "path": "code-block"},
-    { "path": "commands"},
     { "path": "core"},
-    { "path": "model"},
+    { "path": "extensions"},
     { "path": "react"},
     { "path": "rich-text"},
     { "path": "transformers"}

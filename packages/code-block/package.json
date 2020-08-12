@@ -9,6 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@pompom/core": "^1.0.0",
     "highlight.js": "^10.1.1"
   },
   "peerDependencies": {

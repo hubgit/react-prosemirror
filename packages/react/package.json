@@ -10,7 +10,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@pompom/commands": "^1.0.0",
     "@pompom/core": "^1.0.0"
   },
   "peerDependencies": {

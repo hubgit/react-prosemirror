@@ -1,100 +1,93 @@
-import { Node, Schema } from 'prosemirror-model'
-import { EditorState, Plugin, Transaction } from 'prosemirror-state'
-import { EditorProps, EditorView } from 'prosemirror-view'
+import { Extension, PomPom, Transformer } from '@pompom/core'
+import { Schema } from 'prosemirror-model'
+import { EditorState } from 'prosemirror-state'
 import React, {
   createContext,
   PropsWithChildren,
   ReactElement,
+  useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface Transformer<S extends Schema, T = any> {
-  import: (input: T) => Node<S>
-  export: (output: Node<S>) => T
+interface PomPomContext<N extends string = any, M extends string = any> {
+  pompom: PomPom<N, M>
+  state: EditorState<Schema<N, M>>
 }
 
-interface EditorContextProps<S extends Schema> {
-  view: EditorView<S>
-  state: EditorState<S>
+export const EditorContext = createContext<PomPomContext | undefined>(undefined)
+
+export const usePomPom = <N extends string = any, M extends string = any>(): {
+  pompom: PomPom<N, M>
+  state: EditorState<Schema<N, M>>
+} => {
+  // @ts-ignore
+  const { pompom, state } = useContext<PomPomContext<N, M>>(EditorContext)
+
+  if (!pompom || !state) {
+    throw new Error('Context not ready!')
+  }
+
+  return { pompom, state }
 }
 
-// @ts-ignore
-export const EditorContext = createContext<EditorContextProps>(undefined)
-
-export const EditorProvider = <S extends Schema, T>({
+export const EditorProvider = <
+  T,
+  N extends string = any,
+  M extends string = any
+>({
   children,
   debounce = 500,
   handleChange,
-  config,
+  extensions = [],
+  transformer,
   value,
 }: PropsWithChildren<{
-  config: {
-    editorProps: EditorProps<unknown, S>
-    plugins: Plugin<S>[]
-    schema: S
-    transformer: Transformer<S>
-  }
   debounce?: number
-  handleChange: (event: Event, value: T) => void
+  extensions: Extension<N, M>[]
+  handleChange: (value: T) => void
+  transformer: Transformer<T, N, M>
   value?: T
 }>): ReactElement => {
-  // debounce the output transformation if required
-  const debouncedHandleChange = useMemo<(outputNode: Node<S>) => void>(() => {
+  const debouncedHandleChange = useMemo<
+    (state: EditorState<Schema<N, M>>) => void
+  >(() => {
     let timer: number
 
-    return (outputNode) => {
+    return (state) => {
       if (timer) {
         window.clearTimeout(timer)
       }
 
       timer = window.setTimeout(() => {
-        handleChange(config.transformer.export(outputNode))
+        console.log(state.doc)
+        // handleChange(transformer.export(state.doc))
       }, debounce)
     }
-  }, [debounce, handleChange, config])
+  }, [debounce, handleChange])
 
-  const view = useMemo(() => {
-    const { editorProps, plugins, schema } = config
-
-    return new EditorView<S>(undefined, {
-      state: EditorState.create<S>({ plugins, schema }),
-      dispatchTransaction: (tr: Transaction<S>) => {
-        const { state, transactions } = view.state.applyTransaction(tr)
-
-        view.updateState(state)
-
+  const pompom = useMemo(
+    () =>
+      new PomPom(extensions, (state, transactions) => {
         setState(state)
 
-        if (transactions.some((tr) => tr.docChanged)) {
-          const event = new Event('change')
-          event.returnValue
-
-          debouncedHandleChange(state.doc)
+        if (transactions && transactions.some((tr) => tr.docChanged)) {
+          debouncedHandleChange(state)
         }
-      },
-      ...editorProps,
-    })
-  }, [debouncedHandleChange, config])
+      }),
+    [debouncedHandleChange, extensions]
+  )
 
-  const [state, setState] = useState<EditorState<S>>(view.state)
+  const [state, setState] = useState(pompom.view.state)
 
-  useEffect(() => {
-    view.updateState(
-      EditorState.create<S>({
-        doc: config.transformer.import(value),
-        plugins: view.state.plugins,
-        schema: view.state.schema,
-        // selection: view.state.selection, // TODO: map selection?
-      })
-    )
-  }, [config, value, view])
+  // useEffect(() => {
+  //   pompom.updateState(transformer.import(value))
+  // }, [pompom, transformer, value])
 
   return (
     <div className={'pompom-container'}>
-      <EditorContext.Provider value={{ view, state }}>
+      <EditorContext.Provider value={{ pompom, state }}>
         {children}
       </EditorContext.Provider>
     </div>

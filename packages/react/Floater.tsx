@@ -1,9 +1,9 @@
-import React, { useContext, useMemo, useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 
-import { EditorContext } from './EditorProvider'
+import { usePomPom } from './EditorProvider'
 
 export const Floater: React.FC = ({ children }) => {
-  const { view, state } = useContext(EditorContext)
+  const { pompom, state } = usePomPom()
 
   const floaterRef = useRef<HTMLDivElement>(null)
 
@@ -18,7 +18,7 @@ export const Floater: React.FC = ({ children }) => {
       return { left: -1000, top: 0 }
     }
 
-    const coords = view.coordsAtPos(selection.$anchor.pos)
+    const coords = pompom.view.coordsAtPos(selection.$anchor.pos)
 
     const { offsetWidth } = floaterRef.current
 
@@ -30,7 +30,7 @@ export const Floater: React.FC = ({ children }) => {
       top: coords.top + 30,
       // top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 30,
     }
-  }, [state, view, floaterRef])
+  }, [state, pompom, floaterRef])
 
   return (
     <div ref={floaterRef} className={'pompom-floater'} style={style}>

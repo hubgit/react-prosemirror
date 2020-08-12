@@ -17,7 +17,7 @@ import { findWrapping, liftTarget } from 'prosemirror-transform'
 
 type DispatchTransaction = (transaction: Transaction) => void
 
-export const isMarkActive = <S extends Schema>(markType: MarkType<S>) => (
+export const markActive = <S extends Schema>(markType: MarkType<S>) => (
   state: EditorState<S>
 ): boolean => {
   const { from, $from, to, empty } = state.selection
@@ -32,7 +32,7 @@ export const isMarkActive = <S extends Schema>(markType: MarkType<S>) => (
 const isNodeSelection = (selection: Selection): selection is NodeSelection =>
   'node' in selection
 
-export const isBlockActive = <S extends Schema>(
+export const blockActive = <S extends Schema>(
   nodeType: NodeType<S>,
   attrs = {}
 ) => (state: EditorState<S>): boolean => {
@@ -251,7 +251,7 @@ export const toggleWrap = <S extends Schema>(
 
 export const setListTypeOrWrapInList = <S extends Schema>(
   listType: NodeType<S>,
-  attrs: Record<string, unknown>
+  attrs?: Record<string, unknown>
 ) => (state: EditorState, dispatch?: DispatchTransaction) => {
   const { $from, $to } = state.selection
 
@@ -269,7 +269,7 @@ export const setListTypeOrWrapInList = <S extends Schema>(
 
     const node = $pos.nodeAfter
 
-    if (node && node.attrs.type === attrs.type) {
+    if (node && attrs && node.attrs.type === attrs.type) {
       // return false if the node type already matches
       return false
     }

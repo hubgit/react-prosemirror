@@ -1,6 +1,6 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback } from 'react'
 
-import { EditorContext } from './EditorProvider'
+import { usePomPom } from './EditorProvider'
 
 export interface EditorContentProps {
   autoFocus?: boolean
@@ -9,19 +9,19 @@ export interface EditorContentProps {
 export const EditorContent: React.FC<EditorContentProps> = ({
   autoFocus = false,
 }) => {
-  const { view } = useContext(EditorContext)
+  const { pompom } = usePomPom()
 
   const editorRef = useCallback(
     (container: HTMLDivElement | null) => {
       if (container) {
-        container.appendChild(view.dom)
+        container.appendChild(pompom.view.dom)
 
         if (autoFocus) {
-          view.focus()
+          pompom.view.focus()
         }
       }
     },
-    [view, autoFocus]
+    [pompom, autoFocus]
   )
 
   return <div className={'pompom-content'} ref={editorRef} />

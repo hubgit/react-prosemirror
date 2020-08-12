@@ -13,8 +13,8 @@ import ReactDOM from 'react-dom'
 ReactDOM.render(
   <RichText
     autoFocus={true}
-    onChange={(output: string) => {
-      console.log(output)
+    handleChange={(value) => {
+      console.log(value)
     }}
   />,
   document.querySelector('#root')

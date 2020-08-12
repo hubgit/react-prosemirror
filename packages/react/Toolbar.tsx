@@ -1,8 +1,8 @@
-import { Action } from '@pompom/commands'
+import { Action } from '@pompom/core'
 import { Schema } from 'prosemirror-model'
-import React, { PropsWithChildren, ReactElement, useContext } from 'react'
+import React, { PropsWithChildren, ReactElement } from 'react'
 
-import { EditorContext } from './EditorProvider'
+import { usePomPom } from './EditorProvider'
 
 export const Toolbar: React.FC = ({ children }) => (
   <div className={'pompom-toolbar'}>{children}</div>
@@ -20,18 +20,18 @@ export const ToolbarItem = <S extends Schema>({
 }: PropsWithChildren<{ action: Action<S> }>): ReactElement => {
   const { active, enable, title, run } = action
 
-  const { view } = useContext(EditorContext)
+  const { pompom, state } = usePomPom()
 
   return (
     <button
       type={'button'}
       className={'pompom-toolbar-item'}
-      data-active={active && active(view.state)}
-      disabled={enable && !enable(view.state)}
+      data-active={active && active(state)}
+      disabled={enable && !enable(state)}
       title={title}
       onMouseDown={(event) => {
         event.preventDefault()
-        run(view.state, view.dispatch, view)
+        run(state, pompom.view.dispatch, pompom.view)
         // run(view.state, view.dispatch, view, event.nativeEvent)
       }}
     >
