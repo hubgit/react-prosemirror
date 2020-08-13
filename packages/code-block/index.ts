@@ -1,6 +1,7 @@
 import { Extension } from '@pompom/core'
 import { wrapIn } from 'prosemirror-commands'
 import { textblockTypeInputRule } from 'prosemirror-inputrules'
+import { Node } from 'prosemirror-model'
 
 import { CodeBlockView } from './view'
 
@@ -21,15 +22,14 @@ export const codeBlock: Extension<'codeBlock'> = {
         {
           tag: 'pre',
           preserveWhitespace: 'full',
-          // @ts-ignore
-          getAttrs: (node: HTMLPreElement) => {
+          getAttrs: (element: Element) => {
             return {
-              language: node.getAttribute('data-language'),
+              language: element.getAttribute('data-language'),
             }
           },
         },
       ],
-      toDOM: (node) => [
+      toDOM: (node: Node) => [
         'pre',
         {
           'data-language': node.attrs.language,
@@ -41,7 +41,7 @@ export const codeBlock: Extension<'codeBlock'> = {
   nodeViews: {
     codeBlock: (...props) => new CodeBlockView(...props),
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     wrapInCodeBlock: {
       icon: 'code',
       label: 'Code Block',
@@ -51,7 +51,7 @@ export const codeBlock: Extension<'codeBlock'> = {
       // active: blockActive(schema.nodes.codeBlock), // TODO
     },
   }),
-  inputRules: ({ schema }) => ({
+  inputRules: (schema) => ({
     codeBlockRule: textblockTypeInputRule(/^```$/, schema.nodes.codeBlock),
   }),
 }

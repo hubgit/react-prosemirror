@@ -2,7 +2,7 @@ import { Transformer } from '@pompom/core'
 import { DOMParser, DOMSerializer, Node, Schema } from 'prosemirror-model'
 
 export class HTMLTransformer<N extends string = any, M extends string = any>
-  implements Transformer<string, N, M> {
+  implements Transformer<string, Schema<N, M>> {
   private parser: DOMParser
   private serializer: DOMSerializer
 
@@ -22,6 +22,7 @@ export class HTMLTransformer<N extends string = any, M extends string = any>
     return this.parser.parse(template.content)
   }
 
+  // TODO: debounce?
   public export(output: Node<Schema<N, M>>): string {
     const fragment = this.serializer.serializeFragment(output.content)
 

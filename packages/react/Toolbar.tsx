@@ -14,10 +14,10 @@ export const ToolbarGroup: React.FC = ({ children }) => (
 
 // TODO: press button with keyboard
 
-export const ToolbarItem = <S extends Schema>({
+export const ToolbarItem = ({
   action,
   children,
-}: PropsWithChildren<{ action: Action<S> }>): ReactElement => {
+}: PropsWithChildren<{ action: Action }>): ReactElement => {
   const { active, enable, title, run } = action
 
   const { pompom, state } = usePomPom()

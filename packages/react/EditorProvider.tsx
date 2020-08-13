@@ -1,5 +1,5 @@
 import { Extension, PomPom, Transformer } from '@pompom/core'
-import { Schema } from 'prosemirror-model'
+import { Node, Schema } from 'prosemirror-model'
 import { EditorState } from 'prosemirror-state'
 import React, {
   createContext,
@@ -11,25 +11,32 @@ import React, {
   useState,
 } from 'react'
 
-interface PomPomContext<N extends string = any, M extends string = any> {
-  pompom: PomPom<N, M>
+interface PomPomContext<
+  T = any,
+  N extends string = any,
+  M extends string = any
+> {
+  pompom: PomPom<T, N, M>
   state: EditorState<Schema<N, M>>
 }
 
-export const EditorContext = createContext<PomPomContext | undefined>(undefined)
+const EditorContext = createContext<PomPomContext | undefined>(undefined)
 
-export const usePomPom = <N extends string = any, M extends string = any>(): {
-  pompom: PomPom<N, M>
+export const usePomPom = <
+  T,
+  N extends string = never,
+  M extends string = never
+>(): {
+  pompom: PomPom<T, N, M>
   state: EditorState<Schema<N, M>>
 } => {
-  // @ts-ignore
-  const { pompom, state } = useContext<PomPomContext<N, M>>(EditorContext)
+  const value = useContext<PomPomContext<T, N, M> | undefined>(EditorContext)
 
-  if (!pompom || !state) {
-    throw new Error('Context not ready!')
+  if (!value) {
+    throw new Error('Context is not available outside a provider!')
   }
 
-  return { pompom, state }
+  return value
 }
 
 export const EditorProvider = <
@@ -38,52 +45,43 @@ export const EditorProvider = <
   M extends string = any
 >({
   children,
-  debounce = 500,
-  handleChange,
+  debounce,
   extensions = [],
+  handleChange,
   transformer,
   value,
 }: PropsWithChildren<{
   debounce?: number
   extensions: Extension<N, M>[]
-  handleChange: (value: T) => void
-  transformer: Transformer<T, N, M>
+  handleChange?: (value: T) => void
+  transformer: {
+    new (schema: Schema<N, M>): Transformer<T, Schema<N, M>>
+  }
   value?: T
-}>): ReactElement => {
-  const debouncedHandleChange = useMemo<
-    (state: EditorState<Schema<N, M>>) => void
-  >(() => {
-    let timer: number
-
-    return (state) => {
-      if (timer) {
-        window.clearTimeout(timer)
-      }
-
-      timer = window.setTimeout(() => {
-        console.log(state.doc)
-        // handleChange(transformer.export(state.doc))
-      }, debounce)
-    }
-  }, [debounce, handleChange])
+}>): ReactElement | null => {
+  const [state, setState] = useState<EditorState<Schema<N, M>>>()
 
   const pompom = useMemo(
     () =>
-      new PomPom(extensions, (state, transactions) => {
-        setState(state)
-
-        if (transactions && transactions.some((tr) => tr.docChanged)) {
-          debouncedHandleChange(state)
-        }
+      new PomPom<T>({
+        debounce,
+        extensions,
+        handleChange,
+        handleStateChange: setState,
+        transformer,
       }),
-    [debouncedHandleChange, extensions]
+    [extensions, transformer, debounce, handleChange]
   )
 
-  const [state, setState] = useState(pompom.view.state)
+  useEffect(() => {
+    if (value !== undefined) {
+      pompom.setValue(value)
+    }
+  }, [pompom, value])
 
-  // useEffect(() => {
-  //   pompom.updateState(transformer.import(value))
-  // }, [pompom, transformer, value])
+  if (!pompom || !state) {
+    return null
+  }
 
   return (
     <div className={'pompom-container'}>

@@ -2,17 +2,17 @@ import { Extension } from '@pompom/core'
 import { Plugin } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 
-type EventHandler = (event: Event) => boolean
-type ViewEventHandler = (view: EditorView, event: Event) => boolean
-
 export const focus = ({
   onBlur,
   onFocus,
 }: {
-  onBlur?: EventHandler
-  onFocus?: EventHandler
+  onBlur?: (event: Event) => boolean
+  onFocus?: (event: Event) => boolean
 }): Extension => {
-  const handleDOMEvents: Record<string, ViewEventHandler> = {}
+  const handleDOMEvents: Record<
+    string,
+    (view: EditorView, event: Event) => boolean
+  > = {}
 
   if (onBlur) {
     handleDOMEvents.blur = (view, event) => onBlur(event)

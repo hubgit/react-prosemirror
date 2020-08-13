@@ -1,6 +1,6 @@
 import 'highlight.js/styles/default.css'
 
-import * as hljs from 'highlight.js'
+import hljs from 'highlight.js'
 import { Node, Schema } from 'prosemirror-model'
 import { EditorView, NodeView } from 'prosemirror-view'
 

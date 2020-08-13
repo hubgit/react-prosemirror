@@ -1,7 +1,7 @@
 import { Extension, markActive } from '@pompom/core'
 import { toggleMark } from 'prosemirror-commands'
 
-export const emphasis: Extension<undefined, 'emphasis'> = {
+export const emphasis: Extension<never, 'emphasis'> = {
   marks: {
     emphasis: {
       parseDOM: [{ tag: 'em' }, { tag: 'i' }, { style: 'font-style=italic' }],
@@ -9,7 +9,7 @@ export const emphasis: Extension<undefined, 'emphasis'> = {
       toXML: () => ['italic', 0],
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     toggleMarkEmphasis: {
       label: 'Italic',
       title: 'Toggle italic',

@@ -2,7 +2,7 @@ import { Extension, isWrapped, toggleWrap } from '@pompom/core'
 // import { wrapIn } from 'prosemirror-commands'
 import { wrappingInputRule } from 'prosemirror-inputrules'
 
-export const blockquote: Extension<'blockquote'> = {
+export const blockquote: Extension = {
   nodes: {
     blockquote: {
       attrs: {
@@ -13,7 +13,7 @@ export const blockquote: Extension<'blockquote'> = {
       parseDOM: [
         {
           tag: 'blockquote',
-          getAttrs: (element) => ({
+          getAttrs: (element: Element) => ({
             cite: element.getAttribute('cite') || undefined,
           }),
         },
@@ -22,7 +22,7 @@ export const blockquote: Extension<'blockquote'> = {
       toXML: () => ['disp-quote', 0],
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     // wrapInBlockquote: {
     //   label: 'Block Quote',
     //   title: 'Toggle Block Quote',
@@ -38,7 +38,7 @@ export const blockquote: Extension<'blockquote'> = {
       run: toggleWrap(schema.nodes.blockquote),
     },
   }),
-  inputRules: ({ schema }) => ({
+  inputRules: (schema) => ({
     blockQuoteRule: wrappingInputRule(/^\s*>\s$/, schema.nodes.blockquote),
   }),
 }

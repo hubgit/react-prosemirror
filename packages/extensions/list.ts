@@ -1,5 +1,4 @@
 import { blockActive, Extension, setListTypeOrWrapInList } from '@pompom/core'
-import { EditorSchema, schema } from '@pompom/rich-text/config/schema'
 import { wrappingInputRule } from 'prosemirror-inputrules'
 import {
   liftListItem,
@@ -15,14 +14,18 @@ export const list: Extension<'orderedList' | 'bulletList' | 'listItem'> = {
       },
       group: 'block list',
       content: 'listItem+',
-      parseDOM: [{ tag: 'ol' }],
-      getAttrs: (element: Element) => {
-        const start = element.getAttribute('start')
+      parseDOM: [
+        {
+          tag: 'ol',
+          getAttrs: (element: Element) => {
+            const start = element.getAttribute('start')
 
-        return {
-          start: start === undefined ? Number(start) : 1,
-        }
-      },
+            return {
+              start: start === undefined ? Number(start) : 1,
+            }
+          },
+        },
+      ],
       toDOM: () => ['ol', 0],
       toXML: () => ['list', { 'list-type': 'order' }, 0],
     },
@@ -40,7 +43,7 @@ export const list: Extension<'orderedList' | 'bulletList' | 'listItem'> = {
       toXML: () => ['list-item', 0],
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     splitListItem: {
       label: 'Split',
       title: 'Split list item',
@@ -90,7 +93,7 @@ export const list: Extension<'orderedList' | 'bulletList' | 'listItem'> = {
       run: setListTypeOrWrapInList(schema.nodes.bulletList),
     },
   }),
-  inputRules: ({ schema }) => ({
+  inputRules: (schema) => ({
     bulletListRule: wrappingInputRule(
       /^\s*([-+*])\s$/,
       schema.nodes.bulletList

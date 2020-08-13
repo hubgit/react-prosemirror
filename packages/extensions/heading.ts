@@ -1,6 +1,7 @@
 import { blockActive, Extension } from '@pompom/core'
 import { setBlockType } from 'prosemirror-commands'
 import { textblockTypeInputRule } from 'prosemirror-inputrules'
+import { Node } from 'prosemirror-model'
 
 export const heading: Extension<'heading'> = {
   nodes: {
@@ -20,11 +21,11 @@ export const heading: Extension<'heading'> = {
         { tag: 'h5', getAttrs: () => ({ level: 5 }) },
         { tag: 'h6', getAttrs: () => ({ level: 6 }) },
       ],
-      toDOM: (node) => ['h' + node.attrs.level, 0],
+      toDOM: (node: Node) => ['h' + node.attrs.level, 0],
       toXML: () => ['title', 0], // TODO: wrap in section
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     setNodeTypeHeading: {
       label: 'Heading',
       title: 'Change to heading',
@@ -33,7 +34,7 @@ export const heading: Extension<'heading'> = {
       run: setBlockType(schema.nodes.heading, { level: 1 }),
     },
   }),
-  inputRules: ({ schema }) => ({
+  inputRules: (schema) => ({
     headingRule: textblockTypeInputRule(
       new RegExp('^(#{1,6})\\s$'),
       schema.nodes.heading,

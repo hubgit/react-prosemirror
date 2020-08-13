@@ -1,4 +1,5 @@
 import { Extension } from '@pompom/core'
+import { Node } from 'prosemirror-model'
 
 export const image: Extension<'image'> = {
   nodes: {
@@ -16,8 +17,8 @@ export const image: Extension<'image'> = {
           }),
         },
       ],
-      toDOM: (node) => ['img', node.attrs],
-      toXML: (node) => ['graphic', { 'xlink:href': node.attrs.src }],
+      toDOM: (node: Node) => ['img', node.attrs],
+      toXML: (node: Node) => ['graphic', { 'xlink:href': node.attrs.src }],
     },
   },
 }

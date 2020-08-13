@@ -6,6 +6,7 @@
     "declaration": true,
     "declarationMap": true,
 //    "sourceMap": true,
+//    "lib": ["dom"],
     "composite": true,
     "strict": true,
     "moduleResolution": "node",

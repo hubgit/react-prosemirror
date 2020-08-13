@@ -1,7 +1,7 @@
 import { Extension, markActive } from '@pompom/core'
 import { toggleMark } from 'prosemirror-commands'
 
-export const underline: Extension<undefined, 'underline'> = {
+export const underline: Extension<never, 'underline'> = {
   marks: {
     underline: {
       parseDOM: [{ tag: 'u' }, { style: 'text-decoration=underline' }],
@@ -9,10 +9,11 @@ export const underline: Extension<undefined, 'underline'> = {
       toXML: () => ['u', 0],
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     toggleMarkUnderline: {
       label: 'underline',
       title: 'Toggle underline',
+      key: 'Mod-u',
       run: toggleMark(schema.marks.underline),
       enable: toggleMark(schema.marks.underline),
       active: markActive(schema.marks.underline),

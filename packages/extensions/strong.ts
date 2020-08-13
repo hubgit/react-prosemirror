@@ -1,7 +1,7 @@
 import { Extension, markActive } from '@pompom/core'
 import { toggleMark } from 'prosemirror-commands'
 
-export const strong: Extension<undefined, 'strong'> = {
+export const strong: Extension<never, 'strong'> = {
   marks: {
     strong: {
       parseDOM: [
@@ -14,7 +14,7 @@ export const strong: Extension<undefined, 'strong'> = {
       toXML: () => ['bold', 0],
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     toggleMarkStrong: {
       label: 'Bold',
       title: 'Toggle bold',

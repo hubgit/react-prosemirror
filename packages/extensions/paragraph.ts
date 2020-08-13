@@ -10,7 +10,7 @@ export const paragraph: Extension<'paragraph'> = {
       toDOM: () => ['p', 0],
     },
   },
-  actions: ({ schema }) => ({
+  actions: (schema) => ({
     setNodeTypeParagraph: {
       label: 'Paragraph',
       title: 'Change to paragraph',
