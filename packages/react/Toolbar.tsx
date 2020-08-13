@@ -1,5 +1,4 @@
 import { Action } from '@pompom/core'
-import { Schema } from 'prosemirror-model'
 import React, { PropsWithChildren, ReactElement } from 'react'
 
 import { usePomPom } from './EditorProvider'

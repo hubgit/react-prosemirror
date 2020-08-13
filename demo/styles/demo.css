@@ -1,5 +1,16 @@
+body {
+    margin: 0;
+}
+
 .pompom-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    max-width: 40em;
+    overflow: hidden;
     padding: 8px;
+    box-sizing: border-box;
 }
 
 .pompom-toolbar {
@@ -7,14 +18,19 @@
     --toolbar-color-inverse: #fff;
 }
 
+.pompom-content {
+    flex: 1;
+    overflow: hidden;
+}
+
 .ProseMirror {
     font-family: "San Francisco", serif;
     font-size: 20px;
     padding: 16px 4px;
-    max-width: 40em;
     overflow-y: auto;
-    min-height: 5em;
-    max-height: 10em;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .ProseMirror p:first-child {

@@ -9,7 +9,7 @@ export const blockquote: Extension = {
         cite: { default: undefined },
       },
       group: 'block',
-      content: 'paragraph+', // 'block+'
+      content: 'block+',
       parseDOM: [
         {
           tag: 'blockquote',

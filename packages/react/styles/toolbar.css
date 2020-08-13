@@ -32,7 +32,7 @@
   color: var(--toolbar-color-inverse);
 }
 
-.pompom-toolbar-item:active {
+.pompom-toolbar-item:not([disabled]):active {
   background-color: var(--toolbar-color);
   color: var(--toolbar-color-inverse);
 }

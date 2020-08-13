@@ -9,7 +9,7 @@ export const heading: Extension<'heading'> = {
       attrs: {
         level: { default: 1 },
       },
-      group: 'heading',
+      group: 'block heading',
       content: 'inline*', // 'text*'
       marks: 'emphasis superscript subscript',
       defining: true,

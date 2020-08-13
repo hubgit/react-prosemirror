@@ -1,6 +1,7 @@
 import { codeBlock } from '@pompom/code-block'
 import {
   basic,
+  blockquote,
   code,
   emphasis,
   focus,
@@ -31,7 +32,8 @@ export const RichText = React.memo<{
   const extensions = useMemo(
     () => [
       basic,
-      paragraph,
+      paragraph, // note: must be first block
+      blockquote,
       code,
       codeBlock,
       emphasis,

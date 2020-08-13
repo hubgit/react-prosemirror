@@ -1,5 +1,5 @@
 import { Extension } from '@pompom/core'
-import { wrapIn } from 'prosemirror-commands'
+import { setBlockType } from 'prosemirror-commands'
 import { textblockTypeInputRule } from 'prosemirror-inputrules'
 import { Node } from 'prosemirror-model'
 
@@ -46,8 +46,8 @@ export const codeBlock: Extension<'codeBlock'> = {
       icon: 'code',
       label: 'Code Block',
       title: 'Toggle Code Block',
-      run: wrapIn(schema.nodes.codeBlock), // TODO: unwrap
-      enable: wrapIn(schema.nodes.codeBlock),
+      run: setBlockType(schema.nodes.codeBlock), // TODO: unwrap
+      enable: setBlockType(schema.nodes.codeBlock),
       // active: blockActive(schema.nodes.codeBlock), // TODO
     },
   }),
