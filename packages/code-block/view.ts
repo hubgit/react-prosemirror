@@ -32,7 +32,7 @@ export class CodeBlockView<S extends Schema> implements NodeView<S> {
   constructor(
     protected node: Node<S>,
     protected view: EditorView<S>,
-    protected getPos: () => number | boolean
+    protected getPos: () => number
   ) {
     this.dom = document.createElement('pre')
     this.dom.className = 'pompom-code'
@@ -92,7 +92,7 @@ export class CodeBlockView<S extends Schema> implements NodeView<S> {
         const language = (event.target as HTMLSelectElement).value
 
         this.view.dispatch(
-          this.view.state.tr.setNodeMarkup(this.getPos() as number, undefined, {
+          this.view.state.tr.setNodeMarkup(this.getPos(), undefined, {
             ...this.node.attrs,
             language,
           })

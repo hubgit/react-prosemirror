@@ -3,17 +3,9 @@ import { InputRule, inputRules } from 'prosemirror-inputrules'
 import { keymap } from 'prosemirror-keymap'
 import { MarkSpec, Node, NodeSpec, Schema } from 'prosemirror-model'
 import { EditorState, Plugin } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
+import { EditorProps, EditorView } from 'prosemirror-view'
 
 import { Action, Extension, NodeViewCreator, Transformer } from './types'
-
-interface Options<T, N extends string = any, M extends string = any> {
-  debounce?: number
-  extensions: Extension<N, M>[]
-  handleChange?: (value: T) => void
-  handleStateChange?: (state: EditorState<Schema<N, M>>) => void
-  transformer: { new (schema: Schema): Transformer<T, Schema<N, M>> }
-}
 
 export class PomPom<T, N extends string = any, M extends string = any> {
   public schema: Schema<N, M>
@@ -30,11 +22,19 @@ export class PomPom<T, N extends string = any, M extends string = any> {
 
   constructor({
     debounce = 500,
+    editorProps,
     extensions = [],
     handleChange,
     handleStateChange,
     transformer,
-  }: Options<T, N, M>) {
+  }: {
+    debounce?: number
+    editorProps?: EditorProps<unknown, Schema<N, M>>
+    extensions: Extension<N, M>[]
+    handleChange?: (value: T) => void
+    handleStateChange?: (state: EditorState<Schema<N, M>>) => void
+    transformer: { new (schema: Schema): Transformer<T, Schema<N, M>> }
+  }) {
     this.actions = {}
     this.inputRules = {}
     this.keys = {}
@@ -119,7 +119,7 @@ export class PomPom<T, N extends string = any, M extends string = any> {
       rules: Object.values(this.inputRules),
     })
 
-    const state = EditorState.create({
+    const state = EditorState.create<Schema<N, M>>({
       schema: this.schema,
       plugins: Object.values(this.plugins),
     })
@@ -127,13 +127,14 @@ export class PomPom<T, N extends string = any, M extends string = any> {
     const handleDocChange =
       handleChange && this.handleDocChange(handleChange, debounce)
 
-    const view = new EditorView(undefined, {
+    this.view = new EditorView<Schema<N, M>>(undefined, {
       state,
       nodeViews: this.nodeViews,
+      ...editorProps,
       dispatchTransaction: function (tr) {
-        const { state, transactions } = view.state.applyTransaction(tr)
+        const { state, transactions } = this.state.applyTransaction(tr)
 
-        view.updateState(state)
+        this.updateState(state)
 
         if (handleStateChange) {
           handleStateChange(state)
@@ -146,8 +147,6 @@ export class PomPom<T, N extends string = any, M extends string = any> {
         }
       },
     })
-
-    this.view = view
 
     // TODO: dispatch a null transaction instead?
 
@@ -168,6 +167,8 @@ export class PomPom<T, N extends string = any, M extends string = any> {
     if (this.handleStateChange) {
       this.handleStateChange(state)
     }
+
+    // TODO: handleDocChange?
   }
 
   public handleDocChange = (
