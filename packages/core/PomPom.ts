@@ -129,6 +129,7 @@ export class PomPom<T, N extends string = any, M extends string = any> {
 
     const view = new EditorView(undefined, {
       state,
+      nodeViews: this.nodeViews,
       dispatchTransaction: function (tr) {
         const { state, transactions } = view.state.applyTransaction(tr)
 

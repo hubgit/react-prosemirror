@@ -29,7 +29,7 @@ export interface Action<N extends string = any, M extends string = any> {
 export type NodeViewCreator<S extends Schema> = (
   node: Node<S>,
   view: EditorView<S>,
-  getPos: () => number // | boolean
+  getPos: () => number | boolean
 ) => NodeView
 
 interface ParseRules extends Omit<ParseRule, 'getAttrs'> {

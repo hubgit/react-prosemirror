@@ -27,11 +27,12 @@ export class CodeBlockView<S extends Schema> implements NodeView<S> {
 
   public contentDOM: HTMLElement
   public dom: HTMLPreElement
+  // public ignoreMutation = () => true
 
   constructor(
     protected node: Node<S>,
     protected view: EditorView<S>,
-    protected getPos: () => number
+    protected getPos: () => number | boolean
   ) {
     this.dom = document.createElement('pre')
     this.dom.className = 'pompom-code'
@@ -40,6 +41,7 @@ export class CodeBlockView<S extends Schema> implements NodeView<S> {
     this.dom.appendChild(this.contentDOM)
 
     this.highlightDOM = document.createElement('code')
+    this.highlightDOM.setAttribute('contenteditable', 'false')
     this.dom.appendChild(this.highlightDOM)
 
     this.setLanguage(this.node.attrs.language).catch(() => {
@@ -90,7 +92,7 @@ export class CodeBlockView<S extends Schema> implements NodeView<S> {
         const language = (event.target as HTMLSelectElement).value
 
         this.view.dispatch(
-          this.view.state.tr.setNodeMarkup(this.getPos(), undefined, {
+          this.view.state.tr.setNodeMarkup(this.getPos() as number, undefined, {
             ...this.node.attrs,
             language,
           })

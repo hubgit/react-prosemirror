@@ -58,9 +58,9 @@ export const MainToolbar: React.FC = () => {
         <ToolbarItem action={actions.setNodeTypeParagraph}>
           <FontAwesomeIcon icon={faParagraph} />
         </ToolbarItem>
-        <ToolbarItem action={actions.wrapInCodeBlock}>
+        {/*  <ToolbarItem action={actions.wrapInCodeBlock}>
           <FontAwesomeIcon icon={faCode} />
-        </ToolbarItem>
+        </ToolbarItem>*/}
         <ToolbarItem action={actions.setNodeTypeHeading}>
           <FontAwesomeIcon icon={faHeading} />
         </ToolbarItem>
