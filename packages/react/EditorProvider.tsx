@@ -75,6 +75,7 @@ export const EditorProvider = <
 
   useEffect(() => {
     if (value !== undefined) {
+      // TODO: compare to existing value?
       pompom.setValue(value)
     }
   }, [pompom, value])

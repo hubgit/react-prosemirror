@@ -24,7 +24,6 @@ export class PomPom<T, N extends string = any, M extends string = any> {
   public nodes: Record<N, NodeSpec>
   public nodeViews: Record<N | M, NodeViewCreator<Schema<N, M>>>
   public plugins: Record<string, Plugin>
-  public debounce: number
   public handleStateChange?: (state: EditorState<Schema<N, M>>) => void
   public view: EditorView<Schema<N, M>>
   public transformer: Transformer<T, Schema<N, M>>
@@ -43,8 +42,6 @@ export class PomPom<T, N extends string = any, M extends string = any> {
     this.nodes = {} as Record<N, NodeSpec>
     this.nodeViews = {} as Record<N | M, NodeViewCreator<Schema<N, M>>>
     this.plugins = {}
-
-    this.debounce = debounce
     this.handleStateChange = handleStateChange
 
     for (const extension of extensions) {
