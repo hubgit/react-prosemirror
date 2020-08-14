@@ -1,0 +1,18 @@
+{
+  "name": "@pompom/plugins",
+  "version": "1.0.0",
+  "main": "index.js",
+  "source": "index.ts",
+  "types": "index.d.ts",
+  "files": ["**/*.{js,d.ts}"],
+  "license": "MIT",
+  "dependencies": {
+    "@pompom/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/prosemirror-state": "^1.2.5"
+  },
+  "peerDependencies": {
+    "prosemirror-state": "^1.3.3"
+  }
+}

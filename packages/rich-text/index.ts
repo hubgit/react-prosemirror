@@ -1,1 +1,1 @@
-export { RichText } from './components/RichText'
+export { RichTextEditor } from './RichTextEditor'

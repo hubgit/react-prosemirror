@@ -5,18 +5,19 @@ import '@pompom/react/styles/floater.css'
 import '@pompom/react/styles/toolbar.css'
 import './styles/demo.css'
 
-import { RichText } from '@pompom/rich-text'
+import { RichTextEditor } from '@pompom/rich-text'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 // TODO: routes
 
 ReactDOM.render(
-  <RichText
+  <RichTextEditor
     autoFocus={true}
     handleChange={(value) => {
       console.log(value)
     }}
+    value={'Hello world!'}
   />,
   document.querySelector('#root')
 )

@@ -1,28 +1,24 @@
-import React, { useCallback } from 'react'
+import { EditorView } from 'prosemirror-view'
+import React, { useCallback, useEffect } from 'react'
 
-import { usePomPom } from './EditorProvider'
-
-export interface EditorContentProps {
+export const EditorContent: React.FC<{
+  view: EditorView
   autoFocus?: boolean
-}
-
-export const EditorContent: React.FC<EditorContentProps> = ({
-  autoFocus = false,
-}) => {
-  const { pompom } = usePomPom()
-
-  const editorRef = useCallback(
+}> = ({ view, autoFocus = false }) => {
+  const ref = useCallback(
     (container: HTMLDivElement | null) => {
       if (container) {
-        container.appendChild(pompom.view.dom)
-
-        if (autoFocus) {
-          pompom.view.focus()
-        }
+        container.appendChild(view.dom)
       }
     },
-    [pompom, autoFocus]
+    [view]
   )
 
-  return <div className={'pompom-content'} ref={editorRef} />
+  useEffect(() => {
+    if (autoFocus) {
+      view.focus()
+    }
+  }, [autoFocus, view])
+
+  return <div className={'pompom-content'} ref={ref} />
 }

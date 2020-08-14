@@ -1,43 +1,38 @@
 import { Action } from '@pompom/core'
-import React, { PropsWithChildren, ReactElement } from 'react'
+import { EditorState } from 'prosemirror-state'
+import { EditorView } from 'prosemirror-view'
+import React from 'react'
 
-import { usePomPom } from './EditorProvider'
+export type ToolbarItems = Array<{
+  id: string
+  items: Array<Action>
+}>
 
-export const Toolbar: React.FC = ({ children }) => (
-  <div className={'pompom-toolbar'}>{children}</div>
+export const Toolbar: React.FC<{
+  items: ToolbarItems
+  state: EditorState
+  view: EditorView
+}> = ({ items, state, view }) => (
+  <div className={'pompom-toolbar'}>
+    {items.map((group) => (
+      <div className={'pompom-toolbar-group'} key={group.id}>
+        {group.items.map((action) => (
+          <button
+            key={action.id}
+            type={'button'}
+            className={'pompom-toolbar-item'}
+            data-active={action.active && action.active(state)}
+            disabled={action.enable && !action.enable(state)}
+            title={action.title}
+            onMouseDown={(event) => {
+              event.preventDefault()
+              action.run(state, view.dispatch, view)
+            }}
+          >
+            {action.icon || '?'}
+          </button>
+        ))}
+      </div>
+    ))}
+  </div>
 )
-
-export const ToolbarGroup: React.FC = ({ children }) => (
-  <div className={'pompom-toolbar-group'}>{children}</div>
-)
-
-// TODO: press button with keyboard
-
-export const ToolbarItem = ({
-  action,
-  children,
-  title,
-}: PropsWithChildren<{ action: Action; title?: string }>): ReactElement => {
-  const { active, enable, run } = action
-
-  const { pompom, state } = usePomPom()
-
-  return (
-    <button
-      type={'button'}
-      className={'pompom-toolbar-item'}
-      data-active={active && active(state)}
-      disabled={enable && !enable(state)}
-      title={title}
-      onMouseDown={(event) => {
-        event.preventDefault()
-        run(state, pompom.view.dispatch, pompom.view)
-        // run(view.state, view.dispatch, view, event.nativeEvent)
-      }}
-    >
-      {children}
-    </button>
-  )
-}
-
-// export const ToolbarItem = React.memo(ToolbarInner) as typeof ToolbarInner

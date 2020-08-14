@@ -17,8 +17,11 @@ export abstract class Transformer<T, S extends Schema> {
 }
 
 export interface Action<N extends string = any, M extends string = any> {
+  id: string
+  title?: string
   active?: (state: EditorState<Schema<N, M>>) => boolean
   enable?: (state: EditorState<Schema<N, M>>) => boolean
+  icon?: React.ReactElement
   run: Command<Schema<N, M>>
 }
 
@@ -35,13 +38,15 @@ interface ParseRules extends Omit<ParseRule, 'getAttrs'> {
     | null
 }
 
-interface PomPomMarkSpec extends Omit<MarkSpec, 'parseDOM'> {
+export interface PomPomMarkSpec extends Omit<MarkSpec, 'parseDOM' | 'toDOM'> {
   parseDOM?: Array<ParseRules>
+  toDOM?: (node: Node) => DOMOutputSpec
   toXML?: (node: Node) => DOMOutputSpec
 }
 
-interface PomPomNodeSpec extends Omit<NodeSpec, 'parseDOM'> {
+export interface PomPomNodeSpec extends Omit<NodeSpec, 'parseDOM' | 'toDOM'> {
   parseDOM?: Array<ParseRules>
+  toDOM?: (node: Node) => DOMOutputSpec
   toXML?: (node: Node) => DOMOutputSpec
 }
 

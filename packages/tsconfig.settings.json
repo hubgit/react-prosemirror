@@ -6,7 +6,7 @@
     "declaration": true,
     "declarationMap": true,
 //    "sourceMap": true,
-//    "lib": ["dom"],
+    "lib": ["dom", "es2019"],
     "composite": true,
     "strict": true,
     "moduleResolution": "node",

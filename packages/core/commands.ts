@@ -15,7 +15,7 @@ import {
 } from 'prosemirror-state'
 import { findWrapping, liftTarget } from 'prosemirror-transform'
 
-type DispatchTransaction = (transaction: Transaction) => void
+export type DispatchTransaction = (transaction: Transaction) => void
 
 export const markActive = <S extends Schema>(markType: MarkType<S>) => (
   state: EditorState<S>
