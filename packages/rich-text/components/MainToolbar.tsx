@@ -18,50 +18,70 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Toolbar, ToolbarGroup, ToolbarItem, usePomPom } from '@pompom/react'
 import React from 'react'
 
-export const MainToolbar: React.FC = () => {
+export const MainToolbar = React.memo(() => {
   const {
-    pompom: { actions },
-  } = usePomPom()
-
-  // TODO: pompom.toggleMark?
+    pompom: { actions, toggleMark, setBlockType },
+  } = usePomPom<
+    string,
+    'paragraph' | 'heading',
+    | 'strong'
+    | 'emphasis'
+    | 'code'
+    | 'subscript'
+    | 'superscript'
+    | 'underline'
+    | 'strikethrough'
+  >()
 
   return (
     <Toolbar>
       <ToolbarGroup>
-        <ToolbarItem action={actions.toggleMarkStrong}>
+        <ToolbarItem action={toggleMark.strong} title={'Toggle strong'}>
           <FontAwesomeIcon icon={faBold} />
         </ToolbarItem>
-        <ToolbarItem action={actions.toggleMarkEmphasis}>
+        <ToolbarItem action={toggleMark.emphasis} title={'Toggle emphasis'}>
           <FontAwesomeIcon icon={faItalic} />
         </ToolbarItem>
-        <ToolbarItem action={actions.toggleMarkCode}>
+        <ToolbarItem action={toggleMark.code} title={'Toggle code'}>
           <FontAwesomeIcon icon={faCode} />
         </ToolbarItem>
-        <ToolbarItem action={actions.toggleMarkSubscript}>
+        <ToolbarItem action={toggleMark.subscript} title={'Toggle subscript'}>
           <FontAwesomeIcon icon={faSubscript} />
         </ToolbarItem>
-        <ToolbarItem action={actions.toggleMarkSuperscript}>
+        <ToolbarItem
+          action={toggleMark.superscript}
+          title={'Toggle superscript'}
+        >
           <FontAwesomeIcon icon={faSuperscript} />
         </ToolbarItem>
-        <ToolbarItem action={actions.toggleMarkUnderline}>
+        <ToolbarItem action={toggleMark.underline} title={'Toggle underline'}>
           <FontAwesomeIcon icon={faUnderline} />
         </ToolbarItem>
-        <ToolbarItem action={actions.toggleMarkStrikethrough}>
+        <ToolbarItem
+          action={toggleMark.strikethrough}
+          title={'Toggle strikethrough'}
+        >
           <FontAwesomeIcon icon={faStrikethrough} />
         </ToolbarItem>
-        <ToolbarItem action={actions.removeFormatting}>
+        <ToolbarItem
+          action={actions.removeFormatting}
+          title={'Remove formatting'}
+        >
           <FontAwesomeIcon icon={faRemoveFormat} />
         </ToolbarItem>
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarItem action={actions.setNodeTypeParagraph}>
+        <ToolbarItem
+          action={setBlockType.paragraph}
+          title={'Change to paragraph'}
+        >
           <FontAwesomeIcon icon={faParagraph} />
         </ToolbarItem>
         {/*  <ToolbarItem action={actions.wrapInCodeBlock}>
           <FontAwesomeIcon icon={faCode} />
         </ToolbarItem>*/}
-        <ToolbarItem action={actions.setNodeTypeHeading}>
+        <ToolbarItem action={setBlockType.heading} title={'Change to heading'}>
           <FontAwesomeIcon icon={faHeading} />
         </ToolbarItem>
       </ToolbarGroup>
@@ -97,4 +117,4 @@ export const MainToolbar: React.FC = () => {
       </ToolbarGroup>
     </Toolbar>
   )
-}
+})

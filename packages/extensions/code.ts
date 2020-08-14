@@ -1,4 +1,4 @@
-import { Extension, markActive } from '@pompom/core'
+import { Extension } from '@pompom/core'
 import { toggleMark } from 'prosemirror-commands'
 
 export const code: Extension<never, 'code'> = {
@@ -8,15 +8,7 @@ export const code: Extension<never, 'code'> = {
       toDOM: () => ['code', 0],
     },
   },
-  actions: (schema) => ({
-    toggleMarkCode: {
-      key: 'Mod-`',
-      icon: 'code',
-      label: 'Code',
-      title: 'Toggle code',
-      run: toggleMark(schema.marks.code),
-      enable: toggleMark(schema.marks.code),
-      active: markActive(schema.marks.code),
-    },
+  keys: (schema) => ({
+    'Mod-`': toggleMark(schema.marks.code),
   }),
 }

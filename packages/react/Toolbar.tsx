@@ -16,8 +16,9 @@ export const ToolbarGroup: React.FC = ({ children }) => (
 export const ToolbarItem = ({
   action,
   children,
-}: PropsWithChildren<{ action: Action }>): ReactElement => {
-  const { active, enable, title, run } = action
+  title,
+}: PropsWithChildren<{ action: Action; title?: string }>): ReactElement => {
+  const { active, enable, run } = action
 
   const { pompom, state } = usePomPom()
 

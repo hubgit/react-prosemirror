@@ -3,7 +3,7 @@ import { Extension, removeFormatting } from '@pompom/core'
 export const basic: Extension<'doc' | 'text'> = {
   nodes: {
     doc: {
-      content: '(block | heading)+',
+      content: 'block+',
       toDOM: () => ['article', 0],
     },
     text: {

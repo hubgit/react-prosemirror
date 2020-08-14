@@ -19,7 +19,7 @@ import { EditorContent, EditorProvider } from '@pompom/react'
 import { HTMLTransformer } from '@pompom/transformers'
 import React, { useMemo } from 'react'
 
-import { FloatingToolbar } from './FloatingToolbar'
+// import { FloatingToolbar } from './FloatingToolbar'
 import { MainToolbar } from './MainToolbar'
 
 export const RichText = React.memo<{
@@ -57,7 +57,7 @@ export const RichText = React.memo<{
       transformer={HTMLTransformer}
       value={String(value)}
     >
-      <FloatingToolbar />
+      {/*<FloatingToolbar />*/}
       <MainToolbar />
       <EditorContent autoFocus={autoFocus} />
     </EditorProvider>

@@ -27,8 +27,6 @@ export const heading: Extension<'heading'> = {
   },
   actions: (schema) => ({
     setNodeTypeHeading: {
-      label: 'Heading',
-      title: 'Change to heading',
       active: blockActive(schema.nodes.heading, { level: 1 }),
       enable: setBlockType(schema.nodes.heading, { level: 1 }),
       run: setBlockType(schema.nodes.heading, { level: 1 }),

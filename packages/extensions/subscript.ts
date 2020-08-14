@@ -1,5 +1,4 @@
-import { Extension, markActive } from '@pompom/core'
-import { toggleMark } from 'prosemirror-commands'
+import { Extension } from '@pompom/core'
 
 export const subscript: Extension<never, 'subscript'> = {
   marks: {
@@ -9,13 +8,4 @@ export const subscript: Extension<never, 'subscript'> = {
       toXML: () => ['sub', 0],
     },
   },
-  actions: (schema) => ({
-    toggleMarkSubscript: {
-      label: 'subscript',
-      title: 'Toggle subscript',
-      run: toggleMark(schema.marks.subscript),
-      enable: toggleMark(schema.marks.subscript),
-      active: markActive(schema.marks.subscript),
-    },
-  }),
 }

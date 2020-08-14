@@ -1,15 +1,23 @@
-import { baseKeymap, Command } from 'prosemirror-commands'
+import {
+  baseKeymap,
+  Command,
+  setBlockType,
+  toggleMark,
+} from 'prosemirror-commands'
 import { InputRule, inputRules } from 'prosemirror-inputrules'
 import { keymap } from 'prosemirror-keymap'
 import { MarkSpec, Node, NodeSpec, Schema } from 'prosemirror-model'
 import { EditorState, Plugin } from 'prosemirror-state'
 import { EditorProps, EditorView } from 'prosemirror-view'
 
+import { blockActive, markActive } from './commands'
 import { Action, Extension, NodeViewCreator, Transformer } from './types'
 
 export class PomPom<T, N extends string = any, M extends string = any> {
   public schema: Schema<N, M>
   public actions: Record<string, Action<N, M>>
+  public toggleMark: Record<M, Action<N, M>>
+  public setBlockType: Record<N, Action<N, M>>
   public inputRules: Record<string, InputRule>
   public keys: Record<string, Command<Schema<N, M>>>
   public marks: Record<M, MarkSpec>
@@ -39,6 +47,8 @@ export class PomPom<T, N extends string = any, M extends string = any> {
     this.inputRules = {}
     this.keys = {}
     this.marks = {} as Record<M, MarkSpec>
+    this.toggleMark = {} as Record<M, Action<N, M>>
+    this.setBlockType = {} as Record<N, Action<N, M>>
     this.nodes = {} as Record<N, NodeSpec>
     this.nodeViews = {} as Record<N | M, NodeViewCreator<Schema<N, M>>>
     this.plugins = {}
@@ -65,6 +75,22 @@ export class PomPom<T, N extends string = any, M extends string = any> {
       nodes: this.nodes,
     })
 
+    for (const [key, markType] of Object.entries(this.schema.marks)) {
+      this.toggleMark[key as M] = {
+        enable: toggleMark(markType),
+        run: toggleMark(markType),
+        active: markActive(markType),
+      }
+    }
+
+    for (const [key, nodeType] of Object.entries(this.schema.nodes)) {
+      this.setBlockType[key as N] = {
+        enable: setBlockType(nodeType),
+        run: setBlockType(nodeType),
+        active: blockActive(nodeType),
+      }
+    }
+
     this.transformer = new transformer(this.schema)
 
     for (const extension of extensions) {
@@ -74,10 +100,19 @@ export class PomPom<T, N extends string = any, M extends string = any> {
         )) {
           this.actions[key] = action
 
-          if (action.key && action.run) {
-            // TODO: merge duplicate keys
-            this.keys[action.key] = action.run
-          }
+          // if (action.key && action.run) {
+          //   // TODO: merge duplicate keys
+          //   this.keys[action.key] = action.run
+          // }
+        }
+      }
+
+      if (extension.keys) {
+        for (const [key, value] of Object.entries(
+          extension.keys(this.schema)
+        )) {
+          // TODO: merge duplicate keys
+          this.keys[key] = value
         }
       }
 

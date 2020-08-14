@@ -1,4 +1,5 @@
 import { Extension } from '@pompom/core'
+import { tableEditing } from 'prosemirror-tables'
 
 export const table: Extension<
   'table' | 'tableRow' | 'tableDataCell' | 'tableHeaderCell'
@@ -29,4 +30,7 @@ export const table: Extension<
       toDOM: () => ['th', 0],
     },
   },
+  plugins: () => ({
+    tableEditing: tableEditing(),
+  }),
 }

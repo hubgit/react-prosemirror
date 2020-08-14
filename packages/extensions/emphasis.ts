@@ -1,4 +1,4 @@
-import { Extension, markActive } from '@pompom/core'
+import { Extension } from '@pompom/core'
 import { toggleMark } from 'prosemirror-commands'
 
 export const emphasis: Extension<never, 'emphasis'> = {
@@ -9,15 +9,7 @@ export const emphasis: Extension<never, 'emphasis'> = {
       toXML: () => ['italic', 0],
     },
   },
-  actions: (schema) => ({
-    toggleMarkEmphasis: {
-      label: 'Italic',
-      title: 'Toggle italic',
-      key: 'Mod-i',
-      icon: 'italic',
-      run: toggleMark(schema.marks.emphasis),
-      enable: toggleMark(schema.marks.emphasis),
-      active: markActive(schema.marks.emphasis),
-    },
+  keys: (schema) => ({
+    'Mod-i': toggleMark(schema.marks.emphasis),
   }),
 }

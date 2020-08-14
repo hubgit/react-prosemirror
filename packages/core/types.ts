@@ -17,13 +17,9 @@ export abstract class Transformer<T, S extends Schema> {
 }
 
 export interface Action<N extends string = any, M extends string = any> {
-  // id: string
-  label: string
-  title: string
   active?: (state: EditorState<Schema<N, M>>) => boolean
   enable?: (state: EditorState<Schema<N, M>>) => boolean
   run: Command<Schema<N, M>>
-  key?: string
 }
 
 export type NodeViewCreator<S extends Schema> = (
@@ -57,4 +53,5 @@ export interface Extension<N extends string = any, M extends string = any> {
   nodeViews?: Record<N | M, NodeViewCreator<Schema<N, M>>>
   plugins?: (schema: Schema<N, M>) => Record<string, Plugin<any, Schema<N, M>>>
   styles?: string[]
+  keys?: (schema: Schema<N, M>) => Record<string, Command<Schema<N, M>>>
 }

@@ -1,3 +1,4 @@
+import 'prosemirror-tables/style/tables.css'
 import 'prosemirror-view/style/prosemirror.css'
 import '@pompom/react/styles/editor.css'
 import '@pompom/react/styles/floater.css'

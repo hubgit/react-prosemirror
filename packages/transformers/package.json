@@ -10,7 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "@pompom/core": "^1.0.0",
-    "prosemirror-markdown": "^1.5.0"
+    "@types/prosemirror-tables": "^0.9.1",
+    "prosemirror-markdown": "^1.5.0",
+    "prosemirror-tables": "^1.1.1"
   },
   "peerDependencies": {
     "prosemirror-model": "^1.10.0"

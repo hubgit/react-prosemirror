@@ -43,35 +43,31 @@ export const list: Extension<'orderedList' | 'bulletList' | 'listItem'> = {
       toXML: () => ['list-item', 0],
     },
   },
+  keys: (schema) => ({
+    Enter: splitListItem(schema.nodes.listItem),
+    'Mod-[': liftListItem(schema.nodes.listItem),
+    'Mod-]': sinkListItem(schema.nodes.listItem), // Tab
+  }),
   actions: (schema) => ({
     splitListItem: {
-      label: 'Split',
-      title: 'Split list item',
-      key: 'Enter',
+      enable: splitListItem(schema.nodes.listItem),
       run: splitListItem(schema.nodes.listItem),
     },
     liftListItem: {
-      label: 'Outdent',
-      title: 'Outdent list item',
-      key: 'Mod-[', // 'Shift-Tab'
+      enable: liftListItem(schema.nodes.listItem),
       run: liftListItem(schema.nodes.listItem),
     },
     sinkListItem: {
-      label: 'Indent',
-      title: 'Indent list item',
-      key: 'Mod-]', // 'Tab'
+      // active: blockActive(schema.nodes.list),
+      enable: sinkListItem(schema.nodes.listItem),
       run: sinkListItem(schema.nodes.listItem),
     },
     // wrapInOrderedList: {
-    //   label: 'Ordered list',
-    //   title: 'Wrap in ordered list',
     //   active: blockActive(schema.nodes.list, { type: 'ordered' }),
     //   enable: setListTypeOrWrapInList(schema.nodes.list, { type: 'ordered' }),
     //   run: setListTypeOrWrapInList(schema.nodes.list, { type: 'ordered' }),
     // },
     wrapInOrderedList: {
-      label: 'Ordered list',
-      title: 'Wrap in ordered list',
       active: blockActive(schema.nodes.orderedList),
       enable: setListTypeOrWrapInList(schema.nodes.orderedList),
       run: setListTypeOrWrapInList(schema.nodes.orderedList),
@@ -86,8 +82,6 @@ export const list: Extension<'orderedList' | 'bulletList' | 'listItem'> = {
     //   run: setListTypeOrWrapInList(schema.nodes.list, { type: 'unordered' }),
     // },
     wrapInBulletList: {
-      label: 'Bullet list',
-      title: 'Wrap in bullet list',
       active: blockActive(schema.nodes.bulletList),
       enable: setListTypeOrWrapInList(schema.nodes.bulletList),
       run: setListTypeOrWrapInList(schema.nodes.bulletList),

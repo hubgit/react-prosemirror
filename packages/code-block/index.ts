@@ -43,9 +43,6 @@ export const codeBlock: Extension<'codeBlock'> = {
   },
   actions: (schema) => ({
     wrapInCodeBlock: {
-      icon: 'code',
-      label: 'Code Block',
-      title: 'Toggle Code Block',
       run: setBlockType(schema.nodes.codeBlock), // TODO: unwrap
       enable: setBlockType(schema.nodes.codeBlock),
       // active: blockActive(schema.nodes.codeBlock), // TODO

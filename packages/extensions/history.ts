@@ -5,23 +5,22 @@ import { undoInputRule } from 'prosemirror-inputrules'
 export const history: Extension = {
   actions: () => ({
     undo: {
-      label: 'Undo',
-      title: 'Undo',
-      key: 'Mod-z',
+      enable: undo,
       run: undo,
     },
     redo: {
-      label: 'Redo',
-      title: 'Redo',
-      key: 'Shift-Mod-z',
+      enable: redo,
       run: redo,
     },
     undoInputRule: {
-      label: 'Undo',
-      title: 'Undo',
-      key: 'Backspace',
+      enable: undoInputRule,
       run: undoInputRule,
     },
+  }),
+  keys: () => ({
+    'Mod-z': undo,
+    'Shift-Mod-z': redo,
+    Backspace: undoInputRule,
   }),
   plugins: () => ({
     history: historyPlugin(),

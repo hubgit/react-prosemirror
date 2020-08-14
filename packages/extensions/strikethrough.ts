@@ -1,5 +1,4 @@
-import { Extension, markActive } from '@pompom/core'
-import { toggleMark } from 'prosemirror-commands'
+import { Extension } from '@pompom/core'
 
 export const strikethrough: Extension<never, 'strikethrough'> = {
   marks: {
@@ -9,13 +8,4 @@ export const strikethrough: Extension<never, 'strikethrough'> = {
       toXML: () => ['strike', 0],
     },
   },
-  actions: (schema) => ({
-    toggleMarkStrikethrough: {
-      label: 'Strikethrough',
-      title: 'Toggle strikethrough',
-      run: toggleMark(schema.marks.strikethrough),
-      enable: toggleMark(schema.marks.strikethrough),
-      active: markActive(schema.marks.strikethrough),
-    },
-  }),
 }
