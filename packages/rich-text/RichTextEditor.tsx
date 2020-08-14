@@ -1,37 +1,28 @@
 import { EditorContent, Floater, Toolbar, useProseMirror } from '@pompom/react'
 import { HTMLTransformer } from '@pompom/transformers'
-import { Node } from 'prosemirror-model'
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDebounce } from 'use-debounce'
+import React, { useMemo } from 'react'
 
 import { plugins } from './plugins'
 import { schema } from './schema'
 import { floatingToolbarItems, toolbarItems } from './toolbars'
-
-const transformer = new HTMLTransformer(schema)
+// TODO: nodeViews/editorProps
 
 export const RichTextEditor = React.memo<{
   autoFocus?: boolean
   debounce?: number
   handleChange: (value: string) => void
   value?: string
-}>(({ autoFocus = false, debounce = 500, handleChange, value }) => {
-  // TODO: handle value updates
-  const [doc, setDoc] = useState(transformer.import(value))
+}>(({ autoFocus = false, debounce = 500, value = '', handleChange }) => {
+  const transformer = useMemo(() => new HTMLTransformer(schema, debounce), [
+    debounce,
+  ])
 
-  const [debouncedDoc] = useDebounce(doc, debounce, {
-    maxWait: 5000,
-  })
-
-  useEffect(() => {
-    handleChange(transformer.export(debouncedDoc))
-  }, [debouncedDoc])
-
-  const { view, state } = useProseMirror({
+  const { view, state } = useProseMirror<string, typeof schema>({
     schema,
     plugins,
-    doc,
-    setDoc,
+    value,
+    transformer,
+    handleChange,
   })
 
   if (!state) {

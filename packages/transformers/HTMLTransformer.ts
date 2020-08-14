@@ -5,8 +5,9 @@ export class HTMLTransformer<N extends string = any, M extends string = any>
   implements Transformer<string, Schema<N, M>> {
   private parser: DOMParser
   private serializer: DOMSerializer
+  private timer?: number
 
-  public constructor(schema: Schema<N, M>) {
+  public constructor(schema: Schema<N, M>, private debounce = 0) {
     this.parser = DOMParser.fromSchema(schema)
     this.serializer = DOMSerializer.fromSchema(schema)
     // this.serializer = new XMLSerializer()
@@ -22,15 +23,20 @@ export class HTMLTransformer<N extends string = any, M extends string = any>
     return this.parser.parse(template.content)
   }
 
-  // TODO: debounce?
-  public export(output: Node<Schema<N, M>>): string {
-    const fragment = this.serializer.serializeFragment(output.content)
+  public export(output: Node<Schema<N, M>>, callback: (value: string) => void) {
+    if (this.timer) {
+      window.clearTimeout(this.timer)
+    }
 
-    // return xmlSerializer.serializeToString(fragment)
+    this.timer = window.setTimeout(() => {
+      const fragment = this.serializer.serializeFragment(output.content)
 
-    const container = document.createElement('div')
-    container.appendChild(fragment)
+      // return xmlSerializer.serializeToString(fragment)
 
-    return container.innerHTML
+      const container = document.createElement('div')
+      container.appendChild(fragment)
+
+      callback(container.innerHTML)
+    }, this.debounce)
   }
 }

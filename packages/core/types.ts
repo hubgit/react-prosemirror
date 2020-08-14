@@ -13,7 +13,10 @@ import { EditorView, NodeView } from 'prosemirror-view'
 
 export abstract class Transformer<T, S extends Schema> {
   public abstract import: (input?: T) => Node<S>
-  public abstract export: (output: Node<S>) => T
+  public abstract export: (
+    output: Node<S>,
+    callback: (value: T) => void
+  ) => void
 }
 
 export interface Action<N extends string = any, M extends string = any> {
