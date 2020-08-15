@@ -9,10 +9,13 @@ import { tableEditing } from 'prosemirror-tables'
 import { createInputRules } from './input-rules'
 import { createKeymap } from './keys'
 
-export const createPlugins = <S extends Schema>(schema: S): Plugin<S>[] => [
+export const createPlugins = <S extends Schema>(
+  schema: S
+): Plugin<unknown, S>[] => [
   keymap(createKeymap(schema)),
   keymap(baseKeymap),
-  createInputRules<S>(schema),
+  createInputRules(schema),
+  // createInputRules<S>(schema),
   history(),
   tableEditing(),
   placeholder(),

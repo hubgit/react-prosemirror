@@ -13,7 +13,7 @@ export const useProseMirror = <T, S extends Schema>({
   editorProps = {},
 }: {
   schema: S
-  plugins: Plugin<S>[]
+  plugins: Plugin<unknown, S>[]
   value: T
   handleChange: (value: T) => void
   transformer: Transformer<T, S>

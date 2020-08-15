@@ -1,11 +1,10 @@
-import { EditorState } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
 import React, { useMemo, useRef } from 'react'
 
-export const Floater: React.FC<{
-  state: EditorState
-  view: EditorView
-}> = ({ children, state, view }) => {
+import { useEditorContext } from './EditorProvider'
+
+export const Floater: React.FC = ({ children }) => {
+  const { view, state } = useEditorContext()
+
   const ref = useRef<HTMLDivElement>(null)
 
   const style = useMemo(() => {
