@@ -2,14 +2,14 @@ import { PomPomNodeSpec } from '@pompom/core'
 
 export const tableHeaderCell: PomPomNodeSpec = {
   group: 'tableCell',
-  content: 'text*',
+  content: 'block+',
   parseDOM: [{ tag: 'th' }],
   toDOM: () => ['th', 0],
 }
 
 export const tableDataCell: PomPomNodeSpec = {
   group: 'tableCell',
-  content: 'text*',
+  content: 'block+',
   parseDOM: [{ tag: 'td' }],
   toDOM: () => ['td', 0],
 }

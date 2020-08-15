@@ -20,7 +20,7 @@ export const orderedList: PomPomNodeSpec = {
         const start = element.getAttribute('start')
 
         return {
-          start: start === undefined ? Number(start) : 1,
+          start: start !== undefined ? Number(start) : 1,
         }
       },
     },

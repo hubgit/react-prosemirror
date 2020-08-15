@@ -9,7 +9,7 @@ export const codeBlock: PomPomNodeSpec = {
   defining: true,
   attrs: {
     language: {
-      default: 'javascript', // TODO: auto-detect
+      default: undefined,
     },
   },
   parseDOM: [
@@ -17,7 +17,7 @@ export const codeBlock: PomPomNodeSpec = {
       tag: 'pre',
       preserveWhitespace: 'full',
       getAttrs: (element: Element) => ({
-        language: element.getAttribute('data-language'),
+        language: element.getAttribute('data-language') || undefined,
       }),
     },
   ],

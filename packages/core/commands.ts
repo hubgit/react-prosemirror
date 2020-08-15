@@ -107,6 +107,21 @@ const parentWithNodeTypePos = <S extends Schema>(
     }
   }
 }
+
+const parentInGroupPos = <S extends Schema>(
+  $pos: ResolvedPos,
+  nodeTypeGroup: string
+): number | undefined => {
+  for (let depth = $pos.depth; depth >= 0; depth--) {
+    const parent = $pos.node(depth)
+    const { group } = parent.type.spec
+
+    if (group && group.split(/\s+/).includes(nodeTypeGroup)) {
+      return $pos.before(depth)
+    }
+  }
+}
+
 //
 // export const changeBlockType = <S extends Schema>(
 //   nodeType: NodeType<S>,
@@ -205,8 +220,7 @@ export const toggleWrap = <S extends Schema>(
 }
 
 export const setListTypeOrWrapInList = <S extends Schema>(
-  listType: NodeType<S>,
-  attrs?: Record<string, unknown>
+  listType: NodeType<S>
 ) => (state: EditorState, dispatch?: DispatchTransaction) => {
   const { $from, $to } = state.selection
 
@@ -216,7 +230,7 @@ export const setListTypeOrWrapInList = <S extends Schema>(
     return false
   }
 
-  const parentPos = parentWithNodeTypePos(range.$from, listType)
+  const parentPos = parentInGroupPos(range.$from, 'list')
 
   if (typeof parentPos === 'number') {
     // already in list
@@ -224,18 +238,24 @@ export const setListTypeOrWrapInList = <S extends Schema>(
 
     const node = $pos.nodeAfter
 
-    if (node && attrs && node.attrs.type === attrs.type) {
+    if (node && node.type === listType) {
       // return false if the node type already matches
       return false
     }
 
     if (dispatch) {
-      dispatch(state.tr.setNodeMarkup(parentPos, undefined, attrs))
+      dispatch(
+        state.tr.setNodeMarkup(
+          parentPos,
+          listType,
+          node ? node.attrs : undefined // TODO
+        )
+      )
     }
 
     return true
   } else {
-    const wrapping = findWrapping(range, listType, attrs)
+    const wrapping = findWrapping(range, listType)
 
     if (!wrapping) {
       return false

@@ -4,6 +4,7 @@ import {
   faHeading,
   faItalic,
   faListOl,
+  faListUl,
   faParagraph,
   faQuoteLeft,
   faRedo,

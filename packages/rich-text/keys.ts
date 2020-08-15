@@ -14,7 +14,9 @@ export const createKeymap = <
   schema: S
 ) => ({
   'Mod-[': liftListItem(schema.nodes.listItem),
-  'Mod-]': sinkListItem(schema.nodes.listItem), // Tab
+  'Shift-Tab': liftListItem(schema.nodes.listItem),
+  'Mod-]': sinkListItem(schema.nodes.listItem),
+  Tab: sinkListItem(schema.nodes.listItem),
   'Mod-`': toggleMark(schema.marks.code),
   'Mod-b': toggleMark(schema.marks.bold),
   'Mod-i': toggleMark(schema.marks.italic),

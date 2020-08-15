@@ -4,13 +4,13 @@ export const image: PomPomNodeSpec = {
   group: 'inline',
   inline: true,
   attrs: {
-    src: { default: '' },
+    src: { default: undefined },
   },
   parseDOM: [
     {
       tag: 'img',
       getAttrs: (element: Element) => ({
-        src: element.getAttribute('src'),
+        src: element.getAttribute('src') || undefined,
       }),
     },
   ],
