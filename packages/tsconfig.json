@@ -6,7 +6,6 @@
     { "path": "nodes"},
     { "path": "plugins"},
     { "path": "react"},
-    { "path": "rich-text"},
-    { "path": "markdown-transformer"}
+    { "path": "rich-text"}
   ]
 }

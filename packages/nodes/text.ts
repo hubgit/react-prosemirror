@@ -1,5 +1,5 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { NodeSpec } from 'prosemirror-model'
 
-export const text: PomPomNodeSpec = {
+export const text: NodeSpec = {
   group: 'inline',
 }

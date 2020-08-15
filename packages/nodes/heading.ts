@@ -1,11 +1,11 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { NodeSpec } from 'prosemirror-model'
 
-export const heading: PomPomNodeSpec = {
+export const heading: NodeSpec = {
   attrs: {
     level: { default: 1 },
   },
   group: 'block heading',
-  content: 'inline*', // 'text*'
+  content: 'text*',
   marks: 'italic superscript subscript',
   defining: true,
   parseDOM: [

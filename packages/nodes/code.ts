@@ -1,7 +1,6 @@
-import { PomPomNodeSpec } from '@pompom/core'
-import { Node } from 'prosemirror-model'
+import { Node, NodeSpec } from 'prosemirror-model'
 
-export const codeBlock: PomPomNodeSpec = {
+export const codeBlock: NodeSpec = {
   content: 'text*',
   marks: '',
   group: 'block',
@@ -16,9 +15,12 @@ export const codeBlock: PomPomNodeSpec = {
     {
       tag: 'pre',
       preserveWhitespace: 'full',
-      getAttrs: (element: Element) => ({
-        language: element.getAttribute('data-language') || undefined,
-      }),
+      // @ts-ignore
+      getAttrs: (element: HTMLPreElement) => {
+        return {
+          language: element.getAttribute('data-language') || undefined,
+        }
+      },
     },
   ],
   toDOM: (node: Node) => [

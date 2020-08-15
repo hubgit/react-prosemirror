@@ -1,6 +1,6 @@
-import { PomPomMarkSpec } from '@pompom/core'
+import { MarkSpec } from 'prosemirror-model'
 
-export const subscript: PomPomMarkSpec = {
+export const subscript: MarkSpec = {
   excludes: 'superscript',
   parseDOM: [{ tag: 'sub' }, { style: 'vertical-align=sub' }],
   toDOM: () => ['sub', 0],

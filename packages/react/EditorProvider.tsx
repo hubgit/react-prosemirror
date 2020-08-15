@@ -1,3 +1,4 @@
+import { PomPom } from '@pompom/core'
 import { EditorState } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 import React, { createContext, useContext, useEffect, useState } from 'react'
@@ -17,18 +18,24 @@ export const useEditorContext = () => {
 }
 
 export const EditorProvider: React.FC<{
-  view: EditorView
-  state: EditorState
-}> = ({ children, view, state }) => {
-  // TODO: subscribe to state here instead
-  // const [state, setState] = useState<EditorState>()
+  pompom: PomPom
+}> = ({ children, pompom }) => {
+  const [state, setState] = useState<EditorState>(pompom.view.state)
 
-  // useEffect(() => {
-  //   pompom.onStateChange(setState)
-  // }, [])
+  useEffect(() => {
+    const handler = (event: Event) => {
+      setState((event as CustomEvent<EditorState>).detail)
+    }
+
+    pompom.addEventListener('statechange', handler)
+
+    return () => {
+      pompom.removeEventListener('statechange', handler)
+    }
+  }, [pompom])
 
   return (
-    <EditorContext.Provider value={{ view, state }}>
+    <EditorContext.Provider value={{ view: pompom.view, state }}>
       <div className={'pompom-container'}>{children}</div>
     </EditorContext.Provider>
   )

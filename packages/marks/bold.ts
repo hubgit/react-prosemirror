@@ -1,6 +1,6 @@
-import { PomPomMarkSpec } from '@pompom/core'
+import { MarkSpec } from 'prosemirror-model'
 
-export const bold: PomPomMarkSpec = {
+export const bold: MarkSpec = {
   parseDOM: [
     { tag: 'b' },
     { tag: 'strong' },

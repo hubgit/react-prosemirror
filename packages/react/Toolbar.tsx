@@ -1,45 +1,44 @@
-import { Action } from '@pompom/core'
+// import { Action } from '@pompom/core'
+import { Command } from 'prosemirror-commands'
 import { EditorState } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
 import React from 'react'
 
 import { useEditorContext } from './EditorProvider'
 
-export type ToolbarItems = Array<{
-  id: string
-  items: Array<Action>
-}>
+// export type ToolbarItems = Array<{
+//   id: string
+//   items: Array<Action>
+// }>
 
-const ToolbarItem = ({ action }: { action: Action }) => {
+export const ToolbarItem: React.FC<{
+  active?: (state: EditorState) => boolean
+  enable?: (state: EditorState) => boolean
+  run: Command
+  title?: string
+}> = ({ active, children, enable, run, title }) => {
   const { view, state } = useEditorContext()
 
   return (
     <button
       type={'button'}
       className={'pompom-toolbar-item'}
-      data-active={action.active && action.active(state)}
-      disabled={action.enable && !action.enable(state)}
-      title={action.title}
+      data-active={active && active(state)}
+      disabled={enable && !enable(state)}
+      title={title}
       onMouseDown={(event) => {
         event.preventDefault()
-        action.run(state, view.dispatch, view)
+        run(state, view.dispatch, view)
       }}
     >
-      {action.icon || '?'}
+      {children || '?'}
     </button>
   )
 }
 
-export const Toolbar: React.FC<{
-  items: ToolbarItems
-}> = ({ items }) => (
-  <div className={'pompom-toolbar'}>
-    {items.map((group) => (
-      <div className={'pompom-toolbar-group'} key={group.id}>
-        {group.items.map((action) => (
-          <ToolbarItem action={action} key={action.id} />
-        ))}
-      </div>
-    ))}
-  </div>
+export const ToolbarGroup: React.FC = ({ children }) => (
+  <div className={'pompom-toolbar-group'}>{children}</div>
+)
+
+export const Toolbar: React.FC = ({ children }) => (
+  <div className={'pompom-toolbar'}>{children}</div>
 )

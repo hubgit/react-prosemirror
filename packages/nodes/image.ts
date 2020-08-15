@@ -1,6 +1,6 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { Node, NodeSpec } from 'prosemirror-model'
 
-export const image: PomPomNodeSpec = {
+export const image: NodeSpec = {
   group: 'inline',
   inline: true,
   attrs: {
@@ -9,11 +9,14 @@ export const image: PomPomNodeSpec = {
   parseDOM: [
     {
       tag: 'img',
-      getAttrs: (element: Element) => ({
-        src: element.getAttribute('src') || undefined,
-      }),
+      // @ts-ignore
+      getAttrs: (element: HTMLImageElement) => {
+        return {
+          src: element.getAttribute('src') || undefined,
+        }
+      },
     },
   ],
-  toDOM: (node) => ['img', node.attrs],
-  toXML: (node) => ['graphic', { 'xlink:href': node.attrs.src }],
+  toDOM: (node: Node) => ['img', node.attrs],
+  toXML: (node: Node) => ['graphic', { 'xlink:href': node.attrs.src }],
 }

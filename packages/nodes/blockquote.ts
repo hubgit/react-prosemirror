@@ -1,6 +1,6 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { NodeSpec } from 'prosemirror-model'
 
-export const blockquote: PomPomNodeSpec = {
+export const blockquote: NodeSpec = {
   attrs: {
     cite: { default: undefined },
   },
@@ -9,9 +9,12 @@ export const blockquote: PomPomNodeSpec = {
   parseDOM: [
     {
       tag: 'blockquote',
-      getAttrs: (element: Element) => ({
-        cite: element.getAttribute('cite') || undefined,
-      }),
+      // @ts-ignore
+      getAttrs: (element: HTMLElement) => {
+        return {
+          cite: element.getAttribute('cite') || undefined,
+        }
+      },
     },
   ],
   toDOM: () => ['blockquote', 0],

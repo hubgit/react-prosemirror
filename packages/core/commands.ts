@@ -10,7 +10,7 @@ import {
   EditorState,
   NodeSelection,
   Selection,
-  TextSelection,
+  // TextSelection,
   Transaction,
 } from 'prosemirror-state'
 import { findWrapping, liftTarget } from 'prosemirror-transform'

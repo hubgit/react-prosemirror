@@ -1,6 +1,6 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { NodeSpec } from 'prosemirror-model'
 
-export const doc: PomPomNodeSpec = {
+export const doc: NodeSpec = {
   content: 'block+',
-  toDOM: () => ['article', 0],
+  // toDOM: () => ['article', 0],
 }

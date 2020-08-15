@@ -1,26 +1,26 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { NodeSpec } from 'prosemirror-model'
 
-export const tableHeaderCell: PomPomNodeSpec = {
+export const tableHeaderCell: NodeSpec = {
   group: 'tableCell',
   content: 'block+',
   parseDOM: [{ tag: 'th' }],
   toDOM: () => ['th', 0],
 }
 
-export const tableDataCell: PomPomNodeSpec = {
+export const tableDataCell: NodeSpec = {
   group: 'tableCell',
   content: 'block+',
   parseDOM: [{ tag: 'td' }],
   toDOM: () => ['td', 0],
 }
 
-export const tableRow: PomPomNodeSpec = {
+export const tableRow: NodeSpec = {
   content: 'tableCell+',
   parseDOM: [{ tag: 'tr' }],
   toDOM: () => ['tr', 0],
 }
 
-export const table: PomPomNodeSpec = {
+export const table: NodeSpec = {
   group: 'block',
   content: 'tableRow+',
   parseDOM: [{ tag: 'table' }],

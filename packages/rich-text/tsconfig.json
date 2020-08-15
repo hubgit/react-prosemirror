@@ -6,7 +6,6 @@
     { "path": "../marks" },
     { "path": "../nodes" },
     { "path": "../plugins" },
-    { "path": "../react"},
-    { "path": "../markdown-transformer"}
+    { "path": "../react"}
   ]
 }

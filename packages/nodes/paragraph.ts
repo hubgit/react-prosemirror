@@ -1,6 +1,6 @@
-import { PomPomNodeSpec } from '@pompom/core'
+import { NodeSpec } from 'prosemirror-model'
 
-export const paragraph: PomPomNodeSpec = {
+export const paragraph: NodeSpec = {
   content: 'inline*',
   group: 'block',
   parseDOM: [{ tag: 'p' }],

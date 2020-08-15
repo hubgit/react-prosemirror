@@ -1,6 +1,6 @@
-import { PomPomMarkSpec } from '@pompom/core'
+import { MarkSpec } from 'prosemirror-model'
 
-export const strikethrough: PomPomMarkSpec = {
+export const strikethrough: MarkSpec = {
   parseDOM: [
     { tag: 's' },
     { style: 'text-decoration=line-through' },
