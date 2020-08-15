@@ -19,6 +19,10 @@ export const toolbarItems: ToolbarItems = [
     id: 'block',
     items: [actions.paragraphBlock, actions.headingBlock, actions.codeBlock],
   },
+  {
+    id: 'list',
+    items: [actions.wrapInOrderedList, actions.wrapInBulletList],
+  },
 ]
 
 export const floatingToolbarItems: ToolbarItems = [

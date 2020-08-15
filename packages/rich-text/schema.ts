@@ -1,3 +1,4 @@
+import { PomPomMarkSpec, PomPomNodeSpec } from '@pompom/core'
 import {
   bold,
   code,
@@ -25,30 +26,38 @@ import {
 } from '@pompom/nodes'
 import { MarkSpec, NodeSpec, Schema } from 'prosemirror-model'
 
-export const schema = new Schema({
-  marks: {
-    bold,
-    code,
-    italic,
-    strikethrough,
-    subscript,
-    superscript,
-    underline,
-  } as Record<string, MarkSpec>,
-  nodes: {
-    text,
-    doc,
-    paragraph,
-    heading,
-    blockquote,
-    codeBlock,
-    image,
-    bulletList,
-    orderedList,
-    listItem,
-    table,
-    tableRow,
-    tableDataCell,
-    tableHeaderCell,
-  } as Record<string, NodeSpec>,
+const marks: Record<string, PomPomMarkSpec> = {
+  bold,
+  code,
+  italic,
+  strikethrough,
+  subscript,
+  superscript,
+  underline,
+}
+
+const nodes: Record<string, PomPomNodeSpec> = {
+  text,
+  doc,
+  paragraph,
+  heading,
+  blockquote,
+  codeBlock,
+  image,
+  bulletList,
+  orderedList,
+  listItem,
+  table,
+  tableRow,
+  tableDataCell,
+  tableHeaderCell,
+}
+
+type Marks = keyof typeof marks
+type Nodes = keyof typeof nodes
+export type EditorSchema = Schema<Marks, Nodes>
+
+export const schema: EditorSchema = new Schema<Marks, Nodes>({
+  marks: marks as Record<string, MarkSpec>,
+  nodes: nodes as Record<string, NodeSpec>,
 })

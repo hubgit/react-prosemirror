@@ -49,51 +49,6 @@ export const blockActive = <S extends Schema>(
   return to <= $from.end() && $from.parent.hasMarkup(nodeType, attrs)
 }
 
-export const canInsertBlockAfter = <S extends Schema>(
-  nodeType: NodeType<S>
-) => (state: EditorState<S>): boolean => {
-  const { $from } = state.selection
-
-  for (let d = $from.depth; d >= 0; d--) {
-    const index = $from.index(d)
-
-    if ($from.node(d).canReplaceWith(index, index, nodeType)) {
-      return true
-    }
-  }
-
-  return false
-}
-
-export const insertNodeAfter = <S extends Schema>(
-  node: Node<S>,
-  state: EditorState<S>,
-  dispatch?: DispatchTransaction
-): boolean => {
-  const { $anchor } = state.selection
-
-  const pos = $anchor.after()
-
-  if (dispatch) {
-    const tr = state.tr
-
-    tr.insert(pos, node).setSelection(TextSelection.near(tr.doc.resolve(pos)))
-
-    dispatch(tr)
-  }
-
-  return true
-}
-
-export const insertNodeTypeAfter = <S extends Schema>(
-  nodeType: NodeType<S>,
-  attrs?: Record<string, unknown>
-) => (state: EditorState<S>, dispatch: DispatchTransaction): boolean => {
-  const node = nodeType.createAndFill(attrs) as Node
-
-  return insertNodeAfter(node, state, dispatch)
-}
-
 export const removeFormatting = <S extends Schema>(
   state: EditorState<S>,
   dispatch?: DispatchTransaction
@@ -115,17 +70,17 @@ export const removeFormatting = <S extends Schema>(
   return true
 }
 
-const parentBlockPos = <S extends Schema>(
-  $pos: ResolvedPos
-): number | undefined => {
-  for (let depth = $pos.depth; depth > 0; depth--) {
-    const parent = $pos.node(depth)
-
-    if (parent.type.isBlock) {
-      return $pos.before(depth)
-    }
-  }
-}
+// const parentBlockPos = <S extends Schema>(
+//   $pos: ResolvedPos
+// ): number | undefined => {
+//   for (let depth = $pos.depth; depth > 0; depth--) {
+//     const parent = $pos.node(depth)
+//
+//     if (parent.type.isBlock) {
+//       return $pos.before(depth)
+//     }
+//   }
+// }
 
 const parentWithNodeType = <S extends Schema>(
   $pos: ResolvedPos<S>,
@@ -152,45 +107,45 @@ const parentWithNodeTypePos = <S extends Schema>(
     }
   }
 }
-
-export const changeBlockType = <S extends Schema>(
-  nodeType: NodeType<S>,
-  attrs?: Record<string, unknown>,
-  marks?: Array<Mark<S>>
-) => (state: EditorState<S>, dispatch?: DispatchTransaction): boolean => {
-  const { $from } = state.selection
-
-  const parentPos = parentBlockPos($from)
-
-  if (!parentPos) {
-    return false
-  }
-
-  if (dispatch) {
-    dispatch(state.tr.setNodeMarkup(parentPos, nodeType, attrs, marks))
-  }
-
-  return true
-}
-
-export const canWrap = <S extends Schema>(
-  nodeType: NodeType<S>,
-  attrs?: Record<string, unknown>
-) => (state: EditorState<S>): boolean => {
-  const { $from, $to } = state.selection
-
-  const range = $from.blockRange($to)
-
-  if (!range) {
-    return false
-  }
-
-  if (parentWithNodeType(range.$from, nodeType)) {
-    return false // already wrapped
-  }
-
-  return findWrapping(range, nodeType, attrs) !== null
-}
+//
+// export const changeBlockType = <S extends Schema>(
+//   nodeType: NodeType<S>,
+//   attrs?: Record<string, unknown>,
+//   marks?: Array<Mark<S>>
+// ) => (state: EditorState<S>, dispatch?: DispatchTransaction): boolean => {
+//   const { $from } = state.selection
+//
+//   const parentPos = parentBlockPos($from)
+//
+//   if (!parentPos) {
+//     return false
+//   }
+//
+//   if (dispatch) {
+//     dispatch(state.tr.setNodeMarkup(parentPos, nodeType, attrs, marks))
+//   }
+//
+//   return true
+// }
+//
+// export const canWrap = <S extends Schema>(
+//   nodeType: NodeType<S>,
+//   attrs?: Record<string, unknown>
+// ) => (state: EditorState<S>): boolean => {
+//   const { $from, $to } = state.selection
+//
+//   const range = $from.blockRange($to)
+//
+//   if (!range) {
+//     return false
+//   }
+//
+//   if (parentWithNodeType(range.$from, nodeType)) {
+//     return false // already wrapped
+//   }
+//
+//   return findWrapping(range, nodeType, attrs) !== null
+// }
 
 export const isWrapped = <S extends Schema>(nodeType: NodeType<S>) => (
   state: EditorState<S>
@@ -294,28 +249,28 @@ export const setListTypeOrWrapInList = <S extends Schema>(
   }
 }
 
-export const backspaceInList = <S extends Schema>(
-  listItemType: NodeType<S>
-) => (state: EditorState<S>, dispatch?: (tr: Transaction<S>) => void) => {
-  const { $from, $to } = state.selection
-
-  const range = $from.blockRange($to, (node) => {
-    if (!node.firstChild) {
-      return false
-    }
-
-    return node.firstChild!.type === listItemType
-  })
-
-  if (!range) {
-    return false
-  }
-
-  if (!dispatch) {
-    return true
-  }
-
-  // TODO: join text with preceding node if appropriate
-
-  return true // TODO
-}
+// export const backspaceInList = <S extends Schema>(
+//   listItemType: NodeType<S>
+// ) => (state: EditorState<S>, dispatch?: (tr: Transaction<S>) => void) => {
+//   const { $from, $to } = state.selection
+//
+//   const range = $from.blockRange($to, (node) => {
+//     if (!node.firstChild) {
+//       return false
+//     }
+//
+//     return node.firstChild!.type === listItemType
+//   })
+//
+//   if (!range) {
+//     return false
+//   }
+//
+//   if (!dispatch) {
+//     return true
+//   }
+//
+//   // TODO: join text with preceding node if appropriate
+//
+//   return true // TODO
+// }

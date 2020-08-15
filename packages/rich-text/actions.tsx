@@ -3,6 +3,7 @@ import {
   faCode,
   faHeading,
   faItalic,
+  faListOl,
   faParagraph,
   faQuoteLeft,
   faRedo,
@@ -158,6 +159,7 @@ export const actions: Record<string, Action> = {
   },
   wrapInOrderedList: {
     id: 'wrap-in-ordered-list',
+    icon: <FontAwesomeIcon icon={faListOl} />,
     title: 'Wrap in ordered list',
     active: blockActive(schema.nodes.orderedList),
     enable: setListTypeOrWrapInList(schema.nodes.orderedList),
@@ -165,6 +167,7 @@ export const actions: Record<string, Action> = {
   },
   wrapInBulletList: {
     id: 'wrap-in-bullet-list',
+    icon: <FontAwesomeIcon icon={faListUl} />,
     title: 'Wrap in bullet list',
     active: blockActive(schema.nodes.bulletList),
     enable: setListTypeOrWrapInList(schema.nodes.bulletList),

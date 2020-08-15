@@ -1,15 +1,18 @@
 import { toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { undoInputRule } from 'prosemirror-inputrules'
+import { Schema } from 'prosemirror-model'
 import {
   liftListItem,
   sinkListItem,
   splitListItem,
 } from 'prosemirror-schema-list'
 
-import { schema } from './schema'
-
-export const keys = {
+export const createKeymap = <
+  S extends Schema<'listItem' | 'code' | 'bold' | 'italic'>
+>(
+  schema: S
+) => ({
   'Mod-[': liftListItem(schema.nodes.listItem),
   'Mod-]': sinkListItem(schema.nodes.listItem), // Tab
   'Mod-`': toggleMark(schema.marks.code),
@@ -19,4 +22,4 @@ export const keys = {
   'Shift-Mod-z': redo,
   Backspace: undoInputRule,
   Enter: splitListItem(schema.nodes.listItem),
-}
+})

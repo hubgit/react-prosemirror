@@ -7,6 +7,6 @@
     { "path": "../nodes" },
     { "path": "../plugins" },
     { "path": "../react"},
-    { "path": "../transformers" }
+    { "path": "../markdown-transformer"}
   ]
 }

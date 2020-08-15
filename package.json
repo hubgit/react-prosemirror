@@ -9,8 +9,8 @@
   "author": "Alf Eaton <eaton.alf@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --build packages",
-    "clean": "tsc --build --clean packages",
+    "build-project": "tsc --build packages",
+    "clean-project": "tsc --build --clean packages",
     "demo": "yarn workspace demo serve",
     "lint": "eslint 'packages/**/*.{ts,tsx}'",
     "watch": "tsc --build --watch packages"

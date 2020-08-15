@@ -2,17 +2,18 @@ import { placeholder } from '@pompom/plugins'
 import { baseKeymap } from 'prosemirror-commands'
 import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
+import { Schema } from 'prosemirror-model'
 import { Plugin } from 'prosemirror-state'
 import { tableEditing } from 'prosemirror-tables'
 
-import { inputRules } from './input-rules'
-import { keys } from './keys'
+import { createInputRules } from './input-rules'
+import { createKeymap } from './keys'
 
-export const plugins: Plugin[] = [
-  keymap(keys),
+export const createPlugins = <S extends Schema>(schema: S): Plugin<S>[] => [
+  keymap(createKeymap(schema)),
   keymap(baseKeymap),
-  inputRules,
+  createInputRules<S>(schema),
   history(),
   tableEditing(),
-  placeholder,
+  placeholder(),
 ]

@@ -1,9 +1,9 @@
+import { HTMLTransformer } from '@pompom/html-transformer'
 import { EditorContent, Floater, Toolbar, useProseMirror } from '@pompom/react'
-import { HTMLTransformer } from '@pompom/transformers'
 import React, { useMemo } from 'react'
 
-import { plugins } from './plugins'
-import { schema } from './schema'
+import { createPlugins } from './plugins'
+import { EditorSchema, schema } from './schema'
 import { floatingToolbarItems, toolbarItems } from './toolbars'
 // TODO: nodeViews/editorProps
 
@@ -16,6 +16,8 @@ export const RichTextEditor = React.memo<{
   const transformer = useMemo(() => new HTMLTransformer(schema, debounce), [
     debounce,
   ])
+
+  const plugins = useMemo(() => createPlugins<EditorSchema>(schema), [])
 
   const { view, state } = useProseMirror<string, typeof schema>({
     schema,
