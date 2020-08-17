@@ -1,12 +1,24 @@
 import {
   faBold,
+  faHeading,
   faItalic,
+  faListOl,
+  faListUl,
+  faParagraph,
   faRemoveFormat,
+  faStrikethrough,
   faSubscript,
   faSuperscript,
+  faUnderline,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { markActive, PomPom, removeFormatting } from '@pompom/core'
+import {
+  blockActive,
+  markActive,
+  Editor,
+  removeFormatting,
+  setListTypeOrWrapInList,
+} from '@pompom/core'
 import {
   bold,
   code,
@@ -35,14 +47,14 @@ import {
 import { placeholder } from '@pompom/plugins'
 import {
   EditorContent,
+  EditorProvider,
   Floater,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
 } from '@pompom/react'
-import { EditorProvider } from '@pompom/react/EditorProvider'
 import debounce from 'lodash.debounce'
-import { baseKeymap, toggleMark } from 'prosemirror-commands'
+import { baseKeymap, setBlockType, toggleMark } from 'prosemirror-commands'
 import { history, redo, undo } from 'prosemirror-history'
 import {
   inputRules,
@@ -93,6 +105,27 @@ const schema = new Schema({
 // TODO: nodeViews
 
 const plugins: Plugin[] = [
+  keymap({
+    'Mod-]': sinkListItem(schema.nodes.listItem),
+    'Mod-[': liftListItem(schema.nodes.listItem),
+    Tab: sinkListItem(schema.nodes.listItem),
+    'Shift-Tab': liftListItem(schema.nodes.listItem),
+    Enter: splitListItem(schema.nodes.listItem),
+    // TODO: backspace in list?
+  }),
+  keymap({
+    'Mod-`': toggleMark(schema.marks.code),
+    'Mod-b': toggleMark(schema.marks.bold),
+    'Mod-i': toggleMark(schema.marks.italic),
+  }),
+  keymap({
+    'Mod-z': undo,
+    'Shift-Mod-z': redo,
+  }),
+  keymap({
+    Backspace: undoInputRule,
+  }),
+  keymap(baseKeymap),
   inputRules({
     rules: [
       // # heading
@@ -120,21 +153,6 @@ const plugins: Plugin[] = [
       ),
     ],
   }),
-  keymap({
-    'Mod-]': sinkListItem(schema.nodes.listItem),
-    'Mod-[': liftListItem(schema.nodes.listItem),
-    Tab: sinkListItem(schema.nodes.listItem),
-    'Shift-Tab': liftListItem(schema.nodes.listItem),
-    Enter: splitListItem(schema.nodes.listItem),
-    // TODO: backspace in list?
-    'Mod-`': toggleMark(schema.marks.code),
-    'Mod-b': toggleMark(schema.marks.bold),
-    'Mod-i': toggleMark(schema.marks.italic),
-    'Mod-z': undo,
-    'Shift-Mod-z': redo,
-    Backspace: undoInputRule,
-  }),
-  keymap(baseKeymap),
   history(),
   tableEditing(),
   placeholder(),
@@ -165,7 +183,7 @@ const exportHTML = (output: Node): string => {
   return container.innerHTML
 }
 
-const pompom = new PomPom(schema, plugins, editorProps)
+const editor = new Editor(schema, plugins, editorProps)
 
 export const RichTextEditor = React.memo<{
   autoFocus?: boolean
@@ -182,19 +200,19 @@ export const RichTextEditor = React.memo<{
       }
     }, delay)
 
-    pompom.addEventListener('docchange', handler)
+    editor.addEventListener('docchange', handler)
 
     return () => {
-      pompom.removeEventListener('docchange', handler)
+      editor.removeEventListener('docchange', handler)
     }
   }, [handleChange, value])
 
   useEffect(() => {
-    pompom.setDoc(importHTML(value))
+    editor.setDoc(importHTML(value))
   }, [value])
 
   return (
-    <EditorProvider pompom={pompom}>
+    <EditorProvider editor={editor}>
       <Toolbar>
         <ToolbarGroup>
           <ToolbarItem
@@ -230,6 +248,22 @@ export const RichTextEditor = React.memo<{
             <FontAwesomeIcon icon={faSuperscript} />
           </ToolbarItem>
           <ToolbarItem
+            title={'Toggle strikethrough'}
+            active={markActive(schema.marks.strikethrough)}
+            enable={toggleMark(schema.marks.strikethrough)}
+            run={toggleMark(schema.marks.strikethrough)}
+          >
+            <FontAwesomeIcon icon={faStrikethrough} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Toggle underline'}
+            active={markActive(schema.marks.underline)}
+            enable={toggleMark(schema.marks.underline)}
+            run={toggleMark(schema.marks.underline)}
+          >
+            <FontAwesomeIcon icon={faUnderline} />
+          </ToolbarItem>
+          <ToolbarItem
             title={'Remove formatting'}
             enable={removeFormatting}
             run={removeFormatting}
@@ -237,9 +271,44 @@ export const RichTextEditor = React.memo<{
             <FontAwesomeIcon icon={faRemoveFormat} />
           </ToolbarItem>
         </ToolbarGroup>
+
+        <ToolbarGroup>
+          <ToolbarItem
+            title={'Change to paragraph'}
+            active={blockActive(schema.nodes.paragraph)}
+            enable={setBlockType(schema.nodes.paragraph)}
+            run={setBlockType(schema.nodes.paragraph)}
+          >
+            <FontAwesomeIcon icon={faParagraph} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Change to heading'}
+            active={blockActive(schema.nodes.heading)}
+            enable={setBlockType(schema.nodes.heading)}
+            run={setBlockType(schema.nodes.heading)}
+          >
+            <FontAwesomeIcon icon={faHeading} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Change to ordered list'}
+            active={blockActive(schema.nodes.orderedList)}
+            enable={setListTypeOrWrapInList(schema.nodes.orderedList)}
+            run={setListTypeOrWrapInList(schema.nodes.orderedList)}
+          >
+            <FontAwesomeIcon icon={faListOl} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Change to bullet list'}
+            active={blockActive(schema.nodes.bulletList)}
+            enable={setListTypeOrWrapInList(schema.nodes.bulletList)}
+            run={setListTypeOrWrapInList(schema.nodes.bulletList)}
+          >
+            <FontAwesomeIcon icon={faListUl} />
+          </ToolbarItem>
+        </ToolbarGroup>
       </Toolbar>
 
-      <Floater>
+      {/*<Floater>
         <Toolbar>
           <ToolbarGroup>
             <ToolbarItem
@@ -251,7 +320,7 @@ export const RichTextEditor = React.memo<{
             </ToolbarItem>
           </ToolbarGroup>
         </Toolbar>
-      </Floater>
+      </Floater>*/}
 
       <EditorContent autoFocus={autoFocus} />
     </EditorProvider>

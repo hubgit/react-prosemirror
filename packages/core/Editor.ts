@@ -2,13 +2,13 @@ import { Node, Schema } from 'prosemirror-model'
 import { EditorState, Plugin } from 'prosemirror-state'
 import { EditorProps, EditorView } from 'prosemirror-view'
 
-export class PomPom<S extends Schema = any> extends EventTarget {
+export class Editor<S extends Schema = any> extends EventTarget {
   public view: EditorView<S>
 
   constructor(
-    private schema: S,
-    private plugins: Plugin<unknown, S>[],
-    private editorProps: EditorProps<unknown, S>
+    schema: S,
+    plugins: Plugin<unknown, S>[],
+    editorProps: EditorProps<unknown, S>
   ) {
     super()
 
@@ -17,6 +17,8 @@ export class PomPom<S extends Schema = any> extends EventTarget {
       state: EditorState.create({ schema, plugins }),
       dispatchTransaction: (tr) => {
         const { state, transactions } = view.state.applyTransaction(tr)
+
+        view.updateState(state)
 
         this.dispatchEvent(
           new CustomEvent('statechange', {
@@ -31,8 +33,6 @@ export class PomPom<S extends Schema = any> extends EventTarget {
             })
           )
         }
-
-        view.updateState(state)
       },
     })
 
@@ -45,12 +45,12 @@ export class PomPom<S extends Schema = any> extends EventTarget {
       doc,
     })
 
+    this.view.updateState(state)
+
     this.dispatchEvent(
       new CustomEvent('statechange', {
         detail: state,
       })
     )
-
-    this.view.updateState(state)
   }
 }
