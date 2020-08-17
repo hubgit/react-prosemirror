@@ -40,8 +40,13 @@ export class Editor<S extends Schema = any> extends EventTarget {
   }
 
   public setDoc(doc: Node) {
+    const { schema, selection, storedMarks, plugins } = this.view.state
+
     const state = EditorState.create({
-      ...this.view.state,
+      schema,
+      selection,
+      storedMarks,
+      plugins,
       doc,
     })
 
