@@ -1,4 +1,4 @@
-import { NodeSpec } from 'prosemirror-model'
+import { NodeSpec, NodeType } from 'prosemirror-model'
 
 export const heading: NodeSpec = {
   attrs: {
@@ -18,4 +18,12 @@ export const heading: NodeSpec = {
   ],
   toDOM: (node) => ['h' + node.attrs.level, 0],
   toXML: () => ['title', 0], // TODO: wrap in section
+}
+
+export const sinkHeading = (headingType: NodeType) => {
+  // TODO
+}
+
+export const liftHeading = (headingType: NodeType) => {
+  // TODO
 }

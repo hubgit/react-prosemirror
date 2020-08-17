@@ -108,7 +108,7 @@ const parentWithNodeTypePos = <S extends Schema>(
   }
 }
 
-const parentInGroupPos = <S extends Schema>(
+export const parentInGroupPos = <S extends Schema>(
   $pos: ResolvedPos,
   nodeTypeGroup: string
 ): number | undefined => {
@@ -218,79 +218,3 @@ export const toggleWrap = <S extends Schema>(
     return true
   }
 }
-
-export const setListTypeOrWrapInList = <S extends Schema>(
-  listType: NodeType<S>
-) => (state: EditorState, dispatch?: DispatchTransaction) => {
-  const { $from, $to } = state.selection
-
-  const range = $from.blockRange($to)
-
-  if (!range) {
-    return false
-  }
-
-  const parentPos = parentInGroupPos(range.$from, 'list')
-
-  if (typeof parentPos === 'number') {
-    // already in list
-    const $pos = state.doc.resolve(parentPos)
-
-    const node = $pos.nodeAfter
-
-    if (node && node.type === listType) {
-      // return false if the node type already matches
-      return false
-    }
-
-    if (dispatch) {
-      dispatch(
-        state.tr.setNodeMarkup(
-          parentPos,
-          listType,
-          node ? node.attrs : undefined // TODO
-        )
-      )
-    }
-
-    return true
-  } else {
-    const wrapping = findWrapping(range, listType)
-
-    if (!wrapping) {
-      return false
-    }
-
-    if (dispatch) {
-      dispatch(state.tr.wrap(range, wrapping).scrollIntoView())
-    }
-
-    return true
-  }
-}
-
-// export const backspaceInList = <S extends Schema>(
-//   listItemType: NodeType<S>
-// ) => (state: EditorState<S>, dispatch?: (tr: Transaction<S>) => void) => {
-//   const { $from, $to } = state.selection
-//
-//   const range = $from.blockRange($to, (node) => {
-//     if (!node.firstChild) {
-//       return false
-//     }
-//
-//     return node.firstChild!.type === listItemType
-//   })
-//
-//   if (!range) {
-//     return false
-//   }
-//
-//   if (!dispatch) {
-//     return true
-//   }
-//
-//   // TODO: join text with preceding node if appropriate
-//
-//   return true // TODO
-// }

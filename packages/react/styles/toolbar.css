@@ -2,12 +2,14 @@
   --toolbar-color: #000;
   --toolbar-color-inverse: #fff;
   display: flex;
+  flex-wrap: wrap;
   color: var(--toolbar-color);
 }
 
 .pompom-toolbar-group {
   white-space: nowrap;
   border: 1px solid var(--toolbar-color);
+  margin-bottom: 4px;
 }
 
 .pompom-toolbar-group:not(:last-child) {

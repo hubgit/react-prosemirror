@@ -1,10 +1,14 @@
 import {
   faBold,
+  faCode,
   faHeading,
+  faIndent,
   faItalic,
   faListOl,
   faListUl,
+  faOutdent,
   faParagraph,
+  faQuoteLeft,
   faRemoveFormat,
   faStrikethrough,
   faSubscript,
@@ -14,10 +18,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   blockActive,
-  markActive,
   Editor,
+  isWrapped,
+  markActive,
   removeFormatting,
-  setListTypeOrWrapInList,
+  toggleWrap,
 } from '@pompom/core'
 import {
   bold,
@@ -36,8 +41,10 @@ import {
   heading,
   image,
   listItem,
+  listKeymap,
   orderedList,
   paragraph,
+  setListTypeOrWrapInList,
   table,
   tableDataCell,
   tableHeaderCell,
@@ -48,13 +55,17 @@ import { placeholder } from '@pompom/plugins'
 import {
   EditorContent,
   EditorProvider,
-  Floater,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
 } from '@pompom/react'
 import debounce from 'lodash.debounce'
-import { baseKeymap, setBlockType, toggleMark } from 'prosemirror-commands'
+import {
+  baseKeymap,
+  setBlockType,
+  toggleMark,
+  wrapIn,
+} from 'prosemirror-commands'
 import { history, redo, undo } from 'prosemirror-history'
 import {
   inputRules,
@@ -64,11 +75,7 @@ import {
 } from 'prosemirror-inputrules'
 import { keymap } from 'prosemirror-keymap'
 import { DOMParser, DOMSerializer, Node, Schema } from 'prosemirror-model'
-import {
-  liftListItem,
-  sinkListItem,
-  splitListItem,
-} from 'prosemirror-schema-list'
+import { liftListItem, sinkListItem } from 'prosemirror-schema-list'
 import { Plugin } from 'prosemirror-state'
 import { tableEditing } from 'prosemirror-tables'
 import { EditorProps } from 'prosemirror-view'
@@ -106,14 +113,6 @@ const schema = new Schema({
 
 const plugins: Plugin[] = [
   keymap({
-    'Mod-]': sinkListItem(schema.nodes.listItem),
-    'Mod-[': liftListItem(schema.nodes.listItem),
-    Tab: sinkListItem(schema.nodes.listItem),
-    'Shift-Tab': liftListItem(schema.nodes.listItem),
-    Enter: splitListItem(schema.nodes.listItem),
-    // TODO: backspace in list?
-  }),
-  keymap({
     'Mod-`': toggleMark(schema.marks.code),
     'Mod-b': toggleMark(schema.marks.bold),
     'Mod-i': toggleMark(schema.marks.italic),
@@ -125,6 +124,7 @@ const plugins: Plugin[] = [
   keymap({
     Backspace: undoInputRule,
   }),
+  keymap(listKeymap(schema.nodes.listItem)),
   keymap(baseKeymap),
   inputRules({
     rules: [
@@ -142,7 +142,7 @@ const plugins: Plugin[] = [
       wrappingInputRule(/^\s*>\s$/, schema.nodes.blockquote),
 
       // * bullet list
-      wrappingInputRule(/^\s*([-+*])\s$/, schema.nodes.bulletList),
+      wrappingInputRule(/^\s*([*])\s$/, schema.nodes.bulletList),
 
       // 1. ordered list
       wrappingInputRule(
@@ -232,6 +232,14 @@ export const RichTextEditor = React.memo<{
             <FontAwesomeIcon icon={faItalic} />
           </ToolbarItem>
           <ToolbarItem
+            title={'Toggle code'}
+            active={markActive(schema.marks.code)}
+            enable={toggleMark(schema.marks.code)}
+            run={toggleMark(schema.marks.code)}
+          >
+            <FontAwesomeIcon icon={faCode} />
+          </ToolbarItem>
+          <ToolbarItem
             title={'Toggle subscript'}
             active={markActive(schema.marks.subscript)}
             enable={toggleMark(schema.marks.subscript)}
@@ -281,6 +289,8 @@ export const RichTextEditor = React.memo<{
           >
             <FontAwesomeIcon icon={faParagraph} />
           </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
           <ToolbarItem
             title={'Change to heading'}
             active={blockActive(schema.nodes.heading)}
@@ -289,6 +299,22 @@ export const RichTextEditor = React.memo<{
           >
             <FontAwesomeIcon icon={faHeading} />
           </ToolbarItem>
+          <ToolbarItem
+            title={'Outdent'}
+            enable={liftListItem(schema.nodes.listItem)}
+            run={liftListItem(schema.nodes.listItem)}
+          >
+            <FontAwesomeIcon icon={faOutdent} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Indent'}
+            enable={sinkListItem(schema.nodes.listItem)}
+            run={sinkListItem(schema.nodes.listItem)}
+          >
+            <FontAwesomeIcon icon={faIndent} />
+          </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
           <ToolbarItem
             title={'Change to ordered list'}
             active={blockActive(schema.nodes.orderedList)}
@@ -304,6 +330,30 @@ export const RichTextEditor = React.memo<{
             run={setListTypeOrWrapInList(schema.nodes.bulletList)}
           >
             <FontAwesomeIcon icon={faListUl} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Outdent'}
+            enable={liftListItem(schema.nodes.listItem)}
+            run={liftListItem(schema.nodes.listItem)}
+          >
+            <FontAwesomeIcon icon={faOutdent} />
+          </ToolbarItem>
+          <ToolbarItem
+            title={'Indent'}
+            enable={sinkListItem(schema.nodes.listItem)}
+            run={sinkListItem(schema.nodes.listItem)}
+          >
+            <FontAwesomeIcon icon={faIndent} />
+          </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarItem
+            title={'Toggle blockquote wrapper'}
+            active={isWrapped(schema.nodes.blockquote)}
+            enable={toggleWrap(schema.nodes.blockquote)}
+            run={toggleWrap(schema.nodes.blockquote)}
+          >
+            <FontAwesomeIcon icon={faQuoteLeft} />
           </ToolbarItem>
         </ToolbarGroup>
       </Toolbar>
