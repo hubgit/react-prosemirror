@@ -1,4 +1,5 @@
 import { DispatchTransaction, parentInGroupPos } from '@pompom/core'
+import { Command } from 'prosemirror-commands'
 import { NodeSpec, NodeType, Schema } from 'prosemirror-model'
 import {
   liftListItem,

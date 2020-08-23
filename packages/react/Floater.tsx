@@ -1,36 +1,53 @@
+import { selectionKey } from '@pompom/plugins'
 import React, { useMemo, useRef } from 'react'
 
 import { useEditorContext } from './EditorProvider'
 
+const OUTSIDE = { left: -1000, top: 0 }
+
 export const Floater: React.FC = ({ children }) => {
-  const { view, state } = useEditorContext()
+  const { state } = useEditorContext()
+
+  const selectionState = selectionKey.getState(state)
 
   const ref = useRef<HTMLDivElement>(null)
 
   const style = useMemo(() => {
     if (!ref.current) {
-      return { left: -1000, top: 0 }
+      return OUTSIDE
     }
 
     const { selection } = state
 
     if (!selection || selection.empty) {
-      return { left: -1000, top: 0 }
+      return OUTSIDE
     }
 
-    const coords = view.coordsAtPos(selection.$anchor.pos)
+    const { offsetParent } = ref.current
 
-    const { offsetWidth } = ref.current
+    if (!offsetParent) {
+      return OUTSIDE
+    }
+
+    const box = offsetParent.getBoundingClientRect()
+
+    if (!selectionState) {
+      return OUTSIDE
+    }
+
+    const { start, end } = selectionState
+
+    if (!start || !end) {
+      return OUTSIDE
+    }
+
+    const left = Math.max((start.left + end.left) / 2, start.left)
 
     return {
-      left:
-        window.innerWidth - offsetWidth < coords.left
-          ? coords.left - offsetWidth + 20
-          : coords.left,
-      top: coords.top + 30,
-      // top: coords.top - 40 > 0 ? coords.top - 40 : coords.top + 30,
+      left: left - box.left,
+      bottom: box.bottom - start.top,
     }
-  }, [state, view, ref])
+  }, [selectionState, state, ref])
 
   return (
     <div ref={ref} className={'pompom-floater'} style={style}>

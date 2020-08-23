@@ -16,7 +16,7 @@ export const ToolbarItem: React.FC<{
   run: Command
   title?: string
 }> = ({ active, children, enable, run, title }) => {
-  const { view, state } = useEditorContext()
+  const { state, dispatch } = useEditorContext()
 
   return (
     <button
@@ -27,7 +27,7 @@ export const ToolbarItem: React.FC<{
       title={title}
       onMouseDown={(event) => {
         event.preventDefault()
-        run(state, view.dispatch, view)
+        run(state, dispatch)
       }}
     >
       {children || '?'}

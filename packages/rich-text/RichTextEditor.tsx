@@ -18,7 +18,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   blockActive,
-  Editor,
   isWrapped,
   markActive,
   removeFormatting,
@@ -51,21 +50,16 @@ import {
   tableRow,
   text,
 } from '@pompom/nodes'
-import { placeholder } from '@pompom/plugins'
+import { placeholder, selection } from '@pompom/plugins'
 import {
   EditorContent,
   EditorProvider,
+  Floater,
   Toolbar,
   ToolbarGroup,
   ToolbarItem,
 } from '@pompom/react'
-import debounce from 'lodash.debounce'
-import {
-  baseKeymap,
-  setBlockType,
-  toggleMark,
-  wrapIn,
-} from 'prosemirror-commands'
+import { baseKeymap, setBlockType, toggleMark } from 'prosemirror-commands'
 import { history, redo, undo } from 'prosemirror-history'
 import {
   inputRules,
@@ -79,7 +73,7 @@ import { liftListItem, sinkListItem } from 'prosemirror-schema-list'
 import { Plugin } from 'prosemirror-state'
 import { tableEditing } from 'prosemirror-tables'
 import { EditorProps } from 'prosemirror-view'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const schema = new Schema({
   marks: {
@@ -156,6 +150,7 @@ const plugins: Plugin[] = [
   history(),
   tableEditing(),
   placeholder(),
+  selection(),
 ]
 
 const editorProps: EditorProps = {
@@ -183,7 +178,21 @@ const exportHTML = (output: Node): string => {
   return container.innerHTML
 }
 
-const editor = new Editor(schema, plugins, editorProps)
+// const editor = new Editor(schema, plugins, editorProps)
+
+const useDebounce = <T extends any>(value: T, delay: number): T => {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+
+    return () => window.clearTimeout(timer)
+  }, [value, delay])
+
+  return debouncedValue
+}
 
 export const RichTextEditor = React.memo<{
   autoFocus?: boolean
@@ -191,28 +200,22 @@ export const RichTextEditor = React.memo<{
   handleChange: (value: string) => void
   value?: string
 }>(({ autoFocus = false, delay = 500, value = '', handleChange }) => {
+  const [doc, setDoc] = useState(importHTML(value))
+
+  // useEffect(() => setDoc(importHTML(value)), [value])
+
+  const debouncedDoc = useDebounce(doc, delay)
+
   useEffect(() => {
-    const handler = debounce((event: Event) => {
-      const doc = (event as CustomEvent).detail
-      const output = exportHTML(doc)
-      if (output !== value) {
-        handleChange(output)
-      }
-    }, delay)
+    const output = exportHTML(debouncedDoc)
 
-    editor.addEventListener('docchange', handler)
-
-    return () => {
-      editor.removeEventListener('docchange', handler)
+    if (output !== value) {
+      handleChange(output)
     }
-  }, [handleChange, value])
-
-  useEffect(() => {
-    editor.setDoc(importHTML(value))
-  }, [value])
+  }, [debouncedDoc, handleChange])
 
   return (
-    <EditorProvider editor={editor}>
+    <EditorProvider doc={doc} plugins={plugins} handleDocChange={setDoc}>
       <Toolbar>
         <ToolbarGroup>
           <ToolbarItem
@@ -358,7 +361,7 @@ export const RichTextEditor = React.memo<{
         </ToolbarGroup>
       </Toolbar>
 
-      {/*<Floater>
+      <Floater>
         <Toolbar>
           <ToolbarGroup>
             <ToolbarItem
@@ -370,7 +373,7 @@ export const RichTextEditor = React.memo<{
             </ToolbarItem>
           </ToolbarGroup>
         </Toolbar>
-      </Floater>*/}
+      </Floater>
 
       <EditorContent autoFocus={autoFocus} />
     </EditorProvider>

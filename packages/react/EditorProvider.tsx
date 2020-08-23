@@ -1,10 +1,10 @@
-import { Editor } from '@pompom/core'
-import { EditorState } from 'prosemirror-state'
-import { EditorView } from 'prosemirror-view'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { Node } from 'prosemirror-model'
+import { EditorState, Plugin, Transaction } from 'prosemirror-state'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 
 const EditorContext = createContext<
-  { view: EditorView; state: EditorState } | undefined
+  | { state: EditorState; dispatch: (transaction: Transaction) => void }
+  | undefined
 >(undefined)
 
 export const useEditorContext = () => {
@@ -18,24 +18,31 @@ export const useEditorContext = () => {
 }
 
 export const EditorProvider: React.FC<{
-  editor: Editor
-}> = ({ children, editor }) => {
-  const [state, setState] = useState<EditorState>(editor.view.state)
+  doc: Node
+  handleDocChange: (node: Node) => void
+  plugins: Plugin[]
+}> = ({ children, doc, handleDocChange, plugins }) => {
+  const [state, setState] = useState(EditorState.create({ doc, plugins }))
 
-  useEffect(() => {
-    const handler = (event: Event) => {
-      setState((event as CustomEvent<EditorState>).detail)
-    }
+  const dispatch = useCallback(
+    (transaction: Transaction) => {
+      setState((state) => {
+        const { state: newState, transactions } = state.applyTransaction(
+          transaction
+        )
 
-    editor.addEventListener('statechange', handler)
+        if (transactions.some((tr) => tr.docChanged)) {
+          handleDocChange(newState.doc)
+        }
 
-    return () => {
-      editor.removeEventListener('statechange', handler)
-    }
-  }, [editor])
+        return newState
+      })
+    },
+    [handleDocChange]
+  )
 
   return (
-    <EditorContext.Provider value={{ view: editor.view, state }}>
+    <EditorContext.Provider value={{ state, dispatch }}>
       <div className={'pompom-container'}>{children}</div>
     </EditorContext.Provider>
   )

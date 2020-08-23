@@ -1,11 +1,21 @@
-import React, { useCallback, useEffect } from 'react'
+import { EditorView } from 'prosemirror-view'
+import React, { useCallback, useEffect, useMemo } from 'react'
 
 import { useEditorContext } from './EditorProvider'
 
 export const EditorContent: React.FC<{
   autoFocus?: boolean
 }> = ({ autoFocus = false }) => {
-  const { view } = useEditorContext()
+  const { state, dispatch: dispatchTransaction } = useEditorContext()
+
+  const view = useMemo(
+    () => new EditorView(undefined, { state, dispatchTransaction }),
+    [dispatchTransaction]
+  )
+
+  useEffect(() => {
+    view.updateState(state)
+  }, [state])
 
   const ref = useCallback(
     (container: HTMLDivElement | null) => {
