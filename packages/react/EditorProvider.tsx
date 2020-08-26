@@ -44,7 +44,7 @@ export const EditorProvider: React.FC<{
           }
         },
       }),
-    [handleDocChange]
+    []
   )
 
   return (

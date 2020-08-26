@@ -211,7 +211,7 @@ export const RichTextEditor = React.memo<{
   }, [debouncedDoc, handleChange, value])
 
   return (
-    <EditorProvider doc={doc} plugins={plugins} handleDocChange={setDoc}>
+    <EditorProvider doc={doc} handleDocChange={setDoc} plugins={plugins}>
       <Toolbar>
         <ToolbarGroup>
           <ToolbarItem
