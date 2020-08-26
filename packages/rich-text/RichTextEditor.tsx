@@ -103,8 +103,6 @@ const schema = new Schema({
   },
 })
 
-// TODO: nodeViews
-
 const plugins: Plugin[] = [
   keymap({
     'Mod-`': toggleMark(schema.marks.code),
@@ -178,8 +176,6 @@ const exportHTML = (output: Node): string => {
   return container.innerHTML
 }
 
-// const editor = new Editor(schema, plugins, editorProps)
-
 const useDebounce = <T extends any>(value: T, delay: number): T => {
   const [debouncedValue, setDebouncedValue] = useState(value)
 
@@ -212,7 +208,7 @@ export const RichTextEditor = React.memo<{
     if (output !== value) {
       handleChange(output)
     }
-  }, [debouncedDoc, handleChange])
+  }, [debouncedDoc, handleChange, value])
 
   return (
     <EditorProvider doc={doc} plugins={plugins} handleDocChange={setDoc}>

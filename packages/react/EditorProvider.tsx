@@ -1,9 +1,13 @@
 import { Node } from 'prosemirror-model'
-import { EditorState, Plugin, Transaction } from 'prosemirror-state'
-import React, { createContext, useCallback, useContext, useState } from 'react'
+import { EditorState, Plugin } from 'prosemirror-state'
+import { EditorView } from 'prosemirror-view'
+import React, { createContext, useContext, useMemo, useState } from 'react'
 
 const EditorContext = createContext<
-  | { state: EditorState; dispatch: (transaction: Transaction) => void }
+  | {
+      state: EditorState
+      view: EditorView
+    }
   | undefined
 >(undefined)
 
@@ -24,25 +28,27 @@ export const EditorProvider: React.FC<{
 }> = ({ children, doc, handleDocChange, plugins }) => {
   const [state, setState] = useState(EditorState.create({ doc, plugins }))
 
-  const dispatch = useCallback(
-    (transaction: Transaction) => {
-      setState((state) => {
-        const { state: newState, transactions } = state.applyTransaction(
-          transaction
-        )
+  const view = useMemo(
+    () =>
+      new EditorView(undefined, {
+        state,
+        dispatchTransaction: (tr) => {
+          const { state, transactions } = view.state.applyTransaction(tr)
 
-        if (transactions.some((tr) => tr.docChanged)) {
-          handleDocChange(newState.doc)
-        }
+          setState(state)
 
-        return newState
-      })
-    },
+          view.updateState(state)
+
+          if (transactions.some((tr) => tr.docChanged)) {
+            handleDocChange(state.doc)
+          }
+        },
+      }),
     [handleDocChange]
   )
 
   return (
-    <EditorContext.Provider value={{ state, dispatch }}>
+    <EditorContext.Provider value={{ state, view }}>
       <div className={'pompom-container'}>{children}</div>
     </EditorContext.Provider>
   )

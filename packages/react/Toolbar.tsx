@@ -1,14 +1,8 @@
-// import { Action } from '@pompom/core'
 import { Command } from 'prosemirror-commands'
 import { EditorState } from 'prosemirror-state'
 import React from 'react'
 
 import { useEditorContext } from './EditorProvider'
-
-// export type ToolbarItems = Array<{
-//   id: string
-//   items: Array<Action>
-// }>
 
 export const ToolbarItem: React.FC<{
   active?: (state: EditorState) => boolean
@@ -16,7 +10,7 @@ export const ToolbarItem: React.FC<{
   run: Command
   title?: string
 }> = ({ active, children, enable, run, title }) => {
-  const { state, dispatch } = useEditorContext()
+  const { state, view } = useEditorContext()
 
   return (
     <button
@@ -27,7 +21,7 @@ export const ToolbarItem: React.FC<{
       title={title}
       onMouseDown={(event) => {
         event.preventDefault()
-        run(state, dispatch)
+        run(state, view.dispatch, view)
       }}
     >
       {children || '?'}
