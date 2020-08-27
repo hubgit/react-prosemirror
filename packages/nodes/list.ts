@@ -1,11 +1,11 @@
-import { DispatchTransaction, parentInGroupPos } from '@pompom/core'
+import { parentInGroupPos } from '@pompom/core'
+import { Command } from 'prosemirror-commands'
 import { NodeSpec, NodeType, Schema } from 'prosemirror-model'
 import {
   liftListItem,
   sinkListItem,
   splitListItem,
 } from 'prosemirror-schema-list'
-import { EditorState } from 'prosemirror-state'
 import { findWrapping } from 'prosemirror-transform'
 
 export const listItem: NodeSpec = {
@@ -57,7 +57,7 @@ export const listKeymap = (listItemType: NodeType) => ({
 
 export const setListTypeOrWrapInList = <S extends Schema>(
   listType: NodeType<S>
-): Command => (state: EditorState, dispatch?: DispatchTransaction) => {
+): Command => (state, dispatch?) => {
   const { $from, $to } = state.selection
 
   const range = $from.blockRange($to)

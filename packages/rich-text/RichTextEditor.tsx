@@ -195,6 +195,7 @@ export const RichTextEditor = React.memo<{
     const handler = debounce((event: Event) => {
       const doc = (event as CustomEvent).detail
       const output = exportHTML(doc)
+
       if (output !== value) {
         handleChange(output)
       }
@@ -205,7 +206,7 @@ export const RichTextEditor = React.memo<{
     return () => {
       editor.removeEventListener('docchange', handler)
     }
-  }, [handleChange, value])
+  }, [delay, handleChange, value])
 
   useEffect(() => {
     editor.setDoc(importHTML(value))
