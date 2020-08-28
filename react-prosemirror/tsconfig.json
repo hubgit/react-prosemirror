@@ -7,6 +7,8 @@
     "declarationMap": true,
 //    "sourceMap": true,
     "lib": ["dom", "es2019"],
+    "outDir": "dist",
+    "rootDir": "src",
     "composite": true,
     "strict": true,
     "moduleResolution": "node",

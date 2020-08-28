@@ -1,12 +1,10 @@
+import { EditorView } from 'prosemirror-view'
 import React, { useCallback, useEffect } from 'react'
-
-import { useEditorContext } from './EditorProvider'
 
 export const EditorContent: React.FC<{
   autoFocus?: boolean
-}> = ({ autoFocus = false }) => {
-  const { view } = useEditorContext()
-
+  view: EditorView
+}> = ({ autoFocus = false, view }) => {
   const ref = useCallback(
     (container: HTMLDivElement | null) => {
       if (container) {

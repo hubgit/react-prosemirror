@@ -1,4 +1,3 @@
-import { parentInGroupPos } from '@pompom/core'
 import { Command } from 'prosemirror-commands'
 import { NodeSpec, NodeType, Schema } from 'prosemirror-model'
 import {
@@ -7,6 +6,8 @@ import {
   splitListItem,
 } from 'prosemirror-schema-list'
 import { findWrapping } from 'prosemirror-transform'
+
+import { parentInGroupPos } from '../commands'
 
 export const listItem: NodeSpec = {
   content: '(paragraph | list)+', // 'paragraph (paragraph | list)+'

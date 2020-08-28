@@ -1,4 +1,62 @@
 import {
+  baseKeymap,
+  blockActive,
+  blockquote,
+  bold,
+  bulletList,
+  code,
+  codeBlock,
+  doc,
+  DOMParser,
+  DOMSerializer,
+  Editor,
+  EditorContent,
+  EditorProps,
+  EditorProvider,
+  heading,
+  history,
+  image,
+  inputRules,
+  isWrapped,
+  italic,
+  keymap,
+  liftListItem,
+  listItem,
+  listKeymap,
+  markActive,
+  Node,
+  orderedList,
+  paragraph,
+  placeholder,
+  Plugin,
+  redo,
+  removeFormatting,
+  Schema,
+  setBlockType,
+  setListTypeOrWrapInList,
+  sinkListItem,
+  strikethrough,
+  subscript,
+  superscript,
+  table,
+  tableDataCell,
+  tableEditing,
+  tableHeaderCell,
+  tableRow,
+  text,
+  textblockTypeInputRule,
+  toggleMark,
+  toggleWrap,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+  underline,
+  undo,
+  undoInputRule,
+  wrapIn,
+  wrappingInputRule,
+} from '@aeaton/react-prosemirror'
+import {
   faBold,
   faCode,
   faHeading,
@@ -16,69 +74,7 @@ import {
   faUnderline,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  blockActive,
-  Editor,
-  isWrapped,
-  markActive,
-  removeFormatting,
-  toggleWrap,
-} from '@pompom/core'
-import {
-  bold,
-  code,
-  italic,
-  strikethrough,
-  subscript,
-  superscript,
-  underline,
-} from '@pompom/marks'
-import {
-  blockquote,
-  bulletList,
-  codeBlock,
-  doc,
-  heading,
-  image,
-  listItem,
-  listKeymap,
-  orderedList,
-  paragraph,
-  setListTypeOrWrapInList,
-  table,
-  tableDataCell,
-  tableHeaderCell,
-  tableRow,
-  text,
-} from '@pompom/nodes'
-import { placeholder } from '@pompom/plugins'
-import {
-  EditorContent,
-  EditorProvider,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
-} from '@pompom/react'
 import debounce from 'lodash.debounce'
-import {
-  baseKeymap,
-  setBlockType,
-  toggleMark,
-  wrapIn,
-} from 'prosemirror-commands'
-import { history, redo, undo } from 'prosemirror-history'
-import {
-  inputRules,
-  textblockTypeInputRule,
-  undoInputRule,
-  wrappingInputRule,
-} from 'prosemirror-inputrules'
-import { keymap } from 'prosemirror-keymap'
-import { DOMParser, DOMSerializer, Node, Schema } from 'prosemirror-model'
-import { liftListItem, sinkListItem } from 'prosemirror-schema-list'
-import { Plugin } from 'prosemirror-state'
-import { tableEditing } from 'prosemirror-tables'
-import { EditorProps } from 'prosemirror-view'
 import React, { useEffect } from 'react'
 
 const schema = new Schema({
@@ -189,7 +185,7 @@ export const RichTextEditor = React.memo<{
   autoFocus?: boolean
   delay?: number
   handleChange: (value: string) => void
-  value?: string
+  value?: string // TODO: initialValue?
 }>(({ autoFocus = false, delay = 500, value = '', handleChange }) => {
   useEffect(() => {
     const handler = debounce((event: Event) => {
@@ -373,7 +369,7 @@ export const RichTextEditor = React.memo<{
         </Toolbar>
       </Floater>*/}
 
-      <EditorContent autoFocus={autoFocus} />
+      <EditorContent view={editor.view} autoFocus={autoFocus} />
     </EditorProvider>
   )
 })

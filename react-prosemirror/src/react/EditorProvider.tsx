@@ -1,7 +1,8 @@
-import { Editor } from '@pompom/core'
 import { EditorState } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 import React, { createContext, useContext, useEffect, useState } from 'react'
+
+import { Editor } from '../Editor'
 
 const EditorContext = createContext<
   { view: EditorView; state: EditorState } | undefined
