@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror-config-default",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "index.js",
   "source": "index.ts",
   "types": "index.d.ts",
@@ -13,7 +13,7 @@
     "@aeaton/prosemirror-placeholder": "^2.0.1",
     "@aeaton/prosemirror-schema": "^2.0.1",
     "@aeaton/prosemirror-transformers": "^2.0.1",
-    "@aeaton/react-prosemirror": "^2.0.1",
+    "@aeaton/react-prosemirror": "^2.0.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
