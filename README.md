@@ -170,3 +170,15 @@ const ExampleComponent = () => {
 }
 ```
 
+The editor view is available in descendants of `EditorProvider` via a `useEditorView` hook:
+
+```js
+import { useEditorView } from '@aeaton/react-prosemirror'
+
+const ExampleComponent = () => {
+  const view = useEditorView()
+  
+  // do something with the view
+}
+```
+
