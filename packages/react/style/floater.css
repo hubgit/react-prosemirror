@@ -3,7 +3,7 @@
 }
 
 .prosemirror-floater {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   display: flex;
   flex-wrap: nowrap;
