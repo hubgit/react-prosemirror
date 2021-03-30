@@ -62,15 +62,16 @@ const ToolbarGroup: React.FC<{ items: ToolbarItem[] }> = ({ items }) => {
   )
 }
 
-export const Toolbar: React.FC<{ toolbar: ToolbarGroup[] }> = React.memo(
-  ({ toolbar }) => {
-    return (
-      <div className="prosemirror-toolbar">
-        {toolbar.map((group) => (
-          <ToolbarGroup key={group.id} items={group.items} />
-        ))}
-      </div>
-    )
-  }
-)
+export const Toolbar: React.FC<{
+  toolbar: ToolbarGroup[]
+  className?: string
+}> = React.memo(({ toolbar, className = '' }) => {
+  return (
+    <div className={`prosemirror-toolbar ${className}`}>
+      {toolbar.map((group) => (
+        <ToolbarGroup key={group.id} items={group.items} />
+      ))}
+    </div>
+  )
+})
 Toolbar.displayName = 'Toolbar'
