@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/prosemirror-transformers",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0",
   "main": "index.js",
   "source": "index.ts",
   "types": "index.d.ts",
