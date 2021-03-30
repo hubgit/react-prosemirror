@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.settings.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "references": [
+    { "path": "../commands" },
+    { "path": "../placeholder" },
+    { "path": "../schema" },
+    { "path": "../transformers" },
+    { "path": "../react" }
+  ]
+}

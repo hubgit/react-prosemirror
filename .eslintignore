@@ -1,10 +1,7 @@
 node_modules/
-build/
 dist/
 .cache/
-*.log
-*.tsbuildinfo
+.eslintrc.js
 packages/**/*.js
-packages/**/*.jsx
 packages/**/*.map
 packages/**/*.d.ts

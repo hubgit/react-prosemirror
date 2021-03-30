@@ -1,0 +1,12 @@
+{
+  "files": [],
+  "references": [
+    { "path": "commands" },
+    { "path": "config-default" },
+    { "path": "footnotes" },
+    { "path": "placeholder" },
+    { "path": "react" },
+    { "path": "schema" },
+    { "path": "transformers" }
+  ]
+}

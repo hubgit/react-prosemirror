@@ -1,0 +1,7 @@
+.ProseMirror {
+    font-family: sans-serif;
+}
+
+.ProseMirror:focus-within {
+    outline: none;
+}

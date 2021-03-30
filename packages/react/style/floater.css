@@ -1,0 +1,20 @@
+.prosemirror-container {
+  position: relative;
+}
+
+.prosemirror-floater {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-wrap: nowrap;
+  background: white;
+  opacity: 0.8;
+}
+
+.prosemirror-floater .prosemirror-toolbar {
+  padding: 0;
+}
+
+.prosemirror-floater .prosemirror-toolbar-item {
+  padding: 4px 8px;
+}

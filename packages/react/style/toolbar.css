@@ -1,0 +1,49 @@
+.prosemirror-toolbar {
+  --toolbar-color: #000;
+  --toolbar-color-hover: #00000022;
+  --toolbar-color-inverse: #fff;
+  --toolbar-border-radius: 0;
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--toolbar-color);
+}
+
+.prosemirror-toolbar-group {
+  white-space: nowrap;
+  border: 1px solid var(--toolbar-color);
+  border-radius: var(--toolbar-border-radius);
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.prosemirror-toolbar-group:not(:last-child) {
+  margin-right: 16px;
+}
+
+.prosemirror-toolbar-item {
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  transition: background-color 0.1s;
+}
+
+.prosemirror-toolbar-item:hover {
+  background-color: var(--toolbar-color-hover);
+}
+
+.prosemirror-toolbar-item[disabled]:not([data-active='true']) {
+  opacity: 0.2;
+}
+
+.prosemirror-toolbar-item[data-active='true'] {
+  background-color: var(--toolbar-color);
+  color: var(--toolbar-color-inverse);
+}
+
+.prosemirror-toolbar-item:not([disabled]):active {
+  background-color: var(--toolbar-color);
+  color: var(--toolbar-color-inverse);
+}

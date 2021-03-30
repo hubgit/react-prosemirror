@@ -1,20 +1,54 @@
 {
+  "name": "@aeaton/react-prosemirror-modules",
   "private": true,
-  "license": "MIT",
-  "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "lerna": "^2.8.0",
-    "standard": "^11.0.0"
-  },
   "workspaces": [
-    "prosemirror-*",
-    "react-*"
+    "packages/*",
+    "demo"
   ],
-  "standard": {
-    "parser": "babel-eslint"
-  },
+  "author": "Alf Eaton <eaton.alf@gmail.com>",
+  "license": "MIT",
+  "repository": "hubgit/react-prosemirror",
   "scripts": {
-    "build": "lerna run build --toposort --concurrency=1",
-    "publish": "lerna publish"
+    "bootstrap": "lerna bootstrap",
+    "build": "tsc --build packages",
+    "build:clean": "tsc --build --clean packages",
+    "build:watch": "tsc --build --watch packages",
+    "lint": "eslint packages --ext ts,tsx --cache --cache-file .cache/eslint-packages",
+    "lint:demo": "eslint demo --ext ts,tsx --cache --cache-file .cache/eslint-demo",
+    "demo:build:development": "yarn workspace demo build:development",
+    "demo:serve": "yarn workspace demo serve"
+  },
+  "devDependencies": {
+    "@types/prosemirror-commands": "^1.0.3",
+    "@types/prosemirror-dropcursor": "^1.0.1",
+    "@types/prosemirror-gapcursor": "^1.0.3",
+    "@types/prosemirror-history": "^1.0.2",
+    "@types/prosemirror-inputrules": "^1.0.2",
+    "@types/prosemirror-keymap": "^1.0.3",
+    "@types/prosemirror-model": "^1.13.0",
+    "@types/prosemirror-schema-list": "^1.0.3",
+    "@types/prosemirror-state": "^1.2.5",
+    "@types/prosemirror-tables": "^0.9.1",
+    "@types/prosemirror-transform": "^1.1.2",
+    "@types/prosemirror-view": "^1.15.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.2",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "prettier": "^2.2.1",
+    "prosemirror-commands": "^1.1.7",
+    "prosemirror-model": "^1.13.3",
+    "prosemirror-state": "^1.3.4",
+    "prosemirror-transform": "^1.2.12",
+    "prosemirror-view": "^1.18.2",
+    "react": "^17.0.2",
+    "typescript": "^4.2.3"
   }
 }

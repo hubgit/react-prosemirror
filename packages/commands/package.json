@@ -1,0 +1,17 @@
+{
+  "name": "@aeaton/prosemirror-commands",
+  "version": "2.0.0-alpha.3",
+  "main": "index.js",
+  "source": "index.ts",
+  "types": "index.d.ts",
+  "files": [
+    "**/*.{js,jsx,d.ts}"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "prosemirror-commands": "^1.1.4",
+    "prosemirror-model": "^1.10.0",
+    "prosemirror-state": "^1.3.3",
+    "prosemirror-transform": "^1.2.9"
+  }
+}
