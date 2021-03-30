@@ -1,6 +1,6 @@
 {
   "name": "@aeaton/react-prosemirror",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "index.js",
   "source": "index.ts",
   "types": "index.d.ts",
@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@aeaton/prosemirror-transformers": "^2.0.0"
+    "@aeaton/prosemirror-transformers": "^2.0.1"
   },
   "peerDependencies": {
     "prosemirror-model": "^1.13.1",
