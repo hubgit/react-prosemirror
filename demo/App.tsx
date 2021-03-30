@@ -8,6 +8,7 @@ import {
   ChangeHandler,
   Editor,
   EditorProvider,
+  Floater,
   HtmlEditor,
   Toolbar,
   useDebounce,
@@ -29,6 +30,9 @@ const nullTransformer = createNullTransformer()
 
 const initialValue = `<p></p>`
 const initialDoc = htmlTransformer.parse(initialValue)
+
+const floatingTools = toolbar.slice(0, 2)
+const fixedTools = toolbar.slice(2)
 
 // TODO: nodeviews, perhaps displaying a node type switcher alongside each node?
 
@@ -64,7 +68,10 @@ export const App: React.FC = () => {
               handleChange={setDoc}
               transformer={nullTransformer}
             />
-            <Toolbar toolbar={toolbar} />
+            <Toolbar toolbar={fixedTools} />
+            <Floater>
+              <Toolbar toolbar={floatingTools} />
+            </Floater>
             <Editor autoFocus />
           </EditorProvider>
         </div>
