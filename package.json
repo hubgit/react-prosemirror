@@ -15,6 +15,7 @@
     "build:watch": "tsc --build --watch packages",
     "lint": "eslint packages --ext ts,tsx --cache --cache-file .cache/eslint-packages",
     "lint:demo": "eslint demo --ext ts,tsx --cache --cache-file .cache/eslint-demo",
+    "release": "yarn build && lerna publish",
     "demo:build:development": "yarn workspace demo build:development",
     "demo:serve": "yarn workspace demo serve"
   },
