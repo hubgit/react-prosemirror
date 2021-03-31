@@ -7,6 +7,9 @@
   "files": [
     "**/*.{js,jsx,d.ts}"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "peerDependencies": {
     "prosemirror-commands": "^1.1.4",

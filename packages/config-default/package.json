@@ -7,6 +7,9 @@
   "files": [
     "**/*.{js,d.ts}"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "dependencies": {
     "@aeaton/prosemirror-commands": "^2.0.1",

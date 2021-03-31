@@ -8,6 +8,9 @@
     "**/*.{js,jsx,d.ts}",
     "style"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "dependencies": {
     "@aeaton/prosemirror-transformers": "^2.0.1"
