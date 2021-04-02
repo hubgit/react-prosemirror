@@ -189,6 +189,28 @@ const ExampleComponent = () => {
 }
 ```
 
+## Components
+
+### EditorProvider
+
+The `EditorProvider` component takes optional `schema` (or `doc`), `plugins` and `editorProps` props, uses them to create a new ProseMirror state and view, then makes the state and view available in React's context via `useEditorState` and `useEditorView` hooks.
+
+### Editor
+
+The `Editor` component renders the ProseMirror view into a DOM element.
+
+### Toolbar
+
+The `Toolbar` component takes a `toolbar` prop describing the toolbar (an array of grouped toolbar items) and renders a toolbar.
+
+Each toolbar item has `content` (e.g. an icon), `action` (a command that's run when the button is pressed), plus optional `active` (whether the item is currently active) and `enable` (whether the item is currently enabled) props.
+
+### ChangeHandler
+
+The `ChangeHandler` component makes it easy to listen for changes to the ProseMirror document.
+
+When the document changes, after an optional `debounce`, it's run through the `transformer` then passed to the `handleChange` callback.
+
 ## Styles
 
 Each component has a class so it can be styled with CSS, and several of the styles can also be altered using CSS variables. 
