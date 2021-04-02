@@ -21,14 +21,17 @@ A React component for [ProseMirror](http://prosemirror.net/).
 ### Quickstart: HTML Editor
 
 ```js
-import { HtmlEditor } from '@aeaton/react-prosemirror'
+import { useState } from 'react'
+import { HtmlEditor, Toolbar, Editor } from '@aeaton/react-prosemirror'
 import { plugins, schema, toolbar } from '@aeaton/react-prosemirror-config-default'
 
 const initialValue = '<p></p>'
 
-export const RichTextEditor = () => {
+export const App = () => {
   const [value, setValue] = useState(initialValue)
-  
+
+  console.log({ value })
+
   return (
     <HtmlEditor
       schema={schema}
@@ -84,6 +87,8 @@ const schema = new Schema({
 Create some commands:
 
 ```js
+import { toggleMark } from 'prosemirror-commands'
+
 const toggleMarkStrong = toggleMark(schema.marks.strong)
 const toggleMarkEmphasis = toggleMark(schema.marks.emphasis)
 ```
@@ -111,6 +116,8 @@ const plugins = [
 Create a toolbar definition:
 
 ```js
+import { isMarkActive } from '@aeaton/prosemirror-commands'
+
 const toolbar = [
   {
     id: 'marks',
