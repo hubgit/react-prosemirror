@@ -189,3 +189,8 @@ const ExampleComponent = () => {
 }
 ```
 
+## Styles
+
+Each component has a class so it can be styled with CSS, and several of the styles can also be altered using CSS variables. 
+
+See [the demo styles](https://github.com/hubgit/react-prosemirror/tree/main/demo/styles) for examples of this.
