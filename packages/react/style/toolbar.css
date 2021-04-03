@@ -1,6 +1,7 @@
 .prosemirror-toolbar {
   --toolbar-color: #000;
   --toolbar-color-hover: #00000022;
+  --toolbar-color-focus: #000;
   --toolbar-color-inverse: #fff;
   --toolbar-border-radius: 0;
   display: flex;
@@ -30,15 +31,20 @@
   transition: background-color 0.1s;
 }
 
+.prosemirror-toolbar-item:focus {
+  border-color: var(--toolbar-color-focus);
+  outline: none;
+}
+
 .prosemirror-toolbar-item:hover {
   background-color: var(--toolbar-color-hover);
 }
 
-.prosemirror-toolbar-item[disabled]:not([data-active='true']) {
+.prosemirror-toolbar-item[disabled]:not([aria-pressed='true']) {
   opacity: 0.2;
 }
 
-.prosemirror-toolbar-item[data-active='true'] {
+.prosemirror-toolbar-item[aria-pressed='true'] {
   background-color: var(--toolbar-color);
   color: var(--toolbar-color-inverse);
 }

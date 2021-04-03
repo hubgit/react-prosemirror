@@ -6,6 +6,7 @@ body {
   /* TODO: remove !important once esbuild fixes CSS import order */
   --toolbar-color: #5754f8 !important;
   --toolbar-color-hover: #5754f822 !important;
+  --toolbar-color-focus: #5754f8 !important;
   --toolbar-color-inverse: #fff !important;
   --toolbar-border-radius: 2px !important;
   flex-shrink: 0;
