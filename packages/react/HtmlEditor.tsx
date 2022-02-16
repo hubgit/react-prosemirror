@@ -1,7 +1,7 @@
 import {
   createHTMLTransformer,
   ProsemirrorTransformer,
-} from '@aeaton/prosemirror-transformers'
+} from '@dear-rama/prosemirror-transformers'
 import { Node as ProsemirrorNode, Schema } from 'prosemirror-model'
 import { Plugin } from 'prosemirror-state'
 import React, { useState } from 'react'

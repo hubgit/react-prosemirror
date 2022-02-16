@@ -1,5 +1,5 @@
 {
-  "name": "@aeaton/react-prosemirror",
+  "name": "@dear-rama/react-prosemirror",
   "version": "2.0.3",
   "main": "index.js",
   "source": "index.ts",
@@ -9,11 +9,12 @@
     "style"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@dear-rama",
     "access": "public"
   },
   "license": "MIT",
   "dependencies": {
-    "@aeaton/prosemirror-transformers": "^2.0.2"
+    "@dear-rama/prosemirror-transformers": "^2.0.2"
   },
   "peerDependencies": {
     "prosemirror-model": "^1.13.1",

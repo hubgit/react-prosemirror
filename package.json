@@ -1,5 +1,5 @@
 {
-  "name": "@aeaton/react-prosemirror-modules",
+  "name": "@dear-rama/react-prosemirror-modules",
   "private": true,
   "workspaces": [
     "packages/*",

@@ -1,18 +1,18 @@
 ## Installation
 
-`npm install @aeaton/react-prosemirror`
+`npm install @dear-rama/react-prosemirror`
 
 or
 
-`yarn add @aeaton/react-prosemirror`
+`yarn add @dear-rama/react-prosemirror`
 
 ## Usage
 
-This example imports configuration from [@aeaton/react-prosemirror-config-default](https://www.npmjs.com/package/@aeaton/react-prosemirror-config-default).
+This example imports configuration from [@dear-rama/react-prosemirror-config-default](https://www.npmjs.com/package/@dear-rama/react-prosemirror-config-default).
 
 ```jsx
-import { HtmlEditor } from '@aeaton/react-prosemirror'
-import { plugins, schema, toolbar } from '@aeaton/react-prosemirror-config-default'
+import { HtmlEditor } from '@dear-rama/react-prosemirror'
+import { plugins, schema, toolbar } from '@dear-rama/react-prosemirror-config-default'
 
 const initialValue = '<p></p>'
 

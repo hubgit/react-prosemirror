@@ -4,7 +4,7 @@ import {
   promptForURL,
   setListTypeOrWrapInList,
   toggleWrap,
-} from '@aeaton/prosemirror-commands'
+} from '@dear-rama/prosemirror-commands'
 import { Command, setBlockType, toggleMark, wrapIn } from 'prosemirror-commands'
 import {
   liftListItem,

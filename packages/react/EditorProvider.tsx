@@ -3,8 +3,8 @@ import { EditorState, Plugin } from 'prosemirror-state'
 import { EditorProps, EditorView } from 'prosemirror-view'
 import React, { createContext, useContext, useState } from 'react'
 
-const EditorStateContext = createContext<EditorState | null>(null)
-const EditorViewContext = createContext<EditorView | null>(null)
+export const EditorStateContext = createContext<EditorState | null>(null)
+export const EditorViewContext = createContext<EditorView | null>(null)
 
 export const useEditorState = (): EditorState => {
   const context = useContext(EditorStateContext)

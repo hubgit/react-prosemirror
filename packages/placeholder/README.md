@@ -1,7 +1,7 @@
 ## Usage
 
 ```js
-import { placeholder } from '@aeaton/prosemirror-placeholder'
+import { placeholder } from '@dear-rama/prosemirror-placeholder'
 
 const plugins = [
   placeholder(),

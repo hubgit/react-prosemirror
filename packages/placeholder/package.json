@@ -1,5 +1,5 @@
 {
-  "name": "@aeaton/prosemirror-placeholder",
+  "name": "@dear-rama/prosemirror-placeholder",
   "version": "2.0.2",
   "main": "index.js",
   "source": "index.ts",
@@ -9,6 +9,7 @@
     "style"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@dear-rama",
     "access": "public"
   },
   "license": "MIT",
