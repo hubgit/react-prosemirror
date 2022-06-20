@@ -2,6 +2,10 @@
 
 A React component for [ProseMirror](http://prosemirror.net/).
 
+> **Note**
+> This package provides a solution for efficiently integrating ProseMirror with React, without creating a new API. 
+> If you're looking for something easy to use, you might like to try [Tiptap](https://tiptap.dev/) or [Remirror](https://remirror.io/).
+
 ## Packages
 
 * [@aeaton/react-prosemirror](packages/react) - React components
